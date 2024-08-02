@@ -5,7 +5,7 @@
 }
 .facts-table {
     border-collapse: collapse;
-    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+    font-family: 'Helvetica', sans-serif;
     font-size: 2em;
 }
 .title {
