@@ -1,69 +1,75 @@
 body {
     font-family: 'Helvetica', sans-serif;
 }
-.facts-div {
+.nutrition-facts {
+    font-family: 'Helvetica', sans-serif;
+}
+.nutrition-facts .outline {
+    display: inline-block;
     border: solid 1px black;
     padding: 4px;
-    display: inline-block;
 }
-.facts-table {
+.nutrition-facts h1 {
+    font-style: bold;
+    font-size: 32px;
+    margin: 1px 4px;
+}
+.nutrition-facts h2 {
+    font-style: bold;
+    font-size: 16px;
+    margin: 1px 4px;
+}
+.nutrition-facts table {
     border-collapse: collapse;
-    font-family: 'Helvetica', sans-serif;
-    font-size: 2em;
+    border-top: solid 16px black;
+    border-bottom: solid 16px black;
+    width: 100%;
 }
-.title {
-    font-size: 100%;
+.nutrition-facts th {
     font-style: bold;
-    text-align: left;
-    padding-left: 4px;
-    padding-right: 4px
-}
-.subtitle {
-    font-size: 50%;
-    font-style: bold;
-    text-align: left;
-    padding-left: 4px;
-    padding-right: 4px
-}
-.header-row {
-    font-size: 36%;
-    font-style: bold;
+    font-size: 12px;
     text-align: right;
+    border-bottom: solid 10px black;
+    padding: 1px 4px;
 }
-.content-row {
+.nutrition-facts td {
+    font-style: normal;
+    font-size: 16px;
+    text-align: right;
     border-top: solid 1px black;
     border-bottom: solid 1px black;
-    font-size: 50%;
-    font-style: normal;
+    padding: 1px 4px;
 }
-.name-cell {
-    text-align: left;
-    padding-left: 4px;
-    padding-right: 8px;
+.nutrition-facts td p {
+    float: left;
+    font-size: inherit;
+    margin: 0px;
+    padding: 0px;
 }
-.serving-cell {
-    text-align: right;
-    padding-left: 8px;
-    padding-right: 8px;
+.nutrition-facts td p+p {
+    float: right;
+    font-size: inherit;
+    margin: 0px 0px 0px 16px;
+    padding: 0px;
 }
-.dv-cell {
-    text-align: right;
-    padding-left: 8px;
-    padding-right: 4px;
+.nutrition-facts tr.separator {
+    border-top: solid 16px black;
+    border-bottom: solid 16px black;
 }
-.footer {
-    font-size: 32%;
-    font-style: normal;
-    text-align: left;
-    padding-left: 4px;
-    padding-right: 4px;
-    padding-top: 6px;
+.nutrition-facts .footnotes {
+    font-size: 10px;
+    margin: 0px;
+    padding: 1px 4px;
 }
-.thick-separator {
-    font-size: 36%;
-    background-color: black;
+.nutrition-facts .footnotes p {
+    float: left;
+    font-size: inherit;
+    margin: 0px;
+    padding: 0px;
 }
-.mid-separator {
-    font-size: 16%;
-    background-color: black;
+.nutrition-facts .footnotes p+p {
+    float: right;
+    font-size: inherit;
+    margin: 0px 0px 0px 16px;
+    padding: 0px;
 }
