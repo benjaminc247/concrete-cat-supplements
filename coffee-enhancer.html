@@ -3,11 +3,16 @@
 
 <head>
   <link rel="stylesheet" href="main.css">
+  <script src="./main.js" defer></script>
   <title>Coffee Enhancer</title>
 </head>
 
 <body>
-  <a href="/">Home</a>
+  <div class="page-header">
+    <h1>
+      <a href="/">Concrete Cat Supplements</a>
+    </h1>
+  </div>
   <h1>Coffee Enhancer</h1>
   <p>This supplement enhances the benefits of caffeine while counteracting the side effects.</p>
   <p>Mix one scoop (700mg) with every 8oz coffee.</p>
@@ -16,69 +21,82 @@
     <li>Counteracts anxiety, jitters, sleeplessness, and post-caffeine crash.</li>
     <li>Fights caffeine addiction, reducing tolerance and withdrawals.</li>
   </ul>
-  <div class="nutrition-facts">
-    <div class="outline">
-      <h1>Supplement Facts</h1>
-      <h2>Serving Size: 700mg (Approx. 1 Scoop)</h2>
-      <h2>Servings Per Container: 40</h2>
-      <table>
-        <tr>
-          <th>Amount Per Serving</th>
-          <th>% Daily Value</th>
-        </tr>
-        <tr>
-          <td>
-            <p>Riboflavin (Vitamin B2)</p>
-            <p>1000mcg</p>
-          </td>
-          <td>76%</td>
-        </tr>
-        <tr>
-          <td>
-            <p>Vitamin B6</p>
-            <p>1500mcg</p>
-          </td>
-          <td>88%</td>
-        </tr>
-        <tr>
-          <td>
-            <p>Folate (Vitamin B9)</p>
-            <p>340mcg DFE</p>
-          </td>
-          <td>85%</td>
-        </tr>
-        <tr>
-          <td>
-            <p>Vitamin B12</p>
-            <p>4mcg</p>
-          </td>
-          <td>166%</td>
-        </tr>
-        <tr class="separator" />
-        <tr>
-          <td>
-            <p>L-Theanine</p>
-            <p>200mg</p>
-          </td>
-          <td>&nbsp;&dagger;&nbsp;</td>
-        </tr>
-        <tr>
-          <td>
-            <p>L-Tyrosine</p>
-            <p>500mg</p>
-          </td>
-          <td>&nbsp;&dagger;&nbsp;</td>
-        </tr>
-      </table>
-      <div class="footnotes">
-        <p>* Percent Daily Value based on a 2,000 calorie diet.</p>
-        <p>&dagger; Daily Value not established.</p>
+  <div class="collapsible">
+    <div class="header">
+      <button type="button" class="toggle">Supplement Facts</button>
+    </div>
+    <div class="collapse">
+      <div class="content">
+        <div class="nutrition-facts">
+          <div class="outline">
+            <h1>Supplement Facts</h1>
+            <h2>Serving Size: 700mg (Approx. 1 Scoop)</h2>
+            <h2>Servings Per Container: 40</h2>
+            <table>
+              <tr>
+                <th>Amount Per Serving</th>
+                <th>% Daily Value</th>
+              </tr>
+              <tr>
+                <td>
+                  <p>Riboflavin (Vitamin B2)</p>
+                  <p>1000mcg</p>
+                </td>
+                <td>76%</td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Vitamin B6</p>
+                  <p>1500mcg</p>
+                </td>
+                <td>88%</td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Folate (Vitamin B9)</p>
+                  <p>340mcg DFE</p>
+                </td>
+                <td>85%</td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Vitamin B12</p>
+                  <p>4mcg</p>
+                </td>
+                <td>166%</td>
+              </tr>
+              <tr class="separator" />
+              <tr>
+                <td>
+                  <p>L-Theanine</p>
+                  <p>200mg</p>
+                </td>
+                <td>&nbsp;&dagger;&nbsp;</td>
+              </tr>
+              <tr>
+                <td>
+                  <p>L-Tyrosine</p>
+                  <p>500mg</p>
+                </td>
+                <td>&nbsp;&dagger;&nbsp;</td>
+              </tr>
+            </table>
+            <div class="footnotes">
+              <p>* Percent Daily Value based on a 2,000 calorie diet.</p>
+              <p>&dagger; Daily Value not established.</p>
+            </div>
+          </div>
+          <div class="footnotes">
+            <p>Other Ingredients: None</p>
+          </div>
+        </div>
+        <!-- nutrition facts -->
       </div>
+      <!-- content -->
     </div>
-    <div class="footnotes">
-      <p>Other Ingredients: None</p>
-    </div>
+    <!-- collapse -->
   </div>
+  <!-- collapsible -->
 </body>
 
 </html>
