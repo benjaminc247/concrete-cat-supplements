@@ -35,11 +35,10 @@ function createAppendButton(parent, textContent, classList = undefined) {
  * @param {String} heading Text content for the collapsible heading
  * @returns {HTMLElement} The content div for the created collapsible
  */
-function createAppendCollapsible(parent, heading) {
-    const elem = createAppendElement(parent, "div", "collapsible");
-    const header = createAppendElement(elem, "div", "header");
+function createAppendCollapsible(collapsible, heading) {
+    const header = createAppendElement(collapsible, "div", "header");
     const toggle = createAppendButton(header, heading, "toggle");
-    const collapse = createAppendElement(elem, "div", "collapse");
+    const collapse = createAppendElement(collapsible, "div", "collapse");
     const content = createAppendElement(collapse, "div", "content");
 
     toggle.addEventListener("click", function () {
@@ -105,16 +104,13 @@ function createAppendJsonTextList(parent, jsonData, jsonId, classList = undefine
  * @param {String} jsonId The id of the json element containing the supplement facts
  * @returns {HTMLElement} The created supplement facts element
  */
-function createAppendJsonSupplementFacts(parent, jsonData, jsonId) {
+export function createAppendJsonSupplementFacts(parent, jsonData, jsonId) {
     const data = jsonData[jsonId];
     if (!data)
         throw "JSON data does not contain id '" + jsonId + "'";
 
-    // add top level container
-    const container = createAppendElement(parent, "div", "nutrition-facts");
-
     // add top level outline
-    const outline = createAppendElement(container, "div", "outline");
+    const outline = createAppendElement(parent, "div", "outline");
 
     // add headers
     createAppendElement(outline, "h1", undefined, "Supplement Facts");
@@ -171,57 +167,7 @@ function createAppendJsonSupplementFacts(parent, jsonData, jsonId) {
     // add other ingredients
     const otheringreds = data['other-ingredients'];
     if (otheringreds) {
-        const footnote = createAppendElement(container, "div", "footnotes");
+        const footnote = createAppendElement(parent, "div", "footnotes");
         createAppendElement(footnote, "p", undefined, "Other Ingredients: " + otheringreds.join(", "));
-    }
-}
-
-/**
- * Generates page body from json file at given url
- * @param {String} jsonPageURL 
- */
-export async function genPageBodyFromJson(jsonPageURL) {
-    // retrieve json data
-    let jsonData;
-    try {
-        const response = await fetch(jsonPageURL);
-        jsonData = await response.json();
-    }
-    catch (err) {
-        console.log("Error retrieving page data: " + err);
-        return;
-    }
-
-    // create page elements
-    try {
-        createAppendJsonTextElement(document.body, "h1", jsonData, "heading")
-    }
-    catch (err) {
-        console.log("Error filling page content: " + err);
-    }
-    try {
-        createAppendJsonTextElement(document.body, "p", jsonData, "summary");
-    }
-    catch (err) {
-        console.log("Error filling page content: " + err);
-    }
-    try {
-        createAppendJsonTextElement(document.body, "p", jsonData, "usage");
-    }
-    catch (err) {
-        console.log("Error filling page content: " + err);
-    }
-    try {
-        createAppendJsonTextList(document.body, jsonData, "effects");
-    }
-    catch (err) {
-        console.log("Error filling page content: " + err);
-    }
-    try {
-        const facts = createAppendCollapsible(document.body, "Supplement Facts");
-        createAppendJsonSupplementFacts(facts, jsonData, "supplement-facts");
-    }
-    catch (err) {
-        console.log("Error filling page content: " + err);
     }
 }

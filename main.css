@@ -59,7 +59,7 @@ a, a:hover, a:visited, a:active {
 }
 .nutrition-facts .outline {
     display: inline-block;
-    border: solid 1px black;
+    border: 1px solid black;
     padding: 4px;
 }
 .nutrition-facts h1 {
@@ -74,23 +74,23 @@ a, a:hover, a:visited, a:active {
 }
 .nutrition-facts table {
     border-collapse: collapse;
-    border-top: solid 16px black;
-    border-bottom: solid 16px black;
+    border-top: 16px solid black;
+    border-bottom: 16px solid black;
     width: 100%;
 }
 .nutrition-facts th {
     font-style: bold;
     font-size: 12px;
     text-align: right;
-    border-bottom: solid 10px black;
+    border-bottom: 10px solid black;
     padding: 1px 4px;
 }
 .nutrition-facts td {
     font-style: normal;
     font-size: 16px;
     text-align: right;
-    border-top: solid 1px black;
-    border-bottom: solid 1px black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     padding: 1px 4px;
 }
 .nutrition-facts td p {
@@ -106,8 +106,8 @@ a, a:hover, a:visited, a:active {
     padding: 0px;
 }
 .nutrition-facts tr.separator {
-    border-top: solid 16px black;
-    border-bottom: solid 16px black;
+    border-top: 16px solid black;
+    border-bottom: 16px solid black;
 }
 .nutrition-facts .footnotes {
     font-size: 10px;
