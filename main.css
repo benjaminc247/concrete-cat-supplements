@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap');
+@import url('/assets/roboto-flex/css/roboto-flex.css');
+@import url('/assets/fontawesome/css/fontawesome.css');
+@import url('/assets/fontawesome/css/regular.css');
+@import url('/assets/fontawesome/css/solid.css');
+@import url('/assets/fontawesome/css/brands.css');
+
+/* design for mobile first, then use media queries to adjust to desktop! */
 
 /* set global font */
 body {

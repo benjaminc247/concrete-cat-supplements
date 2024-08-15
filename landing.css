@@ -5,7 +5,7 @@
     padding: 0;
     max-width: 1440px;
     height: min(57.14vw, 480px);
-    background-image: url("/banner-wide.webp");
+    background-image: url("/assets/banner-wide.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: calc(100% * .80);
@@ -36,8 +36,11 @@
 
 /* card strip */
 #card-strip {
+    /* border: 1px solid green; */
+    container-type: inline-size;
     box-sizing: border-box;
     max-width: 1440px;
+    width: 100%;
     margin: auto;
     padding: 12px;
     display: flex;
@@ -45,63 +48,91 @@
     flex-wrap: wrap;
 }
 #card-strip .wrapper {
+    /* border: 1px solid green; */
+    container-type: inline-size;
     box-sizing: border-box;
-    display: grid;
     width: 25%;
+    display: grid;
 }
 .icon-card {
-    display: flex;
+    /* border: 1px solid green; */
     margin: auto;
+    width: 513px;
+    display: flex;
     flex-direction: row;
     align-items: center;
-
-    /* two lines 257 three lines 206px */
-    width: 257px;
 }
-.icon-card img {
+.icon-card i {
+    /* border: 1px solid green; */
     margin: 4px;
+    font-size: 48px;
+    width: 48px;
+    text-align: center;
+    flex: none;
 }
 .icon-card p {
+    /* border: 1px solid green; */
     margin: 4px;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
 }
 /* hokay so... can I figure these out with code if I give the sizes as data tags??? */
 /* or even better do text measurement to figure out the optimal snaps??? */
-@media (width < 1066px) {
-    /* switch to three lines */
-    .icon-card {
-        width: 206px;
-    }
-}
-@media (width < 862px) {
+/* setting wrapping individually to ensure elements line up with different text sizes */
+@container (width < 736px) {
     #card-strip .wrapper {
         width: 50%;
     }
-    /* switch to two lines */
-    .icon-card {
-        width: 257px;
-    }
 }
-@media (width < 553px) {
-    /* switch to three lines */
-    .icon-card {
-        width: 206px;
-    }
-}
-@media (width < 451px) {
+@container (width < 367px) {
     #card-strip .wrapper {
         width: 100%
     }
-    /* switch to two lines */
+}
+/* 2 lines */
+@container (width < 515px) {
     .icon-card {
-        width: 257px;
+        width: 310px;
+    }
+    #magnifier-card p {
+        width: 242px;
+    }
+    #beaker-card p {
+        width: 236px;
+    }
+    #gear-card p {
+        width: 219px;
+    }
+    #leaf-card p {
+        width: 213px;
     }
 }
-@media (width < 297px) {
-    /* switch to three lines */
+/* 3 lines */
+@container (width < 312px) {
     .icon-card {
-        width: 206px;
+        width: 238px;
+    }
+    #magnifier-card p {
+        width: 166px;
+    }
+    #beaker-card p {
+        width: 153px;
+    }
+    #gear-card p {
+        width: 170px;
+    }
+    #leaf-card p {
+        width: 165px;
+    }
+}
+/* vertical stack */
+@container (width < 240px) {
+    .icon-card {
+        flex-direction: column;
+        width: 180px;
+    }
+    .icon-card p {
+        text-align: center;
     }
 }
