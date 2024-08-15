@@ -1,5 +1,18 @@
 import { createAppendJsonSupplementFacts } from "./page-generator.js"
 
+try {
+    const sideNav = document.getElementById("sidenav");
+    const openSideNavBtn = document.getElementById("open-sidenav");
+    const closeSideNavBtn = document.getElementById("close-sidenav");
+    if (sideNav) {
+        openSideNavBtn.addEventListener("click", () => sideNav.style.width = "250px");
+        closeSideNavBtn.addEventListener("click", () => sideNav.style.width = "0px");
+    }
+}
+catch {
+    console.log("Error initializing sidenav: " + err);
+}
+
 // /* find and set up card strip elements */
 // const cardStrips = document.querySelectorAll(".card-strip");
 // for (const cardStrip of cardStrips) {
