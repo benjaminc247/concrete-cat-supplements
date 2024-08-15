@@ -4,33 +4,37 @@
     margin: auto;
     padding: 0;
     max-width: 1440px;
-    height: min(57.14vw, 480px);
+    height: min(75vw, 480px);
     background-image: url("/assets/banner-wide.webp");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position-x: calc(100% * .80);
+    background-position-x: calc(100% * .85);
 }
 #banner-content {
     display: inline-block;
 }
 #banner-content h1 {
-    font-size: min(5.71vw, 48px);
+    /* 30px @ 416vw */
+    font-size: min(7.21vw, 48px);
+    width: min(62vw, 600px);
     font-weight: bold;
     font-stretch: extra-expanded;
     text-transform: uppercase;
-    white-space: nowrap;
     color: white;
-    margin: 2em 1.33em 1em;
+    /* 48px 24px @ 416vw */
+    margin: min(11.54vw, 64px) min(5.77vw, 64px);
     padding: 0;
 }
 #banner-content h2 {
-    font-size: min(3.81vw, 32px);
+    /* 16px @ 416vw */
+    font-size: min(3.85vw, 32px);
     font-weight: bold;
     font-stretch: expanded;
     text-transform: uppercase;
     white-space: nowrap;
     color: white;
-    margin: .83em 2.0em;
+    /* 16px 24px @ 416vw */
+    margin: min(3.85vw, 24px) min(5.77vw, 64px);
     padding: 0;
 }
 
@@ -73,7 +77,7 @@
 .icon-card p {
     /* border: 1px solid green; */
     margin: 4px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -93,37 +97,37 @@
 /* 2 lines */
 @container (width < 515px) {
     .icon-card {
-        width: 310px;
+        width: 277px;
     }
     #magnifier-card p {
-        width: 242px;
+        max-width: 213px;
     }
     #beaker-card p {
-        width: 236px;
+        max-width: 208px;
     }
     #gear-card p {
-        width: 219px;
+        max-width: 193px;
     }
     #leaf-card p {
-        width: 213px;
+        max-width: 188px;
     }
 }
 /* 3 lines */
 @container (width < 312px) {
     .icon-card {
-        width: 238px;
+        width: 219px;
     }
     #magnifier-card p {
-        width: 166px;
+        max-width: 146px;
     }
     #beaker-card p {
-        width: 153px;
+        max-width: 135px;
     }
     #gear-card p {
-        width: 170px;
+        max-width: 155px;
     }
     #leaf-card p {
-        width: 165px;
+        max-width: 148px;
     }
 }
 /* vertical stack */
