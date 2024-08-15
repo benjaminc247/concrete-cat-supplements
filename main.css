@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap');
+
 /* set global font */
 body {
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'Roboto Flex', sans-serif;
+    font-optical-sizing: auto;
 }
 
 /* never decorate links */
@@ -10,11 +13,9 @@ a, a:hover, a:visited, a:active {
 }
 
 /* page header */
-.page-header {
+.page-header h1 {
     text-align: center;
-    border-width: 0px 0px medium 0px;
-    border-style: solid;
-    border-color: lightgray;
+    text-transform: uppercase;
 }
 
 /* collapsible */

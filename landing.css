@@ -1,0 +1,107 @@
+/* banner */
+#banner {
+    display: block;
+    margin: auto;
+    padding: 0;
+    max-width: 1440px;
+    height: min(57.14vw, 480px);
+    background-image: url("/banner-wide.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: calc(100% * .80);
+}
+#banner-content {
+    display: inline-block;
+}
+#banner-content h1 {
+    font-size: min(5.71vw, 48px);
+    font-weight: bold;
+    font-stretch: extra-expanded;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: white;
+    margin: 2em 1.33em 1em;
+    padding: 0;
+}
+#banner-content h2 {
+    font-size: min(3.81vw, 32px);
+    font-weight: bold;
+    font-stretch: expanded;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: white;
+    margin: .83em 2.0em;
+    padding: 0;
+}
+
+/* card strip */
+#card-strip {
+    box-sizing: border-box;
+    max-width: 1440px;
+    margin: auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#card-strip .wrapper {
+    box-sizing: border-box;
+    display: grid;
+    width: 25%;
+}
+.icon-card {
+    display: flex;
+    margin: auto;
+    flex-direction: row;
+    align-items: center;
+
+    /* two lines 257 three lines 206px */
+    width: 257px;
+}
+.icon-card img {
+    margin: 4px;
+}
+.icon-card p {
+    margin: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+/* hokay so... can I figure these out with code if I give the sizes as data tags??? */
+/* or even better do text measurement to figure out the optimal snaps??? */
+@media (width < 1066px) {
+    /* switch to three lines */
+    .icon-card {
+        width: 206px;
+    }
+}
+@media (width < 862px) {
+    #card-strip .wrapper {
+        width: 50%;
+    }
+    /* switch to two lines */
+    .icon-card {
+        width: 257px;
+    }
+}
+@media (width < 553px) {
+    /* switch to three lines */
+    .icon-card {
+        width: 206px;
+    }
+}
+@media (width < 451px) {
+    #card-strip .wrapper {
+        width: 100%
+    }
+    /* switch to two lines */
+    .icon-card {
+        width: 257px;
+    }
+}
+@media (width < 297px) {
+    /* switch to three lines */
+    .icon-card {
+        width: 206px;
+    }
+}
