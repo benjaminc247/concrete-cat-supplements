@@ -8,7 +8,7 @@
     background-image: url("/assets/banner-wide.webp");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position-x: calc(100% * .85);
+    background-position-x: calc(100% * .86);
 }
 #banner-content {
     display: inline-block;
