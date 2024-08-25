@@ -38,36 +38,40 @@
     padding: 0;
 }
 
-/* card strip */
-#card-strip {
-    /* border: 1px solid green; */
-    container-type: inline-size;
+/* hook strip */
+#hook-strip {
     box-sizing: border-box;
     max-width: 1440px;
     width: 100%;
     margin: auto;
     padding: 12px;
+}
+
+/* automatically generate better line breaks! */
+/* https://github.com/adobe/balance-text/blob/master/balancetext.js */
+
+.width-selector {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
-#card-strip .wrapper {
-    /* border: 1px solid green; */
-    container-type: inline-size;
-    box-sizing: border-box;
-    width: 25%;
-    display: grid;
-}
+
 .icon-card {
-    /* border: 1px solid green; */
-    margin: auto;
-    width: 513px;
+    white-space: nowrap;
+    width: fit-content;
+}
+.flex-layout-row {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
+.flex-layout-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 .icon-card i {
-    /* border: 1px solid green; */
     margin: 4px;
     font-size: 48px;
     width: 48px;
@@ -75,68 +79,8 @@
     flex: none;
 }
 .icon-card p {
-    /* border: 1px solid green; */
     margin: 4px;
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
-}
-/* hokay so... can I figure these out with code if I give the sizes as data tags??? */
-/* or even better do text measurement to figure out the optimal snaps??? */
-/* setting wrapping individually to ensure elements line up with different text sizes */
-@container (width < 736px) {
-    #card-strip .wrapper {
-        width: 50%;
-    }
-}
-@container (width < 367px) {
-    #card-strip .wrapper {
-        width: 100%
-    }
-}
-/* 2 lines */
-@container (width < 515px) {
-    .icon-card {
-        width: 277px;
-    }
-    #magnifier-card p {
-        max-width: 213px;
-    }
-    #beaker-card p {
-        max-width: 208px;
-    }
-    #gear-card p {
-        max-width: 193px;
-    }
-    #leaf-card p {
-        max-width: 188px;
-    }
-}
-/* 3 lines */
-@container (width < 312px) {
-    .icon-card {
-        width: 219px;
-    }
-    #magnifier-card p {
-        max-width: 146px;
-    }
-    #beaker-card p {
-        max-width: 135px;
-    }
-    #gear-card p {
-        max-width: 155px;
-    }
-    #leaf-card p {
-        max-width: 148px;
-    }
-}
-/* vertical stack */
-@container (width < 240px) {
-    .icon-card {
-        flex-direction: column;
-        width: 180px;
-    }
-    .icon-card p {
-        text-align: center;
-    }
 }
