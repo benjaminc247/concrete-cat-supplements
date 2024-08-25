@@ -44,43 +44,5 @@
     max-width: 1440px;
     width: 100%;
     margin: auto;
-    padding: 12px;
-}
-
-/* automatically generate better line breaks! */
-/* https://github.com/adobe/balance-text/blob/master/balancetext.js */
-
-.width-selector {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.icon-card {
-    white-space: nowrap;
-    width: fit-content;
-}
-.flex-layout-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.flex-layout-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-.icon-card i {
-    margin: 4px;
-    font-size: 48px;
-    width: 48px;
-    text-align: center;
-    flex: none;
-}
-.icon-card p {
-    margin: 4px;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
+    padding: 6px;
 }

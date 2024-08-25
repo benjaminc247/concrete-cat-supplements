@@ -15,6 +15,11 @@ catch {
 }
 
 /* find and set up width groups */
+/**
+ * when layouts depend on width this measurement can be affected by size during load
+ * for now measure with a parent set to min-content for a deterministic width
+ * could add resize listeners for all elements to keep them in sync
+ */
 try {
     let widthGroups = {};
     for (const widthGroupElem of document.querySelectorAll(".width-group")) {
@@ -23,7 +28,14 @@ try {
     for (const [widthGroupId, widthGroupElems] of Object.entries(widthGroups)) {
         let maxWidth = 0;
         for(const widthGroupElem of widthGroupElems) {
+            const parent = widthGroupElem.parentElement;
+            const wrapper = document.createElement("div");
+            wrapper.style.width = "min-content";
+            wrapper.appendChild(widthGroupElem);
+            parent.appendChild(wrapper);
             maxWidth = Math.max(maxWidth, widthGroupElem.getBoundingClientRect().width);
+            wrapper.remove();
+            parent.appendChild(widthGroupElem);
         }
         // console.log("width group '" + widthGroupId + "' = " + maxWidth);
         for(const widthGroupElem of widthGroupElems) {
@@ -52,7 +64,7 @@ for (const widthSelector of document.querySelectorAll(".width-selector")) {
         while (widthSelector.children.length > 0) {
             const wrapper = document.createElement("div");
             wrapper.appendChild(widthSelector.children[0]);
-            wrapper.style.width = "fit-content";
+            wrapper.style.width = "min-content";
             container.appendChild(wrapper);
         }
         widthSelector.appendChild(container);
