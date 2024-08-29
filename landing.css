@@ -1,41 +1,187 @@
 /* banner */
 #banner {
-    display: block;
-    margin: auto;
-    padding: 0;
+    display: flow-root;
+    position: relative;
     max-width: 1440px;
-    height: min(75vw, 480px);
-    background-image: url("/assets/banner-wide.webp");
+    margin: auto;
+    overflow: hidden;
+}
+#banner h1 {
+    text-transform: uppercase;
+    color: white;
+}
+#banner h2 {
+    text-transform: uppercase;
+    color: white;
+}
+#get-started {
+    all: unset;
+    cursor: pointer;
+    color: white;
+    background-color: #ce6e1f;
+    border-radius: 3px;
+    text-align: center;
+    box-shadow: 2px 2px 4px 2px black;
+}
+#banner-bg {
+    /* container for banner hero image elements */
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+#banner-bg-image {
+    /* main background for hero image */
+    position: absolute;
+    background-image: url("/assets/empty-gym-wide.webp");
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position-x: calc(100% * .86);
+    width: 100%;
+    height: 100%;
+    background-position-x: 90%;
 }
-#banner-content {
-    display: inline-block;
+#banner-bg-fg {
+    /* copy of foreground for fade-out */
+    position: absolute;
+    background-image: url("/assets/regal-cat.webp");
+    background-size: contain;
+    aspect-ratio: 300/380;
 }
-#banner-content h1 {
-    /* 30px @ 416vw */
-    font-size: min(7.21vw, 48px);
-    width: min(62vw, 600px);
-    font-weight: bold;
-    font-stretch: extra-expanded;
-    text-transform: uppercase;
-    color: white;
-    /* 48px 24px @ 416vw */
-    margin: min(11.54vw, 64px) min(5.77vw, 64px);
-    padding: 0;
+#banner-bg-gradient {
+    /* gradient over hero image background for text readability */
+    position: absolute;
+    background-image: linear-gradient(70deg, #002347e6, #00234766);
+    height: 100%;
+    aspect-ratio: 1440/480;
 }
-#banner-content h2 {
-    /* 16px @ 416vw */
-    font-size: min(3.85vw, 32px);
-    font-weight: bold;
-    font-stretch: expanded;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: white;
-    /* 16px 24px @ 416vw */
-    margin: min(3.85vw, 24px) min(5.77vw, 64px);
-    padding: 0;
+#banner-fg {
+    /* hero image foreground, mask fades to duplicate under background gradient */
+    position: absolute;
+    z-index: -1;
+    background-image: url("/assets/regal-cat.webp");
+    background-size: contain;
+    mask-image: linear-gradient(40deg, #00000000 0 30%, #000000ff 80% 100%);
+    mask-size: contain;
+    aspect-ratio: 300/380;
+}
+@media all and (max-width: 459px) {
+    #banner {
+        height: 360px;
+    }
+    #banner-bg-fg {
+        top: 50px;
+        right: 26px;
+        height: 224px;
+    }
+    #banner-fg {
+        top: 50px;
+        right: 26px;
+        height: 224px;
+        mask-image: linear-gradient(10deg, #00000000 0 50%, #000000ff 75% 100%);
+    }
+    #banner h1 {
+        font-size: 32px;
+        font-weight: 700;
+        font-stretch: 130%;
+        line-height: 1.0;
+        width: 12ch;
+        margin: 111px 32px 0px 32px;
+    }
+    #banner h2 {
+        font-size: 16px;
+        font-weight: 650;
+        font-stretch: 125%;
+        line-height: 1.1;
+        width: 20ch;
+        height: 35px;
+        margin: 18px 32px 0px 32px;
+        overflow: hidden;
+    }
+    #get-started {
+        font-size: 16px;
+        font-weight: 500;
+        font-stretch: 120%;
+        width: min(calc(100% - 64px), 200px);
+        height: 32px;
+        margin: 20px 32px 0px 32px;
+    }
+}
+@media all and (min-width: 460px) and (max-width: 739px) {
+    #banner {
+        height: 360px;
+    }
+    #banner-bg-fg {
+        top: 108px;
+        right: 26px;
+        height: 224px;
+    }
+    #banner-fg {
+        top: 108px;
+        right: 26px;
+        height: 224px;
+    }
+    #banner h1 {
+        font-size: 32px;
+        font-weight: 700;
+        font-stretch: 130%;
+        line-height: 1.0;
+        width: 20ch;
+        margin: 125px 32px 0px 32px;
+    }
+    #banner h2 {
+        font-size: 16px;
+        font-weight: 650;
+        font-stretch: 125%;
+        line-height: 1.1;
+        width: 20ch;
+        margin: 18px 32px 0px 32px;
+    }
+    #get-started {
+        font-size: 16px;
+        font-weight: 500;
+        font-stretch: 120%;
+        width: 200px;
+        height: 32px;
+        margin: 20px 32px 0px 32px;
+    }
+}
+@media all and (min-width: 740px) {
+    #banner {
+        height: 480px;
+    }
+    #banner-bg-fg {
+        top: 84px;
+        right: 54px;
+        height: 382px;
+    }
+    #banner-fg {
+        top: 84px;
+        right: 54px;
+        height: 382px;
+    }
+    #banner h1 {
+        font-size: 48px;
+        font-weight: 700;
+        font-stretch: 130%;
+        line-height: 1.0;
+        width: 20ch;
+        margin: 112px 64px 0px 64px;
+    }
+    #banner h2 {
+        font-size: 32px;
+        font-weight: 650;
+        font-stretch: 125%;
+        line-height: 1.1;
+        width: 20ch;
+        margin: 36px 64px 0px 64px;
+    }
+    #get-started {
+        font-size: 16px;
+        font-weight: 500;
+        font-stretch: 120%;
+        width: 270px;
+        height: 42px;
+        margin: 41px 64px 0px 64px;
+    }
 }
 
 /* hook strip */
