@@ -2,6 +2,7 @@
 #banner {
     display: flow-root;
     position: relative;
+    z-index: -1;
     max-width: 1440px;
     margin: auto;
     overflow: hidden;
