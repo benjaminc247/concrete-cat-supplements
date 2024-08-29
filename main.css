@@ -4,38 +4,52 @@
 @import url('/assets/fontawesome/css/solid.css');
 @import url('/assets/fontawesome/css/brands.css');
 
-/* design for mobile first, then use media queries to adjust to desktop! */
-
-/* set global font */
+/* global */
 body {
+    /* fonts */
     font-family: 'Roboto Flex', sans-serif;
+    --icon-font-family: 'Font Awesome 6 Free';
+    font-size: 16px;
     font-optical-sizing: auto;
+    /* greyscale colors for generic text */
+    --main-bg-color: #ffffff;
+    --main-text-color: #242424;
+    --main-border-color: #dbdbdb;
+    --main-inset-color: #020202;
+    /* palette colors for highlights */
+    --highlight-button-color: #ce6e1f;
+    --highlight-bg-color: #002347;
+    /* set main colors */
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
 }
 
-/* never decorate links */
-a, a:hover, a:visited, a:active {
-    color: inherit;
-    text-decoration: none;
+/* simplify links and buttons */
+a {
+    all: unset;
+    cursor: pointer;
+}
+a:focus {
+    outline: revert;
+}
+button {
+    all: unset;
+    cursor: pointer;
+}
+button:focus {
+    outline: revert;
 }
 
 /* page header */
-.page-header {
+#page-header {
     display: flex;
     align-items: center;
 }
 #open-sidenav {
-    background: none;
-    color: inherit;
-    font: inherit;
-    outline: inherit;
-    border: none;
-    padding: 0;
-    cursor: pointer;
     font-size: 2em;
     margin: .67em;
 }
-.page-header h1 {
-    text-align: center;
+#page-header h1 {
     text-transform: uppercase;
     font-size: 2em;
 }
@@ -52,73 +66,30 @@ a, a:hover, a:visited, a:active {
     transition: width 0.2s ease-out;
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: var(--main-bg-color);
 }
-#sidenav button {
-    background: none;
-    color: inherit;
-    font: inherit;
-    outline: inherit;
-    border: none;
-    padding: 0;
-    cursor: pointer;
+#close-sidenav {
     font-size: 2em;
     margin: .67em;
     align-self: end;
 }
 
-/* icon card */
-.icon-card {
-    margin: auto;
-    padding: 6px;
-    white-space: nowrap;
-    width: fit-content;
-}
-.icon-card-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.icon-card-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-.icon-card i {
-    margin: 4px;
-    font-size: 48px;
-    width: 48px;
-    text-align: center;
-    flex: none;
-}
-.icon-card p {
-    margin: 4px;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
 /* collapsible */
 .collapsible {
-    border-width: medium 0px;
+    border-width: 3px 0px;
     border-style: solid;
-    border-color: lightgray;
+    border-color: var(--border-color);
 }
 .collapsible .toggle {
     width: 100%;
-    cursor: pointer;
-    background-color: inherit;
-    text-align: left;
-    font: inherit;
-    border: none;
 }
 .collapsible .toggle::after {
-    content: "\02C5";
+    font-family: var(--icon-font-family);
+    content: "\f078";
     float: right;
 }
 .collapsible .toggle.active::after {
-    content: "\02C4";
+    content: "\f077";
 }
 .collapsible .collapse {
     max-height: 0;
