@@ -1,28 +1,14 @@
-import { createAppendJsonSupplementFacts } from "./page-generator.js"
+import * as cclRegistry from "/ccl-elements/registry.js";
+import "/ccl-elements/sidenav.js";
+import "/ccl-elements/html-include.js";
+import { createAppendJsonSupplementFacts } from "./page-generator.js";
 
-/* set up side nav */
+// set up ccl elements from html root
 try {
-    const sideNav = document.getElementById("sidenav");
-    const sideNavFade = document.getElementById("sidenav-fade");
-    const openSideNavBtn = document.getElementById("open-sidenav");
-    const closeSideNavBtn = document.getElementById("close-sidenav");
-    if (sideNav) {
-        openSideNavBtn.addEventListener("click", () => {
-            sideNav.classList.add("active");
-            sideNavFade.classList.add("active");
-        });
-        closeSideNavBtn.addEventListener("click", () => {
-            sideNav.classList.remove("active");
-            sideNavFade.classList.remove("active");
-        });
-        sideNavFade.addEventListener("click", () => {
-            sideNav.classList.remove("active");
-            sideNavFade.classList.remove("active");
-        });
-    }
+    cclRegistry.raiseHandlers(document);
 }
-catch {
-    console.log("Error initializing sidenav: " + err);
+catch (err) {
+    console.log("Unhandled error initializing ccl elements: " + err);
 }
 
 /* find and set up width groups */
@@ -38,7 +24,7 @@ try {
     }
     for (const [widthGroupId, widthGroupElems] of Object.entries(widthGroups)) {
         let maxWidth = 0;
-        for(const widthGroupElem of widthGroupElems) {
+        for (const widthGroupElem of widthGroupElems) {
             const parent = widthGroupElem.parentElement;
             const wrapper = document.createElement("div");
             wrapper.style.width = "min-content";
@@ -49,9 +35,9 @@ try {
             parent.appendChild(widthGroupElem);
         }
         // console.log("width group '" + widthGroupId + "' = " + maxWidth);
-        for(const widthGroupElem of widthGroupElems) {
+        for (const widthGroupElem of widthGroupElems) {
             const style = window.getComputedStyle(widthGroupElem);
-            if(style.boxSizing == "content-box") {
+            if (style.boxSizing == "content-box") {
                 const padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
                 const border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
                 const clientWidth = maxWidth - padding - border;
@@ -93,7 +79,7 @@ for (const widthSelector of document.querySelectorAll(".width-selector")) {
             minWidth = Math.min(minWidth, width);
             maxWidth = Math.max(maxWidth, width);
             const childDisplay = window.getComputedStyle(child).getPropertyValue("display");
-            childData.push({element: child, width: width, display: childDisplay});
+            childData.push({ element: child, width: width, display: childDisplay });
             // console.log("child[" + i +"] width: " + childData[i]['width']);
         }
         widthSelector.style.minWidth = minWidth + "px";
@@ -101,7 +87,7 @@ for (const widthSelector of document.querySelectorAll(".width-selector")) {
         childData.sort((lhs, rhs) => rhs['width'] - lhs['width']);
 
         // destroy temp wrappers
-        while(container.children.length > 0) {
+        while (container.children.length > 0) {
             widthSelector.appendChild(container.children[0].firstElementChild);
             container.children[0].remove();
         }
@@ -179,10 +165,10 @@ for (const cardStrip of cardStrips) {
                 const childrenBeforeLastRow = (rowCount - 1) * childrenPerRow;
                 const childrenLastRow = container.children.length - childrenBeforeLastRow;
                 let i = 0;
-                for(; i < childrenBeforeLastRow; ++i) {
+                for (; i < childrenBeforeLastRow; ++i) {
                     container.children[i].style.width = (100 / childrenPerRow) + "%";
                 }
-                for(; i < container.children.length; ++i) {
+                for (; i < container.children.length; ++i) {
                     container.children[i].style.width = (100 / childrenLastRow) + "%";
                 }
             }

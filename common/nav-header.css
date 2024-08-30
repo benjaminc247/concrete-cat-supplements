@@ -1,0 +1,64 @@
+#page-header {
+    display: flex;
+    align-items: center;
+}
+#open-sidenav {
+    font-size: 2rem;
+    margin: .5rem;
+}
+#page-header h1 {
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+/*
+    need to trap focus to prevent tabstops in the background
+    https://hidde.blog/using-javascript-to-trap-focus-in-an-element/
+*/
+#sidenav {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 100%;
+    background-color: var(--main-bg-color);
+    visibility: hidden;
+    clip-path: inset(0 100% 0 0);
+    transition: visibility 0.2s, clip-path 0.2s ease-in;
+    display: flex;
+    flex-direction: column;
+}
+#sidenav.active {
+    visibility: visible;
+    clip-path: inset(0);
+    transition: visibility 0.2s, clip-path 0.2s ease-out;
+}
+#sidenav-fade {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    visibility: hidden;
+    opacity: 0%;
+    transition: visibility 0.2s, opacity 0.2s ease-in;
+}
+#sidenav-fade.active {
+    visibility: visible;
+    opacity: 75%;
+    transition: visibility 0.2s, opacity 0.2s ease-out;
+}
+#close-sidenav {
+    font-size: 2rem;
+    margin: .5rem;
+    align-self: end;
+}
+#sidenav a {
+    border-width: 2px 0px;
+    border-style: solid;
+    border-color: var(--main-border-color);
+    padding: 5px;
+}
