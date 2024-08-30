@@ -17,7 +17,7 @@ body {
     --main-border-color: #dbdbdb;
     --main-inset-color: #020202;
     /* palette colors for highlights */
-    --highlight-button-color: #ce6e1f;
+    --highlight-button-color: #ff5500;
     --highlight-bg-color: #002347;
     /* set main colors */
     background-color: var(--main-bg-color);
@@ -46,39 +46,72 @@ button:focus {
     align-items: center;
 }
 #open-sidenav {
-    font-size: 2em;
-    margin: .67em;
+    font-size: 2rem;
+    margin: .5rem;
 }
 #page-header h1 {
     text-transform: uppercase;
-    font-size: 2em;
+    font-size: 2rem;
 }
 
 /* sidenav */
+/*
+    need to trap focus to prevent tabstops in the background
+    https://hidde.blog/using-javascript-to-trap-focus-in-an-element/
+*/
 #sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
     z-index: 1;
+    position: fixed;
     top: 0;
     left: 0;
-    overflow-x: hidden;
-    transition: width 0.2s ease-out;
+    width: auto;
+    height: 100%;
+    background-color: var(--main-bg-color);
+    visibility: hidden;
+    clip-path: inset(0 100% 0 0);
+    transition: visibility 0.2s, clip-path 0.2s ease-in;
     display: flex;
     flex-direction: column;
-    background-color: var(--main-bg-color);
+}
+#sidenav.active {
+    visibility: visible;
+    clip-path: inset(0);
+    transition: visibility 0.2s, clip-path 0.2s ease-out;
+}
+#sidenav-fade {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    visibility: hidden;
+    opacity: 0%;
+    transition: visibility 0.2s, opacity 0.2s ease-in;
+}
+#sidenav-fade.active {
+    visibility: visible;
+    opacity: 75%;
+    transition: visibility 0.2s, opacity 0.2s ease-out;
 }
 #close-sidenav {
-    font-size: 2em;
-    margin: .67em;
+    font-size: 2rem;
+    margin: .5rem;
     align-self: end;
+}
+#sidenav a {
+    border-width: 2px 0px;
+    border-style: solid;
+    border-color: var(--main-border-color);
+    padding: 5px;
 }
 
 /* collapsible */
 .collapsible {
     border-width: 3px 0px;
     border-style: solid;
-    border-color: var(--border-color);
+    border-color: var(--main-border-color);
 }
 .collapsible .toggle {
     width: 100%;

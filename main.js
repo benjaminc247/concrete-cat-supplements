@@ -3,11 +3,22 @@ import { createAppendJsonSupplementFacts } from "./page-generator.js"
 /* set up side nav */
 try {
     const sideNav = document.getElementById("sidenav");
+    const sideNavFade = document.getElementById("sidenav-fade");
     const openSideNavBtn = document.getElementById("open-sidenav");
     const closeSideNavBtn = document.getElementById("close-sidenav");
     if (sideNav) {
-        openSideNavBtn.addEventListener("click", () => sideNav.style.width = "250px");
-        closeSideNavBtn.addEventListener("click", () => sideNav.style.width = "0px");
+        openSideNavBtn.addEventListener("click", () => {
+            sideNav.classList.add("active");
+            sideNavFade.classList.add("active");
+        });
+        closeSideNavBtn.addEventListener("click", () => {
+            sideNav.classList.remove("active");
+            sideNavFade.classList.remove("active");
+        });
+        sideNavFade.addEventListener("click", () => {
+            sideNav.classList.remove("active");
+            sideNavFade.classList.remove("active");
+        });
     }
 }
 catch {

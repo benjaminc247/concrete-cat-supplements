@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!--
+    add android homescreen shortcut metadata
+    https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+  -->
   <title>Concrete Cat Labs</title>
-  <!-- with initial-scale=1 width will be treated as a minimum, device-width may go as low as 214? -->
-  <!-- mobile ppi up to 515 may want to use higher quality images? -->
-  <!-- 800-1200 pixels wide on screen, 4:3 - 3:2 aspect ratios -->
-  <!-- pixel 5 vp 393x851 css pixel ratio 2.75 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/main.css">
   <link rel="stylesheet" href="/landing.css">
   <script type="module" src="/main.js" defer></script>
@@ -20,6 +21,7 @@
       <a href="/">Concrete Cat Labs</a>
     </h1>
   </header>
+  <div id="sidenav-fade"></div>
   <div id="sidenav">
     <button id="close-sidenav"><i class="fa-solid fa-xmark"></i></button>
     <a href="/coffee-enhancer/">Coffee Enhancer</a>
