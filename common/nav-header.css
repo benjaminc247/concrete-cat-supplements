@@ -11,8 +11,7 @@
     font-size: 2rem;
 }
 
-/*
-    need to trap focus to prevent tabstops in the background
+/*  need to trap focus to prevent tabstops in the background
     https://hidde.blog/using-javascript-to-trap-focus-in-an-element/
 */
 #sidenav {
@@ -57,6 +56,7 @@
     align-self: end;
 }
 #sidenav a {
+    display: block;
     border-width: 2px 0px;
     border-style: solid;
     border-color: var(--main-border-color);

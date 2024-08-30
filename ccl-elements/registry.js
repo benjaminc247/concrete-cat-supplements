@@ -1,22 +1,35 @@
+// ccl initialization callback list
+let callbacks = [];
+
 /**
- * functions to register and raise callbacks to set up ccl elements from html
+ * A callback to initialize ccl elements in a given html element
+ * @callback cclElementRegistryCallback
+ * @param {HTMLElement} parentElement - The element under which to search for ccl elements
  */
-let handlers = [];
-export function registerHandler(handler) {
+/**
+ * Register a callback to initialize ccl elements
+ * @param {cclElementRegistryCallback} callback - The callback to initialize ccl elements
+ */
+export function registerCallback(callback) {
     try {
-        handlers.push(handler);
+        callbacks.push(callback);
     }
     catch (err) {
-        console.log("While registering ccl custom element handler: " + err);
+        console.log("While registering ccl element callback: " + err);
     }
 }
-export function raiseHandlers(rootNode) {
-    for (const handler of handlers) {
+
+/**
+ * Call all registered ccl element initialization callbacks
+ * @param {HTMLElement} parentElement - The element under which to search for ccl elements
+ */
+export function raiseCallbacks(parentElement) {
+    for (const callback of callbacks) {
         try {
-            handler(rootNode);
+            callback(parentElement);
         }
         catch(err) {
-            console.log("While running ccl custom element handler: " + err);
+            console.log("While running ccl element callback: " + err);
         }
     }
 }

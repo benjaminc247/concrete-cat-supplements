@@ -1,11 +1,7 @@
-import * as cclRegistry from "/ccl-elements/registry.js";
+import * as cclElementRegistry from "/ccl-elements/registry.js";
 
-/**
- * set up html includes in node and descendants
- * @param {ParentNode} rootNode root of custom element search
- */
-cclRegistry.registerHandler((rootNode) => {
-    const htmlIncludes = rootNode.querySelectorAll("[data-ccl-include-html]");
+cclElementRegistry.registerCallback((parentElement) => {
+    const htmlIncludes = parentElement.querySelectorAll("[data-ccl-include-html]");
     for (const htmlInclude of htmlIncludes) {
         try {
             // remove attribute after fetching file name to avoid repeated include
@@ -18,11 +14,16 @@ cclRegistry.registerHandler((rootNode) => {
                 }
                 return response.text();
             }).then((content) => {
+                // replace include element with html from file
+                // copy children before they are inserted in parent and lost
                 const tpl = document.createElement("template");
                 tpl.innerHTML = content;
-                const frag = tpl.content;
-                htmlInclude.replaceWith(frag);
-                cclRegistry.raiseHandlers(frag);
+                const children = [...tpl.content.children];
+                htmlInclude.replaceWith(tpl.content);
+                // raise ccl element callbacks on each child
+                for (const child of children) {
+                    cclElementRegistry.raiseCallbacks(child);
+                }
             }).catch((err) => {
                 console.log("Error loading html include: " + err);
             });

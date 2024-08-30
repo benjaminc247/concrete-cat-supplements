@@ -1,19 +1,14 @@
-import * as cclRegistry from "/ccl-elements/registry.js";
+import * as cclElementRegistry from "/ccl-elements/registry.js";
 
-/**
- * set up side nav elements in node and descendants
- * @param {ParentNode} rootNode root of custom element search
- */
-/*
-    TODO
+/*  TODO
     probably should just make side nav not unique
     but then have to figure out how to link everything
     is there any code difference between side nav and any other modal dialog?
     maybe the ability to close by clicking the background would not always be useful
 */
-cclRegistry.registerHandler((rootNode) => {
+cclElementRegistry.registerCallback((parentElement) => {
     try {
-        // element by id is document level, so not using root node for now
+        // element by id is document level, so not using parent element for now
         const sideNav = document.getElementById("sidenav");
         const sideNavFade = document.getElementById("sidenav-fade");
         const openSideNavBtn = document.getElementById("open-sidenav");
