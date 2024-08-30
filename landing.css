@@ -2,21 +2,23 @@
 #banner {
     display: flow-root;
     position: relative;
-    z-index: -1;
     max-width: 1440px;
     margin: auto;
     overflow: hidden;
     background-color: var(--highlight-bg-color);
 }
 #banner h1 {
+    position: relative;
     text-transform: uppercase;
     color: var(--main-bg-color);
 }
 #banner h2 {
+    position: relative;
     text-transform: uppercase;
     color: var(--main-bg-color);
 }
 #get-started {
+    position: relative;
     color: var(--main-bg-color);
     background-color: var(--highlight-button-color);
     border-radius: 3px;
@@ -26,7 +28,6 @@
 #banner-bg {
     /* container for banner hero image elements */
     position: absolute;
-    z-index: -1;
     width: 100%;
     height: 100%;
 }
@@ -56,7 +57,6 @@
 #banner-fg {
     /* hero image foreground, mask fades to duplicate under background gradient */
     position: absolute;
-    z-index: -1;
     background-image: url("/assets/regal-cat.webp");
     background-size: contain;
     mask-image: linear-gradient(40deg, #00000000 0 30%, #000000ff 80% 100%);
