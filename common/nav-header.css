@@ -62,3 +62,6 @@
     border-color: var(--main-border-color);
     padding: 5px;
 }
+#sidenav a+a {
+    border-width: 0px 0px 2px 0px;
+}

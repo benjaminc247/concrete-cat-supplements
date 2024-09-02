@@ -41,10 +41,14 @@ button:focus {
 }
 
 /* collapsible */
+/* TODO make this clickable anywhere in the borders! */
 .collapsible {
     border-width: 3px 0px;
     border-style: solid;
     border-color: var(--main-border-color);
+}
+.collapsible+.collapsible {
+    border-width: 0px 0px 3px 0px;
 }
 .collapsible .toggle {
     width: 100%;
