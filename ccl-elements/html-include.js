@@ -1,6 +1,6 @@
 import * as cclElementRegistry from "/ccl-elements/registry.js";
 
-cclElementRegistry.registerCallback((parentElement) => {
+cclElementRegistry.registerCallback("html-include", 2000, (parentElement) => {
     const htmlIncludes = parentElement.querySelectorAll("[data-ccl-include-html]");
     for (const htmlInclude of htmlIncludes) {
         try {

@@ -6,7 +6,7 @@ import * as cclElementRegistry from "/ccl-elements/registry.js";
     is there any code difference between side nav and any other modal dialog?
     maybe the ability to close by clicking the background would not always be useful
 */
-cclElementRegistry.registerCallback((parentElement) => {
+cclElementRegistry.registerCallback("sidenav", 1000, (parentElement) => {
     try {
         // element by id is document level, so not using parent element for now
         const sideNav = document.getElementById("sidenav");

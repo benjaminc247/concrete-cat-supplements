@@ -1,6 +1,6 @@
 import * as cclElementRegistry from "/ccl-elements/registry.js";
 
-cclElementRegistry.registerCallback((parentElement) => {
+cclElementRegistry.registerCallback("collapsible", 1000, (parentElement) => {
     const collapsibles = parentElement.querySelectorAll(".collapsible");
     for (const collapsible of collapsibles) {
         try {

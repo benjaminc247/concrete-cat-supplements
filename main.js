@@ -2,6 +2,7 @@ import * as cclElementRegistry from "/ccl-elements/registry.js";
 import "/ccl-elements/sidenav.js";
 import "/ccl-elements/html-include.js";
 import "/ccl-elements/collapsible.js";
+import "/ccl-elements/width-group.js";
 import { createAppendJsonSupplementFacts } from "./page-generator.js";
 
 // set up ccl elements in document
@@ -10,48 +11,6 @@ try {
 }
 catch (err) {
     console.log("Unhandled error initializing ccl elements: " + err);
-}
-
-/* find and set up width groups */
-/**
- * when layouts depend on width this measurement can be affected by size during load
- * for now measure with a parent set to min-content for a deterministic width
- * could add resize listeners for all elements to keep them in sync
- */
-try {
-    let widthGroups = {};
-    for (const widthGroupElem of document.querySelectorAll(".width-group")) {
-        (widthGroups[widthGroupElem.dataset.widthGroupId] ||= []).push(widthGroupElem);
-    }
-    for (const [widthGroupId, widthGroupElems] of Object.entries(widthGroups)) {
-        let maxWidth = 0;
-        for (const widthGroupElem of widthGroupElems) {
-            const parent = widthGroupElem.parentElement;
-            const wrapper = document.createElement("div");
-            wrapper.style.width = "min-content";
-            wrapper.appendChild(widthGroupElem);
-            parent.appendChild(wrapper);
-            maxWidth = Math.max(maxWidth, widthGroupElem.getBoundingClientRect().width);
-            wrapper.remove();
-            parent.appendChild(widthGroupElem);
-        }
-        // console.log("width group '" + widthGroupId + "' = " + maxWidth);
-        for (const widthGroupElem of widthGroupElems) {
-            const style = window.getComputedStyle(widthGroupElem);
-            if (style.boxSizing == "content-box") {
-                const padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
-                const border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
-                const clientWidth = maxWidth - padding - border;
-                widthGroupElem.style.width = clientWidth + "px";
-            }
-            else {
-                widthGroupElem.style.width = maxWidth + "px";
-            }
-        }
-    }
-}
-catch (err) {
-    console.log("Error initializing width group: " + err);
 }
 
 /* find and set up width selectors */
