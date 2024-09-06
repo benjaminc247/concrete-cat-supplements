@@ -4,6 +4,11 @@ cclElementRegistry.registerCallback("collapsible", 1000, (parentElement) => {
     const collapsibles = parentElement.querySelectorAll(".collapsible");
     for (const collapsible of collapsibles) {
         try {
+            // only initialize once
+            if (collapsible.classList.contains("ccl-initialized"))
+                continue;
+            collapsible.classList.add("ccl-initialized");
+
             // create toggle button with heading text
             const toggle = document.createElement("button");
             toggle.type = "button";

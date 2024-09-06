@@ -9,20 +9,15 @@ let widthGroups = new Map();
 cclElementRegistry.registerCallback("width-group", 500, (parentElement) => {
     for (const widthGroupElem of parentElement.querySelectorAll(".ccl-width-group")) {
         try {
-            if(!widthGroupElem.hasAttribute("data-width-group-id"))
+            if (!widthGroupElem.hasAttribute("data-width-group-id"))
                 throw "Width group must have 'data-width-group-id' attribute set!";
             const groupId = widthGroupElem.getAttribute("data-width-group-id");
-            if (widthGroups.has(groupId)) {
-                const group = widthGroups.get(groupId);
-                if (group.elems.has(widthGroupElem)) {
-                }
-                else {
-                    group.elems.add(widthGroupElem);
-                    group.dirty = true;
-                }
-            }
-            else {
-                widthGroups.set(groupId, { elems: new Set([widthGroupElem]), dirty: true });
+            if (!widthGroups.has(groupId))
+                widthGroups.set(groupId, { elems: new Set(), dirty: false });
+            const group = widthGroups.get(groupId);
+            if (!group.elems.has(widthGroupElem)) {
+                group.elems.add(widthGroupElem);
+                group.dirty = true;
             }
         }
         catch (err) {
@@ -37,7 +32,7 @@ cclElementRegistry.registerCallback("width-group", 500, (parentElement) => {
             for (const widthGroupElem of widthGroup.elems) {
                 const parent = widthGroupElem.parentElement;
                 const wrapper = document.createElement("div");
-                if(widthGroupElem.hasAttribute("data-width-group-style"))
+                if (widthGroupElem.hasAttribute("data-width-group-style"))
                     wrapper.style.width = widthGroupElem.getAttribute("data-width-group-style");
                 else
                     wrapper.style.width = "min-content";

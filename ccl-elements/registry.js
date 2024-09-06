@@ -16,15 +16,15 @@ export function registerCallback(name, priority, callback) {
     try {
         // insert before first index with higher priority
         let start = 0, end = callbacks.length - 1;
-        while(start <= end) {
+        while (start <= end) {
             let mid = Math.floor((start + end) / 2);
-            if(callbacks[mid].priority <= priority) 
+            if (callbacks[mid].priority <= priority)
                 start = mid + 1;
             else
                 end = mid - 1;
         }
         // console.log("callback '" + name + "' priority " + priority + " inserted at index " + start);
-        callbacks.splice(start, 0, {name: name, priority: priority, callback: callback});
+        callbacks.splice(start, 0, { name: name, priority: priority, callback: callback });
     }
     catch (err) {
         console.log("While registering ccl element callback: " + err);
@@ -41,7 +41,7 @@ export function raiseCallbacks(parentElement) {
             // console.log("executing callback '" + callback.name + "'...");
             callback.callback(parentElement);
         }
-        catch(err) {
+        catch (err) {
             console.log("While running ccl element callback: " + err);
         }
     }
