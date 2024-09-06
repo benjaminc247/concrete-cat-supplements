@@ -97,6 +97,14 @@ function createAppendJsonTextList(parent, jsonData, jsonId, classList = undefine
     return elem;
 }
 
+/*
+ * convert to official fonts
+ * https://www.accessdata.fda.gov/scripts/InteractiveNutritionFactsLabel/vitamins.cfm
+ * use right-click -> Inspect
+ * also move this into custom control!
+ * and apply styles using classes instead of hardcoding
+ */
+
 /**
  * Creates a custom supplement facts html element and appends it to the parent
  * @param {HTMLElement} parent The parent element
@@ -159,7 +167,7 @@ export function createAppendJsonSupplementFacts(parent, jsonData, jsonId) {
     if (pdvfootnote || nodvsfootnote) {
         const footnote = createAppendElement(outline, "div", "footnotes");
         if (pdvfootnote)
-            createAppendElement(footnote, "p", undefined, "* Percent Daily Values based on a 2,000 calorie diet.");
+            createAppendElement(footnote, "p", undefined, "* Percent Daily Values are based on a 2,000 calorie diet.");
         if (nodvsfootnote)
             createAppendElement(footnote, "p", undefined, "\u2020 Daily Value not established.");
     }
