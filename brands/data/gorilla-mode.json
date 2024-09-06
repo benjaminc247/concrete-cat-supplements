@@ -1,0 +1,77 @@
+{
+  "link": "https://gorillamind.com/products/gorilla-mode",
+  "name": "Gorilla Mode",
+  "serving-size": "1 Scoop",
+  "serving-weight": "20.4g",
+  "servings-per-container": "40",
+  "nutrition": {
+    "Calories": "5",
+    "Total Carbohydrate": "1g",
+    "Niacin": {
+      "serving": "16mg NE",
+      "note": "as Niacinamide"
+    },
+    "Vitamin B6": {
+      "serving": "10mg",
+      "note": "as Pyridoxal 5'-Phosphate"
+    },
+    "Vitamin B12": {
+      "serving": "125mcg",
+      "note": "as Methylcobalamin"
+    },
+    "Magnesium": {
+      "serving": "25mg",
+      "note": "from Magnesium Bisglycinate"
+    },
+    "Sodium": "190mg",
+    "Potassium": {
+      "serving": "190mg",
+      "note": "from Potassium Chloride"
+    }
+  },
+  "supplements": {
+    "L-Citrulline": "5000mg",
+    "Creatine": {
+      "name": "Creatine Monohydrate",
+      "serving": "2500mg"
+    },
+    "L-Tyrosine": "2500mg",
+    "Betaine": {
+      "name": "Betaine Anhydrous",
+      "serving": "2000mg"
+    },
+    "HydroPrime\u00AE": {
+      "name": "HydroPrime\u00AE Glycerol Powder (65%)",
+      "serving": "2000mg",
+      "concentration": "65%"
+    },
+    "Malic Acid": "1500mg",
+    "Sodium Chloride": {
+      "name": "Pink Himalayan Sea Salt",
+      "serving": "500mg"
+    },
+    "Alpha-GPC": {
+      "serving": "200mg",
+      "name": "Alpha-GPC 50%",
+      "fill-serving": "400mg",
+      "note": "L-Alpha-Glycerylphosphorylcholine"
+    },
+    "Caffeine": {
+      "name": "Caffeine Anhydrous",
+      "serving": "200mg"
+    },
+    "Huperzine A": {
+      "serving": "100mcg",
+      "note": "<i>Huperzia serrata</i> leaf standardized extract"
+    }
+  },
+  "other-ingredients": [
+    "Natural & Artificial Flavor",
+    "Calcium Silicate",
+    "Silica",
+    "Malic Acid",
+    "Sucralose",
+    "Red Beet Root (For Color)",
+    "Acesulfame Potassium"
+  ]
+}

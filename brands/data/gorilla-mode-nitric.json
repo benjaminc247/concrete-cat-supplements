@@ -1,0 +1,55 @@
+{
+  "link": "https://gorillamind.com/products/gorilla-mode-nitric",
+  "name": "Gorilla Mode Nitric",
+  "serving-size": "1 Scoop",
+  "serving-weight": "18.2g",
+  "servings-per-container": 40,
+  "nutrition": {
+    "Sodium": {
+      "serving": "210mg",
+      "note": "from Sodium Nitrate"
+    },
+    "Potassium": {
+      "serving": "40mg",
+      "note": "from Inositol-Stabilized Arginine Silicate"
+    }
+  },
+  "supplements": {
+    "L-Citrulline": "5000mg",
+    "Creatine": {
+      "name": "Creatine Monohydrate",
+      "serving": "2500mg"
+    },
+    "Betaine": {
+      "name": "Betaine Anhydrous",
+      "serving": "2000mg"
+    },
+    "GlycerPump\u2122": {
+      "serving": "2000mg",
+      "note": "65% Glycerol Powder"
+    },
+    "Malic Acid": "1500mg",
+    "Agmatine Sulfate": "750mg",
+    "Nitrosigine\u00AE": {
+      "serving": "750mg",
+      "note": "Inositol-Stabilized Arginine Silicate"
+    },
+    "Sodium Nitrate": "750mg",
+    "VasoDrive-AP\u00AE": {
+      "serving": "127mg",
+      "note": "Isoleucyl-Prolyl-Proline (IPP) and Valyl-Prolyl-Proline (VPP) Isolated from Hydrolyzed Milk Casein"
+    }
+  },
+  "other-ingredients": [
+    "Natural Flavors",
+    "Citric Acid",
+    "Calcium Silicate",
+    "Silicon Dioxide",
+    "Sucralose",
+    "Acesulfame Potassium",
+    "Grape (fruit) Powder (for color)"
+  ],
+  "allergens": [
+    "Milk"
+  ]
+}

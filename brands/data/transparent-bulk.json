@@ -1,0 +1,97 @@
+{
+  "link": "https://www.transparentlabs.com/products/preseries-bulk-preworkout",
+  "name": "Transparent Labs Bulk",
+  "serving-size": "1 Scoop",
+  "serving-weight": "21.2g",
+  "servings-per-container": "30",
+  "nutrition": {
+    "Calories": "5",
+    "Total Carbohydrate": "1g",
+    "Vitamin B6": {
+      "serving": "5mg",
+      "note": "as Pyridoxal-5-Phosphate"
+    },
+    "Vitamin B12": {
+      "serving": "100mcg",
+      "note": "as Methylcobalamin"
+    },
+    "Zinc": {
+      "serving": "10mg",
+      "note": "as Zinc Chelate"
+    },
+    "Sodium": {
+      "serving": "180mg",
+      "note": "as Himalayan Rock Salt"
+    },
+    "Potassium": {
+      "serving": "125mg",
+      "note": "as Potassium Chloride"
+    }
+  },
+  "supplements": {
+    "L-Citrulline": {
+      "serving": "5333mg",
+      "note": "from Citrulline Malate 2:1 8000mg"
+    },
+    "Malic Acid": {
+      "serving": "2667mg",
+      "note": "from Citrulline Malate 2:1 8000mg"
+    },
+    "Beta-Alanine": "4000mg",
+    "Betaine": {
+      "name": "Betaine Anhydrous",
+      "serving": "2500mg",
+      "note": "BetaPure\u2122"
+    },
+    "Taurine": "1300mg",
+    "L-Tyrosine": "1000mg",
+    "Alpha-GPC": {
+      "serving": "150mg",
+      "fill-serving": "300mg",
+      "name": "AlphaSize\u00AE 50% Alpha-Glyceryl Phosphoryl Choline",
+      "note": "Alpha-GPC"
+    },
+    "Caffeine": {
+      "name": "PurCaf\u00AE Organic Caffeine",
+      "serving": "200mg",
+      "note": "from Green Coffee Bean"
+    },
+    "L-Theanine": "200mg",
+    "Theobromine": "50mg",
+    "Senactiv\u00AE": {
+      "serving": "50mg",
+      "note": "Panax notoginseng, Rosa roxburghii"
+    },
+    "Black Pepper Extract": {
+      "name": "BioPerine\u00AE",
+      "serving": "5mg",
+      "note": "Black Pepper (Fruit) Extract"
+    },
+    "Boron": {
+      "serving": "3000mcg",
+      "note": "as Boron Citrate"
+    }
+  },
+  "other-ingredients": [
+    {
+      "name": "Natural Flavors",
+      "serving": "1,250mg"
+    },
+    {
+      "name": "Stevia Extract",
+      "serving": "493mg"
+    },
+    {
+      "name": "Calcium Silicate",
+      "serving": "400mg"
+    },
+    {
+      "name": "Silicon Dioxide",
+      "serving": "400mg"
+    },
+    {
+      "name": "Beet Root Powder",
+      "serving": "50mg"
+    }
+  ]
+}

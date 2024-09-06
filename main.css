@@ -16,6 +16,8 @@ body {
     --main-text-color: #242424;
     --main-border-color: #dbdbdb;
     --main-inset-color: #020202;
+    /* light fade for alternate background */
+    --alt-bg-color: #e6e6e6;
     /* palette colors for highlights */
     --highlight-button-color: #ff5500;
     --highlight-bg-color: #002347;

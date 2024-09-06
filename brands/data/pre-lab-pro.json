@@ -1,0 +1,81 @@
+{
+  "link": "https://www.performancelab.com/products/pre-lab-pro",
+  "name": "Pre Lab Pro",
+  "serving-size": "1 Scoop",
+  "serving-weight": "13g",
+  "servings-per-container": "20",
+  "nutrition": {
+    "Vitamin D": {
+      "name": "Vitamin D3",
+      "serving": "12.5mcg",
+      "note": "from Algae"
+    },
+    "Riboflavin": {
+      "serving": "0.5mg",
+      "note": "as NutriGenesis\u00AE"
+    },
+    "Vitamin B6": {
+      "serving": "0.75mg",
+      "note": "as NutriGenesis\u00AE"
+    },
+    "Folate": {
+      "serving": "167mcg DFE",
+      "note": "as NutriGenesis\u00AE"
+    },
+    "Vitamin B12": {
+      "serving": "2mcg",
+      "note": "as NutriGenesis\u00AE"
+    },
+    "Potassium": {
+      "serving": "49.5mg",
+      "note": "as NutriGenesis\u00AE"
+    },
+    "Iron": {
+      "serving": "2.5mg",
+      "note": "as NutriGenesis\u00AE"
+    },
+    "Sodium": {
+      "serving": "200mg",
+      "note": "from Himalayan Pink Salt"
+    }
+  },
+  "supplements": {
+    "Caffeine": {
+      "name": "Natural Caffeine",
+      "serving": "80mg",
+      "note": "from Coffea Robusta Seeds"
+    },
+    "L-Theanine": {
+      "serving": "160mg",
+      "note": "from Green Tea"
+    },
+    "L-Tyrosine": "400mg",
+    "L-Citrulline": {
+      "serving": "2000mg",
+      "note": "Kyowa Quality\u00AE from Setria\u00AE Performance Blend"
+    },
+    "L-Glutathione": {
+      "serving": "200mg",
+      "note": "from Setria\u00AE Performance Blend"
+    },
+    "Beet Root Powder": {
+      "serving": "1500mg",
+      "note": "Beta Vulgaris L - root"
+    },
+    "Sodium Chloride": {
+      "name": "Himalayan Pink Salt",
+      "serving": "500mg"
+    }
+  },
+  "other-ingredients": [
+    "DL-Malic Acid",
+    "Dextrose",
+    "Xylitol",
+    "Silica",
+    "Monk Fruit Extract",
+    "Stevia (Stevia rebaudiana) Leaf Extract (95% Rebaudioside A)",
+    "Erythritol",
+    "Swerve\u00AE",
+    "Natural Flavors"
+  ]
+}

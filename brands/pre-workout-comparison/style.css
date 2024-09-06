@@ -1,0 +1,30 @@
+#comparison-table {
+    text-align: left;
+    position: relative;
+}
+
+#comparison-table thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--main-bg-color);
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: var(--main-text-color);
+}
+
+#comparison-table th:not(:first-child),
+#comparison-table td:not(:first-child) {
+    text-align: right;
+}
+
+#comparison-table tbody tr:not(:first-child) th,
+#comparison-table tbody tr:not(:first-child) td {
+    border-width: 1px 0px 0px 0px;
+    border-style: solid;
+    border-color: var(--main-text-color);
+}
+
+#comparison-table th:nth-child(2n+3),
+#comparison-table td:nth-child(2n+3) {
+    background-color: var(--alt-bg-color);
+}
