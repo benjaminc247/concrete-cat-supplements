@@ -1,43 +1,45 @@
 {
-    "supplement-facts": {
-        "serving-size": "700mg (Approx. 1 Scoop)",
-        "servings-per-container": 40,
-        "nutrients": [
-            {
-                "name": "Riboflavin (Vitamin B2)",
-                "serving": "1000mcg",
-                "percent-dv": "76%"
-            },
-            {
-                "name": "Vitamin B6",
-                "serving": "1500mcg",
-                "percent-dv": "88%"
-            },
-            {
-                "name": "Folate (Vitamin B9)",
-                "serving": "340mcg DFE",
-                "percent-dv": "85%"
-            },
-            {
-                "name": "Vitamin B12",
-                "serving": "4mcg",
-                "percent-dv": "166%"
-            }
-        ],
-        "supplements": [
-            {
-                "name": "L-Theanine",
-                "serving": "200mg",
-                "percent-dv": "\u00A0\u2020\u00A0"
-            },
-            {
-                "name": "L-Tyrosine",
-                "serving": "500mg",
-                "percent-dv": "\u00A0\u2020\u00A0"
-            }
-        ],
-        "show-percent-dv-footnote": true,
-        "show-no-dv-footnote": true,
-        "other-ingredients": [ "None" ]
-    }
+  "supplement-facts": {
+    "serving-size": "700mg (Approx. 1 Scoop)",
+    "servings-per-container": 40,
+    "nutrients": [
+      {
+        "name": "Riboflavin (Vitamin B2)",
+        "serving": "1000mcg",
+        "percent-dv": "76%"
+      },
+      {
+        "name": "Vitamin B6",
+        "serving": "1500mcg",
+        "percent-dv": "88%"
+      },
+      {
+        "name": "Folate (Vitamin B9)",
+        "serving": "340mcg DFE",
+        "percent-dv": "85%"
+      },
+      {
+        "name": "Vitamin B12",
+        "serving": "4mcg",
+        "percent-dv": "166%"
+      }
+    ],
+    "supplements": [
+      {
+        "name": "L-Theanine",
+        "serving": "200mg",
+        "percent-dv": "\u00A0\u2020\u00A0"
+      },
+      {
+        "name": "L-Tyrosine",
+        "serving": "500mg",
+        "percent-dv": "\u00A0\u2020\u00A0"
+      }
+    ],
+    "show-percent-dv-footnote": true,
+    "show-no-dv-footnote": true,
+    "other-ingredients": [
+      "None"
+    ]
+  }
 }
