@@ -11,7 +11,6 @@ cclElementRegistry.registerCallback("collapsible", 1000, (parentElement) => {
 
             // create toggle button with heading text
             const toggle = document.createElement("button");
-            toggle.type = "button";
             toggle.classList.add("toggle");
             toggle.textContent = collapsible.dataset.heading;
 
@@ -20,7 +19,7 @@ cclElementRegistry.registerCallback("collapsible", 1000, (parentElement) => {
             header.classList.add("header");
             header.appendChild(toggle);
 
-            // create new content div
+            // create content div
             const content = document.createElement("div");
             content.classList.add("content");
 
@@ -28,18 +27,18 @@ cclElementRegistry.registerCallback("collapsible", 1000, (parentElement) => {
             while (collapsible.children.length > 0)
                 content.appendChild(collapsible.children[0]);
 
-            // create collapse region div
+            // create collapse div
             const collapse = document.createElement("div");
             collapse.classList.add("collapse");
             collapse.appendChild(content);
 
             // set up collapse toggle
             toggle.addEventListener("click", function () {
-                this.classList.toggle("active");
-                if (collapse.style.maxHeight)
-                    collapse.style.maxHeight = null;
-                else
+                toggle.classList.toggle("active");
+                if (toggle.classList.contains("active"))
                     collapse.style.maxHeight = collapse.scrollHeight + "px";
+                else
+                    collapse.style.maxHeight = null;
             });
 
             // append new children to collapsible
