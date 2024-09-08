@@ -1,3 +1,4 @@
+import '/common/common.js';
 import * as cclElementRegistry from "/ccl-elements/registry.js";
 
 // list of brand ids to compare

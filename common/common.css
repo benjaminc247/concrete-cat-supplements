@@ -1,0 +1,43 @@
+@import url('/assets/roboto-flex/css/roboto-flex.css');
+@import url('/assets/fontawesome/css/fontawesome.css');
+@import url('/assets/fontawesome/css/regular.css');
+@import url('/assets/fontawesome/css/solid.css');
+@import url('/assets/fontawesome/css/brands.css');
+@import url('/ccl-elements/collapsible.css');
+@import url('/ccl-elements/nutrition-facts.css');
+
+body {
+    /* fonts */
+    font-family: 'Roboto Flex', sans-serif;
+    --icon-font-family: 'Font Awesome 6 Free';
+    font-size: 16px;
+    font-optical-sizing: auto;
+    /* greyscale colors for generic text */
+    --main-bg-color: #ffffff;
+    --main-text-color: #242424;
+    --main-border-color: #dbdbdb;
+    --main-inset-color: #020202;
+    /* light fade for alternate background */
+    --alt-bg-color: #e6e6e6;
+    /* palette colors for highlights */
+    --highlight-button-color: #ff5500;
+    --highlight-bg-color: #002347;
+    /* set main colors */
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+}
+
+a {
+    all: unset;
+    cursor: pointer;
+}
+a:focus {
+    outline: revert;
+}
+button {
+    all: unset;
+    cursor: pointer;
+}
+button:focus {
+    outline: revert;
+}

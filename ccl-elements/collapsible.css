@@ -1,0 +1,33 @@
+/* TODO make this clickable anywhere in the borders! */
+.collapsible {
+    border-width: 3px 0px;
+    border-style: solid;
+    border-color: var(--main-border-color);
+}
+.collapsible+.collapsible {
+    border-width: 0px 0px 3px 0px;
+}
+.collapsible .toggle {
+    width: 100%;
+}
+.collapsible .toggle::after {
+    font-family: var(--icon-font-family);
+    content: "\f078";
+    float: right;
+}
+.collapsible .toggle.active::after {
+    content: "\f077";
+}
+.collapsible .collapse {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.collapsible .header {
+    font-weight: bold;
+    font-size: 24px;
+    margin: 16px;
+}
+.collapsible .content {
+    margin: 16px;
+}
