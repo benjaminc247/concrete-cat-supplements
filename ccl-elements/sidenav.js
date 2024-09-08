@@ -37,7 +37,7 @@ cclElementRegistry.registerCallback("sidenav", 1000, (parentElement) => {
             sideNavFade.classList.remove("active");
         });
     }
-    catch {
+    catch (err) {
         console.log("Error initializing sidenav: " + err);
     }
 });
