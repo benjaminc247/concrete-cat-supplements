@@ -1,5 +1,10 @@
 import * as cclElementRegistry from "/ccl-elements/registry.js";
 
+/*
+improvements? load events etc.
+https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
+https://github.com/justinfagnani/html-include-element/blob/master/html-include-element.js
+*/
 cclElementRegistry.registerCallback("html-include", 2000, (parentElement) => {
     const htmlIncludes = parentElement.querySelectorAll("[data-ccl-include-html]");
     for (const htmlInclude of htmlIncludes) {
