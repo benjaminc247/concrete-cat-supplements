@@ -27,7 +27,7 @@ export function registerCallback(name, priority, callback) {
         callbacks.splice(start, 0, { name: name, priority: priority, callback: callback });
     }
     catch (err) {
-        console.log("While registering ccl element callback: " + err);
+        console.log("While registering ccl element callback '" + callback.name + "': " + err);
     }
 }
 
@@ -42,7 +42,7 @@ export function raiseCallbacks(parentElement) {
             callback.callback(parentElement);
         }
         catch (err) {
-            console.log("While running ccl element callback: " + err);
+            console.log("While running ccl element callback '" + callback.name + "': " + err);
         }
     }
 }
