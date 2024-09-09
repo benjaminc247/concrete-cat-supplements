@@ -19,16 +19,10 @@ cclElementRegistry.registerCallback("html-include", 2000, (parentElement) => {
                 }
                 return response.text();
             }).then((content) => {
-                // replace include element with html from file
-                // copy children before they are inserted in parent and lost
                 const tpl = document.createElement("template");
                 tpl.innerHTML = content;
-                const children = [...tpl.content.children];
-                htmlInclude.replaceWith(tpl.content);
-                // raise ccl element callbacks on each child
-                for (const child of children) {
-                    cclElementRegistry.raiseCallbacks(child);
-                }
+                htmlInclude.appendChild(tpl.content);
+                cclElementRegistry.raiseCallbacks(htmlInclude);
             }).catch((err) => {
                 console.log("Error loading html include: " + err);
             });

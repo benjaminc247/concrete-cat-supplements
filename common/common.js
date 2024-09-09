@@ -3,6 +3,7 @@ import "/ccl-elements/sidenav.js";
 import "/ccl-elements/html-include.js";
 import "/ccl-elements/collapsible.js";
 import "/ccl-elements/width-group.js";
+import "/ccl-elements/activate-button.js";
 import { createAppendJsonSupplementFacts } from "./page-generator.js";
 
 // set up ccl elements in document

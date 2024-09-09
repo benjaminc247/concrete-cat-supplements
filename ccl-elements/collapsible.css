@@ -15,6 +15,7 @@
     font-family: var(--icon-font-family);
     content: "\f078";
     float: right;
+    padding-left: 16px;
 }
 .collapsible .toggle.active::after {
     content: "\f077";
