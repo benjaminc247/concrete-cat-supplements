@@ -3,15 +3,32 @@
 #comparison-table {
     text-align: left;
     position: relative;
+    border-spacing: 0;
 }
 
 #comparison-table thead th {
-    position: sticky;
-    top: 0;
     background-color: var(--main-bg-color);
     border-width: 0px 0px 1px 0px;
     border-style: solid;
     border-color: var(--main-text-color);
+}
+#comparison-table thead th:first-child {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+#comparison-table thead th:not(:first-child) {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+#comparison-table tbody th {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: var(--main-bg-color);
 }
 
 #comparison-table th:not(:first-child),
