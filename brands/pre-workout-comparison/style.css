@@ -1,49 +1,57 @@
 @import url('/common/common.css');
 
-#comparison-table {
-    text-align: left;
+#comp-table {
     position: relative;
+    z-index: 0;
     border-spacing: 0;
 }
-
-#comparison-table thead th {
-    background-color: var(--main-bg-color);
-    border-width: 0px 0px 1px 0px;
-    border-style: solid;
-    border-color: var(--main-text-color);
+#comp-table th,
+#comp-table td {
+    padding: 2px 8px;
 }
-#comparison-table thead th:first-child {
+
+#comp-table thead th:first-child {
     position: sticky;
     top: 0;
     left: 0;
     z-index: 2;
+    text-align: left;
+    background-color: var(--highlight-bg-color);
+    color: var(--main-bg-color);
+    border-width: 0px 1px 1px 0px;
+    border-style: solid;
+    border-color: var(--main-bg-color);
 }
-#comparison-table thead th:not(:first-child) {
+#comp-table thead th:not(:first-child) {
     position: sticky;
     top: 0;
     z-index: 1;
+    text-align: right;
+    background-color: var(--highlight-bg-color);
+    color: var(--main-bg-color);
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: var(--main-bg-color);
 }
 
-#comparison-table tbody th {
+#comp-table tbody th {
     position: sticky;
     left: 0;
     z-index: 1;
-    background-color: var(--main-bg-color);
-}
-
-#comparison-table th:not(:first-child),
-#comparison-table td:not(:first-child) {
-    text-align: right;
-}
-
-#comparison-table tbody tr:not(:first-child) th,
-#comparison-table tbody tr:not(:first-child) td {
-    border-width: 1px 0px 0px 0px;
+    text-align: left;
+    background-color: var(--highlight-bg-color);
+    color: var(--main-bg-color);
+    border-width: 0px 1px 1px 0px;
     border-style: solid;
-    border-color: var(--main-text-color);
+    border-color: var(--main-bg-color);
+}
+#comp-table tbody td {
+    text-align: right;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: var(--highlight-bg-color);
 }
 
-#comparison-table th:nth-child(2n+3),
-#comparison-table td:nth-child(2n+3) {
+#comp-table tbody td:nth-child(2n+3) {
     background-color: var(--alt-bg-color);
 }

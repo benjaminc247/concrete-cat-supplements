@@ -25,32 +25,22 @@ async function loadJsonFile(fileName) {
 }
 
 /**
- * Parse value and unit from given serving
- * @param {string} serving serving size string with optional units
+ * Parse value and unit from ingredient which may have a serving string or extended data object
+ * @param {*} ingredientData - serving string or ingredient data object
+ * @param {string} paramName - name of serving parameter if the data is an object
  * @returns {(number|string)} - value and unit parts of the serving string
  */
-function ParseServing(serving) {
-    const match = serving.match(/^ *(?<value>(?:\d+(?:\.\d+)?)|(?:\.\d+)) *(?<unit>g|mg|mcg|) *(?<equivalent> RAE| DFE| NE|) *$/);
-    if (!match || (match.groups.equivalent && !match.groups.unit))
+function ParseServing(ingredientData, paramName) {
+    const serving = ingredientData[paramName] ? ingredientData[paramName] : ingredientData;
+    const match = serving.match(/^ *(?<value>(?:\d+(?:\.\d+)?)|(?:\.\d+)) *(?<unit>g|mg|mcg|) *(?<equiv> RAE| DFE| NE|) *$/);
+    if (!match || (match.groups.equiv && !match.groups.unit))
         throw "Unable to parse serving size from '" + serving + "'";
-    return [+match.groups.value, match.groups.unit + match.groups.equivalent];
-}
-
-/**
- * Helper to parse ingredient from key which may have extended data
- * @param {object} ingredientData - object containing ingredient data
- * @param {string} paramName - name of serving parameter if the data is an object
- * @returns {object} - ingredient object
- */
-function ParseIngredient(ingredientData, paramName) {
-    if (ingredientData[paramName])
-        return ingredientData;
-    return { [paramName]: ingredientData };
+    return [+match.groups.value, match.groups.unit + match.groups.equiv];
 }
 
 try {
-    // load nutrient list
-    const nutrientList = await loadJsonFile("/nutrients.json");
+    // load nutrient data
+    const nutrientDataList = await loadJsonFile("/nutrients.json");
 
     // load all brand data
     const brandDataList = new Map();
@@ -58,122 +48,122 @@ try {
         brandDataList.set(brandId, await (loadJsonFile("/brands/data/" + brandId + ".json")));
     }
 
+    // build list of nutrients to be displayed and their units
     // only display nutrients which exist in at least one brand
     // all nutrients are known, alert if brand contains invalid nutrient data
+    const nutrientList = new Map();
     for (const [brandId, brandData] of brandDataList.entries()) {
-        for (const [nutrientName, _] of Object.entries(brandData["nutrition"])) {
-            if (nutrientList[nutrientName])
-                nutrientList[nutrientName].display = true;
-            else
-                alert(brandId + " lists invalid nutrient '" + nutrientName + "'");
+        for (const [brandNutrientName, _] of Object.entries(brandData.nutrition)) {
+            if (nutrientList.has(brandNutrientName))
+                continue;
+            if (!nutrientDataList[brandNutrientName]) {
+                alert(brandId + " lists invalid nutrient '" + brandNutrientName + "'");
+                continue;
+            }
+            nutrientList.set(brandNutrientName, ParseServing(nutrientDataList[brandNutrientName], "dv")[1]);
         }
     }
 
     // build list of supplements which appear in any brand
     // there is no comprehensive list of supplements just take them as they come
-    let supplementList = new Set();
-    for (const [_, brandData] of brandDataList.entries()) {
-        for (const [supplementName, _] of Object.entries(brandData["supplements"]))
-            supplementList.add(supplementName);
+    // take units from the first appearance
+    let supplementList = new Map();
+    for (const [brandId, brandData] of brandDataList.entries()) {
+        for (const [brandSupplementName, brandSupplementData] of Object.entries(brandData.supplements)) {
+            if (supplementList.has(brandSupplementName))
+                continue;
+            supplementList.set(brandSupplementName, ParseServing(brandSupplementData, "serving")[1]);
+        }
     }
 
-    // build html header row
-    const headerRow = document.querySelector("#comparison-table thead tr");
-    const headerTemplate = document.querySelector("#brand-header-template");
-    for (const [_, brandData] of brandDataList.entries()) {
-        const brandHeaderFrag = document.importNode(headerTemplate.content, true);
-        const brandHeader = brandHeaderFrag.querySelector("th");
-        brandHeader.textContent = brandData["name"];
-        headerRow.appendChild(brandHeaderFrag);
-    }
+    // find table parts
+    const headerRow = document.getElementById("comp-head-row");
+    const body = document.getElementById("comp-body");
+    const headerBrandTpl = document.getElementById("comp-head-brand-tpl");
+    const ingredientRowTpl = document.getElementById("comp-ingredient-row-tpl");
+    const servingCellTpl = document.getElementById("comp-serving-cell-tpl");
 
-    // find table body and templates
-    const tableBody = document.querySelector("#comparison-table tbody");
-    const rowTemplate = document.querySelector("#comparison-row-template");
-    const servingCellTemplate = document.querySelector("#serving-cell-template");
+    // build header row
+    for (const [_, brandData] of brandDataList.entries()) {
+        const headerBrandFrag = document.importNode(headerBrandTpl.content, true);
+        headerBrandFrag.querySelector(".brand-name").textContent = brandData["name"];
+        headerRow.appendChild(headerBrandFrag);
+    }
 
     // build nutrient rows
-    for (const [nutrientName, nutrientData] of Object.entries(nutrientList)) {
-        // skip nutrients that are not contained in any brand
-        if (!nutrientData.display)
-            continue;
+    for (const [nutrientName, nutrientUnits] of nutrientList.entries()) {
+        // create row
+        const ingredientRowFrag = document.importNode(ingredientRowTpl.content, true);
+        const ingredientRow = ingredientRowFrag.querySelector(".ingredient-row");
+        ingredientRow.querySelector(".ingredient-name").textContent = nutrientName;
+        body.appendChild(ingredientRowFrag);
 
-        // parse daily value for nutrient
-        // we don't need to parse ingredient from nutrient data because it is always an object
-        const [_, nutrientUnits] = ParseServing(nutrientData["dv"]);
-
-        // create html row
-        const nutrientRowFrag = document.importNode(rowTemplate.content, true);
-        const nutrientRow = nutrientRowFrag.querySelector("tr");
-        tableBody.appendChild(nutrientRowFrag);
-
-        // set header
-        const nutrientHeader = nutrientRow.querySelector("th");
-        nutrientHeader.textContent = nutrientName;
-
-        // set brand servings
+        // create serving cells
         for (const [brandId, brandData] of brandDataList.entries()) {
-            const brandNutrition = brandData["nutrition"];
+            const brandNutrition = brandData.nutrition;
 
-            // create html serving cell
-            const servingCellFrag = document.importNode(servingCellTemplate.content, true);
-            const servingCell = servingCellFrag.querySelector("td");
-            nutrientRow.appendChild(servingCellFrag);
+            // create cell
+            const servingCellFrag = document.importNode(servingCellTpl.content, true);
+            const servingText = servingCellFrag.querySelector(".serving");
+            ingredientRow.appendChild(servingCellFrag);
 
             // if brand does not contain this nutrient the property will not exist
             if (!brandNutrition[nutrientName]) {
-                servingCell.textContent = "-";
+                servingText.textContent = "-";
                 continue;
             }
 
             // parse brand serving size from data
-            const brandNutrientData = ParseIngredient(brandNutrition[nutrientName], "serving");
-            const [brandValue, brandUnits] = ParseServing(brandNutrientData["serving"]);
+            const [brandValue, brandUnits] = ParseServing(brandNutrition[nutrientName], "serving");
 
             // require strict units for nutrients, alert on mismatch
             if (brandUnits !== nutrientUnits) {
                 alert(brandId + " " + nutrientName + " must be supplied in " + nutrientUnits);
-                servingCell.textContent = "ERR";
+                servingText.textContent = "ERR";
                 continue;
             }
 
             // set serving value
             // use nutrient units to ensure visual consistency
-            servingCell.textContent = brandValue + nutrientUnits;
+            servingText.textContent = brandValue + nutrientUnits;
         }
     }
 
     // build supplement rows
-    for (const supplementName of supplementList) {
-        // create html row
-        const supplementRowFrag = document.importNode(rowTemplate.content, true);
-        const supplementRow = supplementRowFrag.querySelector("tr");
-        tableBody.appendChild(supplementRowFrag);
+    for (const [supplementName, supplementUnits] of supplementList.entries()) {
+        // create row
+        const ingredientRowFrag = document.importNode(ingredientRowTpl.content, true);
+        const ingredientRow = ingredientRowFrag.querySelector(".ingredient-row");
+        ingredientRow.querySelector(".ingredient-name").textContent = supplementName;
+        body.appendChild(ingredientRowFrag);
 
-        // set header
-        const supplementHeader = supplementRow.querySelector("th");
-        supplementHeader.textContent = supplementName;
-
-        // set brand servings
+        // create serving cells
         for (const [brandId, brandData] of brandDataList.entries()) {
             const brandSupplements = brandData["supplements"];
 
-            // create html serving cell
-            const servingCellFrag = document.importNode(servingCellTemplate.content, true);
-            const servingCell = servingCellFrag.querySelector("td");
-            supplementRow.appendChild(servingCellFrag);
+            // create cell
+            const servingCellFrag = document.importNode(servingCellTpl.content, true);
+            const servingText = servingCellFrag.querySelector(".serving");
+            ingredientRow.appendChild(servingCellFrag);
 
             // if brand does not contain this supplement the property will not exist
             if (!brandSupplements[supplementName]) {
-                servingCell.textContent = "-";
+                servingText.textContent = "-";
                 continue;
             }
 
             // parse brand serving size from data
-            const brandSupplementData = ParseIngredient(brandSupplements[supplementName], "serving");
+            const [brandValue, brandUnits] = ParseServing(brandSupplements[supplementName], "serving");
+
+            // TODO: convert to units
+            if (brandUnits !== supplementUnits) {
+                alert(brandId + " " + supplementName + " must be supplied in " + supplementUnits);
+                servingText.textContent = "ERR";
+                continue;
+            }
 
             // set serving value
-            servingCell.textContent = brandSupplementData.serving;
+            servingText.textContent = brandValue + supplementUnits;
         }
     }
 
