@@ -5,6 +5,7 @@ import "/ccl-elements/collapsible.js";
 import "/ccl-elements/width-group.js";
 import "/ccl-elements/activate-button.js";
 import { createAppendJsonSupplementFacts } from "./page-generator.js";
+import "/brands/comparison-table.js"
 
 // set up ccl elements in document
 try {

@@ -11,14 +11,17 @@
 
 <body>
   <div data-ccl-include-html="/common/nav-header.html"></div>
-  <table id="comp-table">
-    <thead>
-      <tr id="comp-head-row">
-        <th scope="col" id="comp-head-ingredient"></th>
-      </tr>
-    </thead>
-    <tbody id="comp-body">
-    </tbody>
+  <ccl-comp-table>
+    <table id="comp-table">
+      <thead>
+        <tr id="comp-head-row">
+          <td scope="col" id="comp-head-ingredient">
+            </th>
+        </tr>
+      </thead>
+      <tbody id="comp-body">
+      </tbody>
+    </table>
     <template id="comp-head-brand-tpl">
       <th scope="col" class="ccl-width-group" data-width-group-id="comparison-column-width"
           data-width-group-style="max-content">
@@ -37,7 +40,7 @@
         <span class="serving">Serving</span>
       </td>
     </template>
-  </table>
+  </ccl-comp-table>
 </body>
 
 </html>

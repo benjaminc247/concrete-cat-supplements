@@ -10,7 +10,7 @@
   padding: 2px 8px;
 }
 
-#comp-table thead th:first-child {
+#comp-table thead td {
   position: sticky;
   top: 0;
   left: 0;
@@ -22,7 +22,7 @@
   border-style: solid;
   border-color: var(--main-bg-color);
 }
-#comp-table thead th:not(:first-child) {
+#comp-table thead th {
   position: sticky;
   top: 0;
   z-index: 1;
