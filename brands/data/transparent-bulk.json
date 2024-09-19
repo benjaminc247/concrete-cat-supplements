@@ -8,68 +8,85 @@
     "Calories": "5",
     "Total Carbohydrate": "1g",
     "Vitamin B6": {
-      "serving": "5mg",
-      "note": "as Pyridoxal-5-Phosphate"
+      "as": "Pyridoxal-5-Phosphate",
+      "serving": "5mg"
     },
     "Vitamin B12": {
-      "serving": "100mcg",
-      "note": "as Methylcobalamin"
+      "as": "Methylcobalamin",
+      "serving": "100mcg"
     },
     "Zinc": {
-      "serving": "10mg",
-      "note": "as Zinc Chelate"
+      "as": "Zinc Chelate",
+      "serving": "10mg"
     },
     "Sodium": {
-      "serving": "180mg",
-      "note": "as Himalayan Rock Salt"
+      "as": "Himalayan Rock Salt",
+      "serving": "180mg"
     },
     "Potassium": {
-      "serving": "125mg",
-      "note": "as Potassium Chloride"
+      "as": "Potassium Chloride",
+      "serving": "125mg"
     }
   },
   "supplements": {
     "L-Citrulline": {
       "serving": "5333mg",
-      "note": "from Citrulline Malate 2:1 8000mg"
+      "from": "Citrulline Malate 2:1",
+      "from-weight": "8000mg"
     },
     "Malic Acid": {
       "serving": "2667mg",
-      "note": "from Citrulline Malate 2:1 8000mg"
+      "from": "Citrulline Malate 2:1",
+      "from-weight": "8000mg"
     },
     "Beta-Alanine": "4000mg",
     "Betaine": {
       "name": "Betaine Anhydrous",
-      "serving": "2500mg",
-      "note": "BetaPure\u2122"
+      "note": "BetaPure\u2122",
+      "serving": "2500mg"
     },
     "Taurine": "1300mg",
     "L-Tyrosine": "1000mg",
     "Alpha-GPC": {
-      "serving": "150mg",
-      "fill-serving": "300mg",
       "name": "AlphaSize\u00AE 50% Alpha-Glyceryl Phosphoryl Choline",
-      "note": "Alpha-GPC"
+      "note": "Alpha-GPC",
+      "serving": "150mg",
+      "serving-weight": "300mg"
     },
     "Caffeine": {
       "name": "PurCaf\u00AE Organic Caffeine",
-      "serving": "200mg",
-      "note": "from Green Coffee Bean"
+      "notes": [
+        "from Green Coffee Bean",
+        "Coffea arabica",
+        "fruit"
+      ],
+      "serving": "200mg"
     },
     "L-Theanine": "200mg",
     "Theobromine": "50mg",
-    "Senactiv\u00AE": {
-      "serving": "50mg",
-      "note": "Panax notoginseng, Rosa roxburghii"
+    "Panax Notoginseng": {
+      "note": "root",
+      "serving": "",
+      "from": "Senactiv\u00AE",
+      "from-weight": "50mg"
+    },
+    "Rosa Roxburghii": {
+      "note": "root",
+      "serving": "",
+      "from": "Senactiv\u00AE",
+      "from-weight": "50mg"
     },
     "Black Pepper Extract": {
       "name": "BioPerine\u00AE",
-      "serving": "5mg",
-      "note": "Black Pepper (Fruit) Extract"
+      "notes": [
+        "Piper Nigrum",
+        "Black Pepper (Fruit) Extract"
+      ],
+      "serving": "5mg"
     },
     "Boron": {
-      "serving": "3000mcg",
-      "note": "as Boron Citrate"
+      "note": "as Boron Citrate",
+      "serving": "3000mcg"
     }
   },
   "other-ingredients": [

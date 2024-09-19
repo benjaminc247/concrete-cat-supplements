@@ -7,26 +7,26 @@
   "nutrition": {
     "Calories": "5",
     "Total Carbohydrate": "1g",
+    "Sodium": "190mg",
     "Niacin": {
-      "serving": "16mg NE",
-      "note": "as Niacinamide"
+      "as": "Niacinamide",
+      "serving": "16mg NE"
     },
     "Vitamin B6": {
-      "serving": "10mg",
-      "note": "as Pyridoxal 5'-Phosphate"
+      "as": "Pyridoxal 5'-Phosphate",
+      "serving": "10mg"
     },
     "Vitamin B12": {
-      "serving": "125mcg",
-      "note": "as Methylcobalamin"
+      "as": "Methylcobalamin",
+      "serving": "125mcg"
     },
     "Magnesium": {
-      "serving": "25mg",
-      "note": "from Magnesium Bisglycinate"
+      "as": "Magnesium Bisglycinate",
+      "serving": "25mg"
     },
-    "Sodium": "190mg",
     "Potassium": {
-      "serving": "190mg",
-      "note": "from Potassium Chloride"
+      "as": "Potassium Chloride",
+      "serving": "190mg"
     }
   },
   "supplements": {
@@ -40,10 +40,10 @@
       "name": "Betaine Anhydrous",
       "serving": "2000mg"
     },
-    "HydroPrime\u00AE": {
+    "Glycerol": {
       "name": "HydroPrime\u00AE Glycerol Powder (65%)",
-      "serving": "2000mg",
-      "concentration": "65%"
+      "serving": "1300mg",
+      "serving-weight": "2000mg"
     },
     "Malic Acid": "1500mg",
     "Sodium Chloride": {
@@ -51,18 +51,18 @@
       "serving": "500mg"
     },
     "Alpha-GPC": {
-      "serving": "200mg",
       "name": "Alpha-GPC 50%",
-      "fill-serving": "400mg",
-      "note": "L-Alpha-Glycerylphosphorylcholine"
+      "note": "L-Alpha-Glycerylphosphorylcholine",
+      "serving": "200mg",
+      "serving-weight": "400mg"
     },
     "Caffeine": {
       "name": "Caffeine Anhydrous",
       "serving": "200mg"
     },
     "Huperzine A": {
-      "serving": "100mcg",
-      "note": "<i>Huperzia serrata</i> leaf standardized extract"
+      "note": "Huperzia serrata leaf standardized extract",
+      "serving": "100mcg"
     }
   },
   "other-ingredients": [
@@ -71,7 +71,10 @@
     "Silica",
     "Malic Acid",
     "Sucralose",
-    "Red Beet Root (For Color)",
+    {
+      "name": "Red Beet Root",
+      "note": "For Color"
+    },
     "Acesulfame Potassium"
   ]
 }

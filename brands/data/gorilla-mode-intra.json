@@ -10,26 +10,26 @@
     "Total Sugars": "26g",
     "Added Sugars": "12g",
     "Calcium": {
-      "serving": "10mg",
-      "note": "as Calcium Citrate"
+      "as": "Calcium Citrate",
+      "serving": "10mg"
     },
     "Magnesium": {
-      "serving": "40mg",
-      "note": "as Magnesium Bisglycinate Chelate"
+      "as": "Magnesium Bisglycinate Chelate",
+      "serving": "40mg"
     },
     "Sodium": {
-      "serving": "500mg",
-      "note": "as Pink Himalayan Sea Salt, Sodium Chloride"
+      "as": [ "Pink Himalayan Sea Salt", "Sodium Chloride" ],
+      "serving": "500mg"
     },
     "Potassium": {
-      "serving": "200mg",
-      "note": "as Potassium Citrate & Coconut Water Powder"
+      "as": [ "Potassium Citrate", "Coconut Water Powder" ],
+      "serving": "200mg"
     }
   },
   "supplements": {
     "Cluster Dextrin\u2122": {
-      "serving": "15g",
-      "note": "Highly Branched Cyclic Dextrin"
+      "note": "Highly Branched Cyclic Dextrin",
+      "serving": "15g"
     },
     "Dextrose": "15g",
     "Fructose": "7.5g",
@@ -46,6 +46,7 @@
       "name": "L-Ornithine HCl",
       "serving": "2000mg"
     },
+    "Taurine": "1500mg",
     "Coconut Water Powder": "1000mg",
     "Sodium Chloride": {
       "name": "Pink Himalayan Sea Salt",
@@ -60,8 +61,14 @@
     "Silicon Dioxide",
     "Sucralose",
     "Acesulfame Potassium",
-    "Beet Root Powder (for color)",
-    "Grape (fruit) Powder (for color)"
+    {
+      "name": "Beet Root Powder",
+      "note": "for color"
+    },
+    {
+      "name": "Grape (fruit) Powder",
+      "note": "for color"
+    }
   ],
   "allergens": [
     "Tree Nuts"

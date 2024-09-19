@@ -1,3 +1,5 @@
+import * as cclIngredients from '/common/ingredients.js'
+
 /**
  * Creates an html element with the specified tag and appends it to the parent
  * @param {HTMLElement} parent The parent element
@@ -136,29 +138,33 @@ export function createAppendJsonSupplementFacts(parent, jsonData, jsonId) {
   createAppendElement(headerrow, "th", undefined, "% Daily Value");
 
   // add nutrients
-  const nutrients = data['nutrients'];
-  if (nutrients) {
-    nutrients.forEach(function (nutrient) {
+  const nutrients = cclIngredients.parseList(
+    data['nutrients'], { servingKey: "serving", errPrefix: "Nutrient" }
+  );
+  if (nutrients.size > 0) {
+    for (const [_, nutrient] of nutrients.entries()) {
       const row = createAppendElement(table, "tr");
       const ps = createAppendElement(row, "td");
       createAppendElement(ps, "p", undefined, nutrient['name']);
       createAppendElement(ps, "p", undefined, nutrient['serving']);
       createAppendElement(row, "td", undefined, nutrient['percent-dv']);
-    });
+    }
   }
 
   // add supplements
-  const supplements = data['supplements'];
-  if (supplements) {
-    if (nutrients)
+  const supplements = cclIngredients.parseList(
+    data['supplements'], { servingKey: "serving", errPrefix: "Supplement" }
+  );
+  if (supplements.size > 0) {
+    if (nutrients.size > 0)
       createAppendElement(table, "tr", "separator");
-    supplements.forEach(function (supplement) {
+    for (const [_, supplement] of supplements.entries()) {
       const row = createAppendElement(table, "tr");
       const ps = createAppendElement(row, "td");
       createAppendElement(ps, "p", undefined, supplement['name']);
       createAppendElement(ps, "p", undefined, supplement['serving']);
       createAppendElement(row, "td", undefined, supplement['percent-dv']);
-    });
+    };
   }
 
   // add footnotes
@@ -173,9 +179,12 @@ export function createAppendJsonSupplementFacts(parent, jsonData, jsonId) {
   }
 
   // add other ingredients
-  const otheringreds = data['other-ingredients'];
-  if (otheringreds) {
+  const otheringreds = cclIngredients.parseList(
+    data['other-ingredients'], { servingKey: "serving", errPrefix: "Ingredient" }
+  );
+  if (otheringreds.size > 0) {
     const footnote = createAppendElement(parent, "div", "footnotes");
-    createAppendElement(footnote, "p", undefined, "Other Ingredients: " + otheringreds.join(", "));
+    const str = Array.from(otheringreds).map(([_, data]) => data.name).join(", ") + ".";
+    createAppendElement(footnote, "p", undefined, "Other Ingredients: " + str);
   }
 }

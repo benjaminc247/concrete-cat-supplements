@@ -7,60 +7,64 @@
   "nutrition": {
     "Vitamin D": {
       "name": "Vitamin D3",
-      "serving": "12.5mcg",
-      "note": "from Algae"
+      "note": "from Algae",
+      "serving": "12.5mcg"
     },
     "Riboflavin": {
-      "serving": "0.5mg",
-      "note": "as NutriGenesis\u00AE"
+      "note": "as NutriGenesis\u00AE",
+      "serving": "0.5mg"
     },
     "Vitamin B6": {
-      "serving": "0.75mg",
-      "note": "as NutriGenesis\u00AE"
+      "note": "as NutriGenesis\u00AE",
+      "serving": "0.75mg"
     },
     "Folate": {
-      "serving": "167mcg DFE",
-      "note": "as NutriGenesis\u00AE"
+      "note": "as NutriGenesis\u00AE",
+      "serving": "167mcg DFE"
     },
     "Vitamin B12": {
-      "serving": "2mcg",
-      "note": "as NutriGenesis\u00AE"
+      "note": "as NutriGenesis\u00AE",
+      "serving": "2mcg"
     },
     "Potassium": {
-      "serving": "49.5mg",
-      "note": "as NutriGenesis\u00AE"
+      "note": "as NutriGenesis\u00AE",
+      "serving": "49.5mg"
     },
     "Iron": {
-      "serving": "2.5mg",
-      "note": "as NutriGenesis\u00AE"
+      "note": "as NutriGenesis\u00AE",
+      "serving": "2.5mg"
     },
     "Sodium": {
-      "serving": "200mg",
-      "note": "from Himalayan Pink Salt"
+      "note": "from Himalayan Pink Salt",
+      "serving": "200mg"
     }
   },
   "supplements": {
     "Caffeine": {
       "name": "Natural Caffeine",
-      "serving": "80mg",
-      "note": "from Coffea Robusta Seeds"
+      "note": "from Coffea Robusta Seeds",
+      "serving": "80mg"
     },
     "L-Theanine": {
-      "serving": "160mg",
-      "note": "from Green Tea"
+      "note": "from Green Tea",
+      "serving": "160mg"
     },
     "L-Tyrosine": "400mg",
     "L-Citrulline": {
+      "note": "Kyowa Quality\u00AE",
       "serving": "2000mg",
-      "note": "Kyowa Quality\u00AE from Setria\u00AE Performance Blend"
+      "from": "Setria\u00AE Performance Blend",
+      "from-weight": "2200mg"
     },
     "L-Glutathione": {
+      "note": "Setria\u00AE",
       "serving": "200mg",
-      "note": "from Setria\u00AE Performance Blend"
+      "from": "Setria\u00AE Performance Blend",
+      "from-weight": "2200mg"
     },
     "Beet Root Powder": {
-      "serving": "1500mg",
-      "note": "Beta Vulgaris L - root"
+      "note": "Beta Vulgaris L - root",
+      "serving": "1500mg"
     },
     "Sodium Chloride": {
       "name": "Himalayan Pink Salt",

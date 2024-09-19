@@ -1,5 +1,7 @@
 import '/common/common.js';
 import * as cclElementRegistry from "/ccl-elements/registry.js";
+import * as cclIngredients from "/common/ingredients.js"
+import * as cclServing from "/common/serving.js"
 
 // list of brand ids to compare
 const compareBrandIds = [
@@ -24,23 +26,12 @@ async function loadJsonFile(fileName) {
   }
 }
 
-/**
- * Parse value and unit from ingredient which may have a serving string or extended data object
- * @param {*} ingredientData - serving string or ingredient data object
- * @param {string} paramName - name of serving parameter if the data is an object
- * @returns {(number|string)} - value and unit parts of the serving string
- */
-function ParseServing(ingredientData, paramName) {
-  const serving = ingredientData[paramName] ? ingredientData[paramName] : ingredientData;
-  const match = serving.match(/^ *(?<value>(?:\d+(?:\.\d+)?)|(?:\.\d+)) *(?<unit>g|mg|mcg|) *(?<equiv> RAE| DFE| NE|) *$/);
-  if (!match || (match.groups.equiv && !match.groups.unit))
-    throw "Unable to parse serving size from '" + serving + "'";
-  return [+match.groups.value, match.groups.unit + match.groups.equiv];
-}
-
 try {
   // load nutrient data
-  const nutrientDataList = await loadJsonFile("/nutrients.json");
+  const nutrientDataMap = cclIngredients.parseList(
+    await loadJsonFile("/nutrients.json"),
+    { servingKey: "dv", errPrefix: "Nutrient" }
+  );
 
   // load all brand data
   const brandDataList = new Map();
@@ -53,14 +44,19 @@ try {
   // all nutrients are known, alert if brand contains invalid nutrient data
   const nutrientList = new Map();
   for (const [brandId, brandData] of brandDataList.entries()) {
-    for (const [brandNutrientName, _] of Object.entries(brandData.nutrition)) {
+    brandData.nutrition = cclIngredients.parseList(
+      brandData.nutrition,
+      { servingKey: "serving", errPrefix: "Nutrient" }
+    );
+    for (const [brandNutrientName, _] of brandData.nutrition.entries()) {
       if (nutrientList.has(brandNutrientName))
         continue;
-      if (!nutrientDataList[brandNutrientName]) {
+      const nutrientData = nutrientDataMap.get(brandNutrientName);
+      if (!nutrientData) {
         alert(brandId + " lists invalid nutrient '" + brandNutrientName + "'");
         continue;
       }
-      nutrientList.set(brandNutrientName, ParseServing(nutrientDataList[brandNutrientName], "dv")[1]);
+      nutrientList.set(brandNutrientName, nutrientData.dv.units);
     }
   }
 
@@ -69,10 +65,14 @@ try {
   // take units from the first appearance
   let supplementList = new Map();
   for (const [brandId, brandData] of brandDataList.entries()) {
-    for (const [brandSupplementName, brandSupplementData] of Object.entries(brandData.supplements)) {
+    brandData.supplements = cclIngredients.parseList(
+      brandData.supplements,
+      { servingKey: "serving", errPrefix: "Supplement" }
+    );
+    for (const [brandSupplementName, brandSupplementData] of brandData.supplements.entries()) {
       if (supplementList.has(brandSupplementName))
         continue;
-      supplementList.set(brandSupplementName, ParseServing(brandSupplementData, "serving")[1]);
+      supplementList.set(brandSupplementName, brandSupplementData.serving.units);
     }
   }
 
@@ -108,24 +108,23 @@ try {
       ingredientRow.appendChild(servingCellFrag);
 
       // if brand does not contain this nutrient the property will not exist
-      if (!brandNutrition[nutrientName]) {
+      if (!brandNutrition.has(nutrientName)) {
         servingText.textContent = "-";
         continue;
       }
 
       // parse brand serving size from data
-      const [brandValue, brandUnits] = ParseServing(brandNutrition[nutrientName], "serving");
+      const brandServing = brandNutrition.get(nutrientName).serving;
 
       // require strict units for nutrients, alert on mismatch
-      if (brandUnits !== nutrientUnits) {
+      if (!cclServing.unitsMatch(brandServing, nutrientUnits)) {
         alert(brandId + " " + nutrientName + " must be supplied in " + nutrientUnits);
         servingText.textContent = "ERR";
         continue;
       }
 
       // set serving value
-      // use nutrient units to ensure visual consistency
-      servingText.textContent = brandValue + nutrientUnits;
+      servingText.textContent = brandServing;
     }
   }
 
@@ -139,7 +138,7 @@ try {
 
     // create serving cells
     for (const [brandId, brandData] of brandDataList.entries()) {
-      const brandSupplements = brandData["supplements"];
+      const brandSupplements = brandData.supplements;
 
       // create cell
       const servingCellFrag = document.importNode(servingCellTpl.content, true);
@@ -147,23 +146,23 @@ try {
       ingredientRow.appendChild(servingCellFrag);
 
       // if brand does not contain this supplement the property will not exist
-      if (!brandSupplements[supplementName]) {
+      if (!brandSupplements.has(supplementName)) {
         servingText.textContent = "-";
         continue;
       }
 
       // parse brand serving size from data
-      const [brandValue, brandUnits] = ParseServing(brandSupplements[supplementName], "serving");
+      const brandServing = brandSupplements.get(supplementName).serving;
 
       // TODO: convert to units
-      if (brandUnits !== supplementUnits) {
+      if (!cclServing.unitsMatch(brandServing, supplementUnits)) {
         alert(brandId + " " + supplementName + " must be supplied in " + supplementUnits);
         servingText.textContent = "ERR";
         continue;
       }
 
       // set serving value
-      servingText.textContent = brandValue + supplementUnits;
+      servingText.textContent = brandServing;
     }
   }
 

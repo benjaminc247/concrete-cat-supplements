@@ -6,12 +6,12 @@
   "servings-per-container": 40,
   "nutrition": {
     "Sodium": {
-      "serving": "210mg",
-      "note": "from Sodium Nitrate"
+      "note": "from Sodium Nitrate",
+      "serving": "210mg"
     },
     "Potassium": {
-      "serving": "40mg",
-      "note": "from Inositol-Stabilized Arginine Silicate"
+      "note": "from Inositol-Stabilized Arginine Silicate",
+      "serving": "40mg"
     }
   },
   "supplements": {
@@ -24,9 +24,11 @@
       "name": "Betaine Anhydrous",
       "serving": "2000mg"
     },
-    "GlycerPump\u2122": {
-      "serving": "2000mg",
-      "note": "65% Glycerol Powder"
+    "Glycerol": {
+      "name": "GlycerPump\u2122",
+      "note": "65% Glycerol Powder",
+      "serving": "1300mg",
+      "serving-weight": "2000mg"
     },
     "Malic Acid": "1500mg",
     "Agmatine Sulfate": "750mg",
@@ -47,7 +49,10 @@
     "Silicon Dioxide",
     "Sucralose",
     "Acesulfame Potassium",
-    "Grape (fruit) Powder (for color)"
+    {
+      "name": "Grape (fruit) Powder",
+      "note": "for color"
+    }
   ],
   "allergens": [
     "Milk"
