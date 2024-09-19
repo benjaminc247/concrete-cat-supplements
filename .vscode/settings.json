@@ -1,0 +1,23 @@
+{
+  "html.format.preserveNewLines": false,
+  "html.format.wrapLineLength": 100,
+  "html.format.wrapAttributes": "preserve-aligned",
+  "css.format.newlineBetweenRules": false,
+  "css.format.spaceAroundSelectorSeparator": true,
+  "css.format.maxPreserveNewLines": 2,
+  "json.format.keepLines": true,
+  "css.lint.boxModel": "warning",
+  "css.lint.compatibleVendorPrefixes": "warning",
+  "css.lint.duplicateProperties": "warning",
+  "css.lint.float": "warning",
+  "css.lint.fontFaceProperties": "error",
+  "css.lint.important": "warning",
+  "css.lint.universalSelector": "warning",
+  "css.lint.unknownVendorSpecificProperties": "warning",
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false
+}
