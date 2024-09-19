@@ -6,91 +6,91 @@ sidenav covers the entire screen and contains all control elements
 it will have the visible class added to it when the sidenav is opened
 */
 .sidenav {
-    --transition-duration: 0.2s;
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    visibility: hidden;
-    transition: visibility var(--transition-duration);
+  --transition-duration: 0.2s;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  transition: visibility var(--transition-duration);
 }
 .sidenav.active {
-    visibility: visible;
+  visibility: visible;
 }
 /*
 fade covers the entire screen to disable and fade the background when the sidenav is opened
 */
 .sidenav > .fade {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0%;
-    transition: opacity var(--transition-duration) ease-in;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0%;
+  transition: opacity var(--transition-duration) ease-in;
 }
 .sidenav.active > .fade {
-    opacity: 75%;
-    transition: opacity var(--transition-duration) ease-out;
+  opacity: 75%;
+  transition: opacity var(--transition-duration) ease-out;
 }
 /*
 slide contains all elements that slide onto the screen when the sidenav is opened
 */
 .sidenav > .slide {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: auto;
-    height: 100%;
-    clip-path: inset(0 100% 0 0);
-    transition: clip-path var(--transition-duration) ease-in;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: 100%;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--transition-duration) ease-in;
 }
 .sidenav.active > .slide {
-    clip-path: inset(0);
-    transition: clip-path var(--transition-duration) ease-out;
+  clip-path: inset(0);
+  transition: clip-path var(--transition-duration) ease-out;
 }
 /*
 content is the active interactive region of the sidenav
 clicking anywhere outside the content element will close the sidenav
 */
 .sidenav > .slide > .content {
-    width: auto;
-    height: 100%;
-    background-color: var(--main-bg-color);
-    float: left;
+  width: auto;
+  height: 100%;
+  background-color: var(--main-bg-color);
+  float: left;
 }
 .sidenav > .slide > .content .home {
-    display: block;
-    border: none;
-    font-weight: bold;
-    font-size: 18px;
-    padding: 12px 16px;
-    background-color: var(--highlight-bg-color);
-    color: var(--highlight-text-color);
+  display: block;
+  border: none;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 12px 16px;
+  background-color: var(--highlight-bg-color);
+  color: var(--highlight-text-color);
 }
 .sidenav > .slide > .content .collapsible {
-    border-top: none;
+  border-top: none;
 }
 .sidenav > .slide > .content > .collapsible a {
-    display: block;
-    border-width: 2px 0px;
-    border-style: solid;
-    border-color: var(--main-border-color);
-    padding: 4px;
-    margin: 0;
+  display: block;
+  border-width: 2px 0px;
+  border-style: solid;
+  border-color: var(--main-border-color);
+  padding: 4px;
+  margin: 0;
 }
-.sidenav > .slide > .content > .collapsible a+a {
-    border-width: 0px 0px 2px 0px;
+.sidenav > .slide > .content > .collapsible a + a {
+  border-width: 0px 0px 2px 0px;
 }
 /*
 close button is in the slide area but outside the content area
 */
 .sidenav > .slide .close {
-    font-size: 18px;
-    margin: 12px;
-    color: var(--main-bg-color);
-    float: left;
+  font-size: 18px;
+  margin: 12px;
+  color: var(--main-bg-color);
+  float: left;
 }

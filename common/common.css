@@ -8,38 +8,38 @@
 @import url('/ccl-elements/sidenav.css');
 
 body {
-    /* fonts */
-    font-family: 'Roboto Flex', sans-serif;
-    --icon-font-family: 'Font Awesome 6 Free';
-    font-size: 16px;
-    font-optical-sizing: auto;
-    /* greyscale colors for generic text */
-    --main-bg-color: #ffffff;
-    --main-text-color: #242424;
-    --main-border-color: #dbdbdb;
-    --main-inset-color: #020202;
-    /* light fade for alternate background */
-    --alt-bg-color: #e6e6e6;
-    /* palette colors for highlights */
-    --highlight-button-color: #ff5500;
-    --highlight-bg-color: #002347;
-    --highlight-text-color: #ffffff;
-    /* set main colors */
-    background-color: var(--main-bg-color);
-    color: var(--main-text-color);
+  /* fonts */
+  font-family: 'Roboto Flex', sans-serif;
+  --icon-font-family: 'Font Awesome 6 Free';
+  font-size: 16px;
+  font-optical-sizing: auto;
+  /* greyscale colors for generic text */
+  --main-bg-color: #ffffff;
+  --main-text-color: #242424;
+  --main-border-color: #dbdbdb;
+  --main-inset-color: #020202;
+  /* light fade for alternate background */
+  --alt-bg-color: #e6e6e6;
+  /* palette colors for highlights */
+  --highlight-button-color: #ff5500;
+  --highlight-bg-color: #002347;
+  --highlight-text-color: #ffffff;
+  /* set main colors */
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
 }
 
 a {
-    all: unset;
-    cursor: pointer;
+  all: unset;
+  cursor: pointer;
 }
 a:focus {
-    outline: revert;
+  outline: revert;
 }
 button {
-    all: unset;
-    cursor: pointer;
+  all: unset;
+  cursor: pointer;
 }
 button:focus {
-    outline: revert;
+  outline: revert;
 }

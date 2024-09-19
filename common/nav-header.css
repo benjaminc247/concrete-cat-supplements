@@ -1,14 +1,14 @@
 @import url('./common.css');
 
 #page-header {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 #open-sidenav {
-    font-size: 2rem;
-    margin: .5rem;
+  font-size: 2rem;
+  margin: .5rem;
 }
 #page-header h1 {
-    text-transform: uppercase;
-    font-size: 2rem;
+  text-transform: uppercase;
+  font-size: 2rem;
 }

@@ -1,34 +1,34 @@
 .collapsible {
-    border-width: 3px 0px;
-    border-style: solid;
-    border-color: var(--main-border-color);
+  border-width: 3px 0px;
+  border-style: solid;
+  border-color: var(--main-border-color);
 }
-.collapsible+.collapsible {
-    border-width: 0px 0px 3px 0px;
+.collapsible + .collapsible {
+  border-width: 0px 0px 3px 0px;
 }
 .collapsible .toggle {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px;
 }
 .collapsible .toggle::after {
-    font-family: var(--icon-font-family);
-    content: "\f078";
-    float: right;
-    padding-left: 16px;
+  font-family: var(--icon-font-family);
+  content: "\f078";
+  float: right;
+  padding-left: 16px;
 }
 .collapsible .toggle.active::after {
-    content: "\f077";
+  content: "\f077";
 }
 .collapsible .collapse {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }
 .collapsible .header {
-    font-weight: bold;
-    font-size: 24px;
+  font-weight: bold;
+  font-size: 24px;
 }
 .collapsible .content {
-    margin: 0px 16px 16px 16px;
+  margin: 0px 16px 16px 16px;
 }
