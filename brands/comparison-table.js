@@ -26,6 +26,13 @@ async function loadJsonFile(fileName) {
 }
 
 class HTMLCompTableElement extends HTMLElement {
+  #_brandDataList;
+  #_nutrientList;
+  #_supplementList;
+
+  /**
+   * Load comparison table data
+   */
   async #load() {
     // load nutrient data
     const nutrientDataMap = cclIngredients.parseList(
@@ -34,48 +41,53 @@ class HTMLCompTableElement extends HTMLElement {
     );
 
     // load all brand data
-    const brandDataList = new Map();
+    this.#_brandDataList = new Map();
     for (const brandId of compareBrandIds) {
-      brandDataList.set(brandId, await (loadJsonFile("/brands/data/" + brandId + ".json")));
+      this.#_brandDataList.set(brandId, await (loadJsonFile("/brands/data/" + brandId + ".json")));
     }
 
     // build list of nutrients to be displayed and their units
     // only display nutrients which exist in at least one brand
     // all nutrients are known, alert if brand contains invalid nutrient data
-    const nutrientList = new Map();
-    for (const [brandId, brandData] of brandDataList.entries()) {
+    this.#_nutrientList = new Map();
+    for (const [brandId, brandData] of this.#_brandDataList.entries()) {
       brandData.nutrition = cclIngredients.parseList(
         brandData.nutrition,
         { servingKey: "serving", errPrefix: "Nutrient" }
       );
       for (const [brandNutrientName, _] of brandData.nutrition.entries()) {
-        if (nutrientList.has(brandNutrientName))
+        if (this.#_nutrientList.has(brandNutrientName))
           continue;
         const nutrientData = nutrientDataMap.get(brandNutrientName);
         if (!nutrientData) {
           alert(brandId + " lists invalid nutrient '" + brandNutrientName + "'");
           continue;
         }
-        nutrientList.set(brandNutrientName, nutrientData.dv.units);
+        this.#_nutrientList.set(brandNutrientName, nutrientData.dv.units);
       }
     }
 
     // build list of supplements which appear in any brand
     // there is no comprehensive list of supplements just take them as they come
     // take units from the first appearance
-    let supplementList = new Map();
-    for (const [brandId, brandData] of brandDataList.entries()) {
+    this.#_supplementList = new Map();
+    for (const [brandId, brandData] of this.#_brandDataList.entries()) {
       brandData.supplements = cclIngredients.parseList(
         brandData.supplements,
         { servingKey: "serving", errPrefix: "Supplement" }
       );
       for (const [brandSupplementName, brandSupplementData] of brandData.supplements.entries()) {
-        if (supplementList.has(brandSupplementName))
+        if (this.#_supplementList.has(brandSupplementName))
           continue;
-        supplementList.set(brandSupplementName, brandSupplementData.serving.units);
+        this.#_supplementList.set(brandSupplementName, brandSupplementData.serving.units);
       }
     }
+  }
 
+  /**
+   * Build table element from data
+   */
+  #build() {
     // find table parts
     const headerRow = document.getElementById("comp-head-row");
     const body = document.getElementById("comp-body");
@@ -84,14 +96,14 @@ class HTMLCompTableElement extends HTMLElement {
     const servingCellTpl = document.getElementById("comp-serving-cell-tpl");
 
     // build header row
-    for (const [_, brandData] of brandDataList.entries()) {
+    for (const [_, brandData] of this.#_brandDataList.entries()) {
       const headerBrandFrag = document.importNode(headerBrandTpl.content, true);
       headerBrandFrag.querySelector(".brand-name").textContent = brandData["name"];
       headerRow.appendChild(headerBrandFrag);
     }
 
     // build nutrient rows
-    for (const [nutrientName, nutrientUnits] of nutrientList.entries()) {
+    for (const [nutrientName, nutrientUnits] of this.#_nutrientList.entries()) {
       // create row
       const ingredientRowFrag = document.importNode(ingredientRowTpl.content, true);
       const ingredientRow = ingredientRowFrag.querySelector(".ingredient-row");
@@ -99,7 +111,7 @@ class HTMLCompTableElement extends HTMLElement {
       body.appendChild(ingredientRowFrag);
 
       // create serving cells
-      for (const [brandId, brandData] of brandDataList.entries()) {
+      for (const [brandId, brandData] of this.#_brandDataList.entries()) {
         const brandNutrition = brandData.nutrition;
 
         // create cell
@@ -129,7 +141,7 @@ class HTMLCompTableElement extends HTMLElement {
     }
 
     // build supplement rows
-    for (const [supplementName, supplementUnits] of supplementList.entries()) {
+    for (const [supplementName, supplementUnits] of this.#_supplementList.entries()) {
       // create row
       const ingredientRowFrag = document.importNode(ingredientRowTpl.content, true);
       const ingredientRow = ingredientRowFrag.querySelector(".ingredient-row");
@@ -137,7 +149,7 @@ class HTMLCompTableElement extends HTMLElement {
       body.appendChild(ingredientRowFrag);
 
       // create serving cells
-      for (const [brandId, brandData] of brandDataList.entries()) {
+      for (const [brandId, brandData] of this.#_brandDataList.entries()) {
         const brandSupplements = brandData.supplements;
 
         // create cell
@@ -171,7 +183,9 @@ class HTMLCompTableElement extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#load().catch((reason) => {
+    this.#load().then(() => {
+      this.#build();
+    }).catch((reason) => {
       console.log("Error loading side-by-side comparison: " + reason);
     });
   }
