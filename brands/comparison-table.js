@@ -88,26 +88,58 @@ class HTMLCompTableElement extends HTMLElement {
    * Build table element from data
    */
   #build() {
-    // find table parts
-    const headerRow = document.getElementById("comp-head-row");
-    const body = document.getElementById("comp-body");
-    const headerBrandTpl = document.getElementById("comp-head-brand-tpl");
-    const ingredientRowTpl = document.getElementById("comp-ingredient-row-tpl");
-    const servingCellTpl = document.getElementById("comp-serving-cell-tpl");
+    // table frag
+    const tableTpl = document.querySelector("template.ccl-comp-table");
+    if (!tableTpl)
+      throw "ccl-comp-table requires a content template matching 'template.ccl-comp-table'";
+    const tableFrag = document.importNode(tableTpl.content, true);
+
+    // top level element parts
+    const headerRow = tableFrag.querySelector("table thead tr");
+    if (!headerRow)
+      throw "ccl-comp-table must contain a header row element matching 'table thead tr'";
+    const body = tableFrag.querySelector("table tbody");
+    if (!body)
+      throw "ccl-comp-table must contain a body element matching 'table tbody'";
+
+    // brand header template
+    const brandHeaderTpl = tableFrag.querySelector("template.brand-header");
+    if (!brandHeaderTpl)
+      throw "ccl-comp-table must contain a brand header template matching 'template.brand-header'";
+    if (!brandHeaderTpl.content.querySelector(".brand-name"))
+      throw "ccl-comp-table brand-header must contain a text element matching '.brand-name'";
+
+    // ingredient row template
+    const ingredientRowTpl = tableFrag.querySelector("template.ingredient-row");
+    if (!ingredientRowTpl)
+      throw "ccl-comp-table must contain an ingredient row template matching 'template.ingredient-row'";
+    if (!ingredientRowTpl.content.querySelector("tr"))
+      throw "ccl-comp-table ingredient-row must contain a row element matching 'tr'";
+    if (!ingredientRowTpl.content.querySelector(".ingredient-name"))
+      throw "ccl-comp-table ingredient-row must contain a text element matching '.ingredient-name'";
+
+    // serving cell template
+    const servingCellTpl = tableFrag.querySelector("template.serving-cell");
+    if (!servingCellTpl)
+      throw "ccl-comp-table must contain a serving cell template matching 'template.serving-cell'";
+    if (!servingCellTpl.content.querySelector(".serving"))
+      throw "ccl-comp-table serving-cell must contain a text element matching '.serving'";
+
+    // TODO: ensure data: brandData["name"]
 
     // build header row
     for (const [_, brandData] of this.#_brandDataList.entries()) {
-      const headerBrandFrag = document.importNode(headerBrandTpl.content, true);
-      headerBrandFrag.querySelector(".brand-name").textContent = brandData["name"];
-      headerRow.appendChild(headerBrandFrag);
+      const brandHeaderFrag = document.importNode(brandHeaderTpl.content, true);
+      brandHeaderFrag.querySelector(".brand-name").textContent = brandData["name"];
+      headerRow.appendChild(brandHeaderFrag);
     }
 
     // build nutrient rows
     for (const [nutrientName, nutrientUnits] of this.#_nutrientList.entries()) {
       // create row
       const ingredientRowFrag = document.importNode(ingredientRowTpl.content, true);
-      const ingredientRow = ingredientRowFrag.querySelector(".ingredient-row");
-      ingredientRow.querySelector(".ingredient-name").textContent = nutrientName;
+      const ingredientRow = ingredientRowFrag.querySelector("tr");
+      ingredientRowFrag.querySelector(".ingredient-name").textContent = nutrientName;
       body.appendChild(ingredientRowFrag);
 
       // create serving cells
@@ -144,7 +176,7 @@ class HTMLCompTableElement extends HTMLElement {
     for (const [supplementName, supplementUnits] of this.#_supplementList.entries()) {
       // create row
       const ingredientRowFrag = document.importNode(ingredientRowTpl.content, true);
-      const ingredientRow = ingredientRowFrag.querySelector(".ingredient-row");
+      const ingredientRow = ingredientRowFrag.querySelector("tr");
       ingredientRow.querySelector(".ingredient-name").textContent = supplementName;
       body.appendChild(ingredientRowFrag);
 
@@ -178,16 +210,19 @@ class HTMLCompTableElement extends HTMLElement {
       }
     }
 
+    // add element to document
+    this.appendChild(tableFrag);
+
     // set up any new ccl elements in document
     cclElementRegistry.raiseCallbacks(document);
   }
 
   connectedCallback() {
-    this.#load().then(() => {
-      this.#build();
-    }).catch((reason) => {
-      console.log("Error loading side-by-side comparison: " + reason);
-    });
+    this.#load()
+      .then(() => this.#build())
+      .catch((reason) => {
+        console.log("Error loading side-by-side comparison: " + reason);
+      });
   }
 }
 

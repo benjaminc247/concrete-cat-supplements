@@ -11,36 +11,8 @@
 
 <body>
   <div data-ccl-include-html="/common/nav-header.html"></div>
-  <ccl-comp-table>
-    <table id="comp-table">
-      <thead>
-        <tr id="comp-head-row">
-          <td scope="col" id="comp-head-ingredient">
-            </th>
-        </tr>
-      </thead>
-      <tbody id="comp-body">
-      </tbody>
-    </table>
-    <template id="comp-head-brand-tpl">
-      <th scope="col" class="ccl-width-group" data-width-group-id="comparison-column-width"
-          data-width-group-style="max-content">
-        <span class="brand-name">Brand Name</span>
-      </th>
-    </template>
-    <template id="comp-ingredient-row-tpl">
-      <tr class="ingredient-row">
-        <th scope="row">
-          <span class="ingredient-name">Ingredient</span>
-        </th>
-      </tr>
-    </template>
-    <template id="comp-serving-cell-tpl">
-      <td>
-        <span class="serving">Serving</span>
-      </td>
-    </template>
-  </ccl-comp-table>
+  <div data-ccl-include-html="/brands/comparison-table.html"></div>
+  <ccl-comp-table></ccl-comp-table>
 </body>
 
 </html>
