@@ -1,0 +1,108 @@
+{
+  "link": "https://clubearlybird.com/",
+  "name": "EarlyBird",
+  "serving-size": "1 Scoop",
+  "serving-weight": "4g",
+  "servings-per-container": "45",
+  "nutrition": {
+    "Calcium": {
+      "as": "Calcium Citrate",
+      "serving": "40mg"
+    },
+    "Sodium": {
+      "as": "Sodium Chloride",
+      "serving": "120mg"
+    },
+    "Potassium": {
+      "as": "Potassium Chloride",
+      "serving": "100mg"
+    }
+  },
+  "supplements": {
+    "L-Tyrosine": {
+      "serving": "",
+      "from": "EarlyBird Clean Energy Blend",
+      "from-weight": "575mg"
+    },
+    "Caffeine": {
+      "name": "PurCaf\u00AE",
+      "note": "Organic Green Coffee Caffeine",
+      "serving": "",
+      "from": "EarlyBird Clean Energy Blend",
+      "from-weight": "575mg"
+    },
+    "Blueberry Powder": {
+      "serving": "",
+      "from": "EarlyBird Clean Energy Blend - EarlyBird Antioxidant Blend",
+      "from-weight": "575mg"
+    },
+    "Broccoli Extract": {
+      "name": "Broccoli Extract 4:1",
+      "serving": "",
+      "from": "EarlyBird Clean Energy Blend - EarlyBird Antioxidant Blend",
+      "from-weight": "575mg"
+    },
+    "Green Tea Extract": {
+      "serving": "",
+      "from": "EarlyBird Clean Energy Blend - EarlyBird Antioxidant Blend",
+      "from-weight": "575mg"
+    },
+    "Turmeric Powder": {
+      "serving": "",
+      "from": "EarlyBird Clean Energy Blend - EarlyBird Antioxidant Blend",
+      "from-weight": "575mg"
+    },
+    "Tart Cherry Extract": {
+      "serving": "",
+      "from": "EarlyBird Clean Energy Blend - EarlyBird Antioxidant Blend",
+      "from-weight": "575mg"
+    },
+    "DiCaffeine Malate": {
+      "name": "Infinergy\u00AE DiCaffeine Malate",
+      "serving": "",
+      "from": "EarlyBird Clean Energy Blend",
+      "from-weight": "575mg"
+    },
+    "L-Theanine": {
+      "serving": "",
+      "from": "EarlyBird Clean Energy Blend",
+      "from-weight": "575mg"
+    },
+    "Ashwagandha Extract": {
+      "name": "KSM-66\u2122 Ashwagandha Extract",
+      "notes": [
+        "made with certified ashwagandha",
+        "Withania Somnifera [Root] Extract",
+        "Std. to minimum 5% total Withanolides"
+      ],
+      "serving": "",
+      "from": "EarlyBird Motivation Blend",
+      "from-weight": "500mg"
+    },
+    "Theobromine": {
+      "serving": "",
+      "from": "EarlyBird Motivation Blend",
+      "from-weight": "500mg"
+    },
+    "Coffea Arabica Extract": {
+      "name": "CoffeeBerry\u00AE",
+      "note": "Coffea arabica [Fruit] Extract",
+      "serving": "",
+      "from": "EarlyBird Motivation Blend",
+      "from-weight": "500mg"
+    },
+    "Black Pepper Extract": {
+      "name": "BioPerine\u00AE Black Pepper (Piper Nigrum) [Fruit]",
+      "note": "Standardized to contain 95% piperine",
+      "serving": "",
+      "from": "EarlyBird Motivation Blend",
+      "from-weight": "500mg"
+    }
+  },
+  "other-ingredients": [
+    "Citric Acid",
+    "Natural Flavors",
+    "Silica",
+    "Sucralose"
+  ]
+}

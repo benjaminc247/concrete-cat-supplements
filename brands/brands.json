@@ -1,0 +1,29 @@
+{
+  "pre-workout": [
+    "transparent-bulk",
+    "pre-lab-pro",
+    "gorilla-mode",
+    "gorilla-mode-nitric",
+    "athleanrx-x-cite"
+  ],
+  "intra-workout": [
+    "transparent-intra",
+    "gorilla-mode-intra",
+    "athleanrx-prx"
+  ],
+  "post-workout": [
+    "transparent-intra",
+    "gorilla-mode-intra",
+    "athleanrx-reconstruxion"
+  ],
+  "hydration": [
+    "transparent-intra",
+    "gorilla-mode-intra",
+    "gorilla-hydration",
+    "liquid-iv",
+    "earlybird"
+  ],
+  "morning": [
+    "earlybird"
+  ]
+}

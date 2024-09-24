@@ -1,0 +1,107 @@
+{
+  "link": "https://athleanx.com/athleanrx/x-cite",
+  "name": "AthleanRX X-Cite",
+  "serving-size": "1 Scoop",
+  "serving-weight": "20.11g",
+  "servings-per-container": "22",
+  "nutrition": {
+    "Calories": "10",
+    "Total Carbohydrate": "2g",
+    "Dietary Fiber": "1g",
+    "Niacin": "15mg",
+    "Folate": {
+      "serving": "66.66mcg DFE",
+      "serving-note": "40mcg Folic Acid",
+      "from": "Folic Acid",
+      "from-weight": "40mcg"
+    },
+    "Vitamin B12": {
+      "as": "Methylcobalamin",
+      "serving": "400mcg"
+    },
+    "Pantothenic Acid": {
+      "as": "Calcium-D-Pantothenate",
+      "serving": "100mg"
+    },
+    "Choline": {
+      "as": "Choline Bitartrate",
+      "serving": "400mg"
+    },
+    "Iron": "0.18mg",
+    "Manganese": {
+      "from": "Manganese Sulfate",
+      "serving": "6.4mg"
+    },
+    "Sodium": {
+      "from": "Sodium Chloride",
+      "serving": "95mg"
+    },
+    "Potassium": {
+      "from": "Potassium Chloride",
+      "serving": "94mg"
+    }
+  },
+  "supplements": {
+    "L-Citrulline": {
+      "serving": "4000mg",
+      "from": "L-Citrulline Malate",
+      "from-weight": "6000mg"
+    },
+    "Malic Acid": {
+      "serving": "2000mg",
+      "from": "L-Citrulline Malate",
+      "from-weight": "6000mg"
+    },
+    "Beta-Alanine": {
+      "note": "as CarnoSyn\u00AE",
+      "serving": "3200mg"
+    },
+    "Creatine": {
+      "name": "Patented Creatine HCl\u00AE",
+      "note": "as CON-CRET\u00AE",
+      "serving": "2000mg"
+    },
+    "L-Tyrosine": "1500mg",
+    "Betaine": {
+      "name": "Betaine Anhydrous",
+      "serving": "1250mg"
+    },
+    "Inulin": "1080mg",
+    "Taurine": "1000mg",
+    "Sodium Chloride": {
+      "serving": "",
+      "from": "Electrolyte Complex",
+      "from-weight": "500mg"
+    },
+    "Potassium Chloride": {
+      "serving": "",
+      "from": "Electrolyte Complex",
+      "from-weight": "500mg"
+    },
+    "Manganese Sulfate": {
+      "serving": "",
+      "from": "Electrolyte Complex",
+      "from-weight": "500mg"
+    },
+    "Caffeine": {
+      "name": "Caffeine Anhydrous",
+      "serving": "200mg"
+    }
+  },
+  "other-ingredients": [
+    "Silicon Dioxide",
+    "Natural Flavors",
+    "Acesulfame Potassium",
+    "Sucralose",
+    {
+      "name": "Fruit and Vegetable Juice Powder",
+      "note": "Color"
+    }
+  ],
+  "facility-allergens": [
+    "Peanuts",
+    "Eggs",
+    "Wheat",
+    "Milk"
+  ]
+}

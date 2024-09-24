@@ -2,14 +2,6 @@ import * as cclElementRegistry from "/ccl-elements/registry.js";
 import * as cclIngredients from "/common/ingredients.js"
 import * as cclServing from "/common/serving.js"
 
-// list of brand ids to compare
-const compareBrandIds = [
-  "gorilla-mode",
-  "gorilla-mode-nitric",
-  "pre-lab-pro",
-  "transparent-bulk"
-];
-
 /**
  * Async load json data from file
  * @param {string} fileName - name of json file to load
@@ -34,6 +26,19 @@ class HTMLCompTableElement extends HTMLElement {
    * Load comparison table data
    */
   async #load() {
+    // get required attributes
+    const srcFile = this.getAttribute('src-file');
+    if (!srcFile)
+      throw 'Data source file attribute \'data-src\' not set.';
+    const srcProp = this.getAttribute('src-prop');
+    if (!srcProp)
+      throw 'Data source property attribute \'data-prop\' not set.';
+
+    // load brand id list
+    const brandIdList = (await loadJsonFile(srcFile))[srcProp];
+    if (!Array.isArray(brandIdList))
+      throw `Brand list '${srcProp}' does not exist or is not an array.`;
+
     // load nutrient data
     const nutrientDataMap = cclIngredients.parseList(
       await loadJsonFile("/nutrients.json"),
@@ -42,7 +47,7 @@ class HTMLCompTableElement extends HTMLElement {
 
     // load all brand data
     this.#_brandDataList = new Map();
-    for (const brandId of compareBrandIds) {
+    for (const brandId of brandIdList) {
       this.#_brandDataList.set(brandId, await (loadJsonFile("/brands/data/" + brandId + ".json")));
     }
 
@@ -159,6 +164,10 @@ class HTMLCompTableElement extends HTMLElement {
 
         // parse brand serving size from data
         const brandServing = brandNutrition.get(nutrientName).serving;
+        if (!brandServing || !nutrientUnits) {
+          servingText.textContent = "ERR";
+          continue;
+        }
 
         // require strict units for nutrients, alert on mismatch
         if (!cclServing.unitsMatch(brandServing, nutrientUnits)) {
@@ -197,6 +206,10 @@ class HTMLCompTableElement extends HTMLElement {
 
         // parse brand serving size from data
         const brandServing = brandSupplements.get(supplementName).serving;
+        if (!brandServing || !supplementUnits) {
+          servingText.textContent = "ERR";
+          continue;
+        }
 
         // TODO: convert to units
         if (!cclServing.unitsMatch(brandServing, supplementUnits)) {

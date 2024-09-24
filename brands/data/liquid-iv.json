@@ -1,0 +1,56 @@
+{
+  "link": "https://www.liquid-iv.com/products/hydration-multiplier-passion-fruit-one-time",
+  "name": "Liquid IV",
+  "serving-size": "1 Stick",
+  "serving-weight": "16g",
+  "servings-per-container": "16",
+  "nutrition": {
+    "Calories": "50",
+    "Sodium": "520mg",
+    "Total Carbohydrate": "13g",
+    "Total Sugars": "11g",
+    "Added Sugars": "11g",
+    "Potassium": "370mg",
+    "Vitamin C": "62mg",
+    "Niacin": "19.3mg",
+    "Vitamin B6": "1.93mg",
+    "Vitamin B12": "5.79mcg",
+    "Pantothenic Acid": "9.6mg"
+  },
+  "supplements": { },
+  "other-ingredients": [
+    "Cane Sugar",
+    "Dextrose",
+    "Citric Acid",
+    "Salt",
+    "Potassium Citrate",
+    "Sodium Citrate",
+    "Dipotassium Phosphate",
+    "Silicon Dioxide",
+    {
+      "name": "Stevia Leaf Extract",
+      "note": "Rebaudioside A"
+    },
+    {
+      "name": "Vitamin C",
+      "note": "Ascorbic Acid"
+    },
+    "Natural Flavors",
+    {
+      "name": "Vitamin B3",
+      "note": "Niacinamide"
+    },
+    {
+      "name": "Vitamin B5",
+      "note": "Calcium D-Pantothenate"
+    },
+    {
+      "name": "Vitamin B6",
+      "note": "Pyridoxine Hydrochloride"
+    },
+    {
+      "name": "Vitamin B12",
+      "note": "Cyanocobalamin"
+    }
+  ]
+}

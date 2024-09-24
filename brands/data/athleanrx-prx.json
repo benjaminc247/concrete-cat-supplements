@@ -1,0 +1,59 @@
+{
+  "link": "https://athleanx.com/prx",
+  "name": "AthleanRX PRX",
+  "serving-size": "1 Scoop",
+  "serving-weight": "12g",
+  "servings-per-container": "22",
+  "nutrition": {
+    "Calories": "5",
+    "Total Carbohydrate": "1g",
+    "Total Sugars": "<1g",
+    "Added Sugars": "<1g",
+    "Calcium": {
+      "as": "Calcium Silicate",
+      "serving": "40mg"
+    },
+    "Sodium": "15mg"
+  },
+  "supplements": {
+    "L-Citrulline": {
+      "serving": "4000mg",
+      "from": "L-Citrulline Malate",
+      "from-weight": "6000mg"
+    },
+    "Malic Acid": {
+      "serving": "2000mg",
+      "from": "L-Citrulline Malate",
+      "from-weight": "6000mg"
+    },
+    "Creatine": {
+      "name": "Kre-Alkalyn\u00AE buffered creatine monohydrate",
+      "serving": "3g",
+      "CoEnzyme Q10": "100mg",
+      "NADH": {
+        "name": "Nicotinamide Adenine Dinucleotide",
+        "note": "NADH",
+        "serving": "15mg"
+      }
+    }
+  },
+  "other-ingredients": [
+    "Rice Syrup Solids",
+    "Silicon Dioxide",
+    "Natural Flavors",
+    "Sunflower Lecithin Powder",
+    "Sucralose",
+    "Citric Acid"
+  ],
+  "facility-allergens": [
+    "Soy",
+    "Wheat",
+    "Milk",
+    "Egg",
+    "Treenut",
+    "Peanut",
+    "Fish",
+    "Crustacean Fish",
+    "Sesame"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "link": "https://gorillamind.com/products/hydration",
+  "name": "Gorilla Hydration",
+  "serving-size": "1 Stick",
+  "serving-weight": "6.6g",
+  "servings-per-container": "30",
+  "nutrition": {
+    "Calories": "5",
+    "Sodium": "750mg",
+    "Calcium": "50mg",
+    "Potassium": "545mg",
+    "Phosphorus": "18mg",
+    "Iodine": "50mcg",
+    "Magnesium": "100mg",
+    "Chloride": "1610mg"
+  },
+  "supplements": { },
+  "other-ingredients": [
+    {
+      "name": "Salt",
+      "note": "Sodium Chloride"
+    },
+    "Potassium Chloride",
+    "Taurine",
+    "Malic Acid",
+    "Natural Flavors",
+    "Magnesium Bisglycinate Chelate",
+    "Calcium Citrate",
+    "Stevia Extract",
+    "Calcium Silicate",
+    "Dipotassium Phosphate",
+    "Silicon Dioxide",
+    {
+      "name": "Vitamin K2",
+      "as": "MK-7 [Menaquinone-7]"
+    },
+    "Potassium Iodide"
+  ]
+}
