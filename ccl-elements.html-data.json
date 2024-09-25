@@ -1,0 +1,33 @@
+{
+  "version": 1.1,
+  "tags": [
+    {
+      "name": "ccl-comp-table",
+      "description": "An element that loads brand data from files and displays it in a comparison table.",
+      "attributes": [
+        {
+          "name": "src-file",
+          "description": "File path from which to load brand list for comparison."
+        },
+        {
+          "name": "src-prop",
+          "description": "Property name for brand list in source file."
+        }
+      ]
+    },
+    {
+      "name": "ccl-supplement-facts",
+      "description": "An element that loads supplement facts from a file and displays them fda label format.",
+      "attributes": [
+        {
+          "name": "src-file",
+          "description": "File path from which to load supplement data."
+        },
+        {
+          "name": "src-prop",
+          "description": "Property name of supplement data in source file."
+        }
+      ]
+    }
+  ]
+}
