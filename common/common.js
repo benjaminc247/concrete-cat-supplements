@@ -4,7 +4,6 @@ import "/ccl-elements/html-include.js";
 import "/ccl-elements/collapsible.js";
 import "/ccl-elements/width-group.js";
 import "/ccl-elements/activate-button.js";
-import { createAppendJsonSupplementFacts } from "./page-generator.js";
 import "/brands/comparison-table.js"
 
 // set up ccl elements in document
@@ -146,16 +145,3 @@ for (const cardStrip of cardStrips) {
     console.log("Error generating card strip: " + err);
   }
 }
-
-/* find and set up nutrition facts */
-const nutritions = document.querySelectorAll(".nutrition-facts");
-nutritions.forEach(async function (nutrition) {
-  try {
-    const response = await fetch(nutrition.dataset.source);
-    const dat = await response.json();
-    createAppendJsonSupplementFacts(nutrition, dat, nutrition.dataset.key);
-  }
-  catch (err) {
-    console.log("Error generating nutrition facts: " + err);
-  }
-});

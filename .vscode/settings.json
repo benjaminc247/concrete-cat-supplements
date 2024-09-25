@@ -1,7 +1,8 @@
 {
-  "html.format.preserveNewLines": false,
   "html.format.wrapLineLength": 100,
-  "html.format.wrapAttributes": "preserve-aligned",
+  "html.customData": [
+    "ccl-elements.html-data.json"
+  ],
   "css.format.newlineBetweenRules": false,
   "css.format.spaceAroundSelectorSeparator": true,
   "css.format.maxPreserveNewLines": 2,
