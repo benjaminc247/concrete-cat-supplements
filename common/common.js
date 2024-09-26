@@ -6,6 +6,14 @@ import "/ccl-elements/width-group.js";
 import "/ccl-elements/activate-button.js";
 import "/brands/comparison-table.js"
 
+// set global error handlers
+window.addEventListener('error', (ev) => {
+  console.log(`Unhandled Error: ${ev.message} at (${ev.filename}:${ev.lineno}:${ev.colno})`);
+});
+window.addEventListener('unhandledrejection', (ev) => {
+  console.log(`Unhandled promise rejection due to ${ev.reason.stack.replace(/\s+/g, ' ')}`);
+});
+
 // set up ccl elements in document
 try {
   cclElementRegistry.raiseCallbacks(document);
