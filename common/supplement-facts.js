@@ -1,26 +1,65 @@
 import * as cclIngredients from '/common/ingredients.js'
 import * as cclUtils from '/common/utils.js'
 
-/**
- * Creates an html element with the specified tag and appends it to the parent
- * @param {HTMLElement} parent The parent element
- * @param {String} tagName The name of an element to create
- * @param {String} classList Optional class list to add to the element
- * @param {String} textContent Optional text content to set on the element
- * @returns {HTMLElement} The created element
- */
-function createAppendElement(parent, tagName, classList = undefined, textContent = undefined) {
-  const elem = document.createElement(tagName);
-  if (classList)
-    elem.classList.add(classList);
-  if (textContent)
-    elem.textContent = textContent;
-  parent.appendChild(elem);
-  return elem;
-}
+customElements.define('ccl-supplement-facts', class extends HTMLElement {
+  // html fragment containing content templates
+  static s_htmlFrag;
+  get #htmlFrag() {
+    return this.constructor.s_htmlFrag;
+  }
 
-class HTMLSupplementFactsElement extends HTMLElement {
-  async connectedCallback() {
+  // static initialization promise
+  static s_initPromise;
+  static s_initError;
+  #initPromise() {
+    return new Promise((resolve, reject) => {
+      return this.constructor.s_initPromise.then(() => {
+        if (this.constructor.s_initError === undefined)
+          resolve();
+        else
+          reject(this.constructor.s_initError);
+      })
+    });
+  }
+
+  /**
+   * Static initialization.
+   */
+  static {
+    this.s_initPromise = new Promise((resolve, reject) => {
+      (async () => {
+        try {
+          // fetch html and convert to document fragment
+          const htmlText = await cclUtils.fetchText('/common/supplement-facts.html');
+          const tpl = document.createElement('template');
+          tpl.innerHTML = htmlText;
+          this.s_htmlFrag = tpl.content;
+
+          // import stylesheet
+          const cssText = await cclUtils.fetchText('/common/supplement-facts.css');
+          const styleElem = document.createElement('style');
+          styleElem.appendChild(document.createTextNode(cssText));
+          document.head.appendChild(styleElem);
+
+          // success
+          return resolve();
+        }
+        catch (err) {
+          return reject(err);
+        }
+      })();
+    }).catch((err) => {
+      this.s_initError = err || 'Undefined error';
+    });
+  }
+
+  // data source identifier
+  #_srcId;
+
+  /**
+   * Async build html from data file.
+   */
+  async #rebuild() {
     try {
       // read source attributes
       const srcFile = this.getAttribute('src-file');
@@ -28,48 +67,63 @@ class HTMLSupplementFactsElement extends HTMLElement {
         throw 'Source file attribute \'src-file\' not set.';
       const srcProp = this.getAttribute('src-prop');
 
+      // rebuild may be called repeatedly with the same attributes, early out
+      const srcId = `'${srcFile}'${srcProp !== null ? `['${srcProp}']` : ''}`;
+      if (srcId === this.#_srcId)
+        return;
+      this.#_srcId = srcId;
+
+      // TODO: abort prev rebuilds still fetching src data
+
       // fetch source data
       const srcData = await (async () => {
-        const srcFileDat = await cclUtils.fetchJson(srcFile);
+        const srcDataFile = await cclUtils.fetchJson(srcFile);
         if (srcProp === null)
-          return srcFileDat;
-        if (!srcFileDat.hasOwnProperty(srcProp))
-          throw `Source file '${srcFile} property '${srcProp} does not exist.`;
-        return srcFileDat[srcProp];
+          return srcDataFile;
+        if (!srcDataFile.hasOwnProperty(srcProp))
+          throw `Source file '${srcFile}' property '${srcProp}' does not exist.`;
+        return srcDataFile[srcProp];
       })();
 
-      // TODO: load template
+      // wait for init
+      await this.#initPromise();
 
-      // TODO: load styles
+      // attributes may have changed while waiting for load
+      // new rebuild call will already be in the queue
+      if (this.#_srcId !== srcId)
+        return;
 
-      // add top level outline
-      const outline = createAppendElement(this, 'div', 'outline');
+      // query facts template
+      const factsTpl = this.#htmlFrag.querySelector('#supplement-facts-template');
+      const factsFrag = document.importNode(factsTpl.content, true);
 
-      // add headers
-      createAppendElement(outline, 'h1', undefined, 'Supplement Facts');
+      // headers
+      // TODO: do we need something else to handle empty serving size or servings per?
+      factsFrag.querySelector('.title').textContent = 'Supplement Facts';
       const svsize = srcData['serving-size'];
       if (svsize)
-        createAppendElement(outline, 'h2', undefined, `Serving Size: ${svsize}`);
+        factsFrag.querySelector('.serving-size').textContent = `Serving Size: ${svsize}`;
       const svper = srcData['servings-per-container'];
       if (svper)
-        createAppendElement(outline, 'h2', undefined, `Servings Per Container: ${svper}`);
+        factsFrag.querySelector('.servings-per').textContent = `Servings Per Container: ${svper}`;
+      factsFrag.querySelector('.serving-header').textContent = 'Amount Per Serving';
+      factsFrag.querySelector('.percent-dv-header').textContent = '% Daily Value';
 
-      // add ingredients table and headers
-      const table = createAppendElement(outline, 'table');
-      const headerrow = createAppendElement(table, 'tr');
-      createAppendElement(headerrow, 'th', undefined, 'Amount Per Serving');
-      createAppendElement(headerrow, 'th', undefined, '% Daily Value');
+      // body
+      const table = factsFrag.querySelector('table');
+      const ingrRowTpl = this.#htmlFrag.querySelector('#ingredient-row-template');
+      const separatorTpl = this.#htmlFrag.querySelector('#separator-template');
 
       // add nutrients
       const nutrients = cclIngredients.parseList(
         srcData['nutrients'], { servingKey: 'serving', errPrefix: 'Nutrient' }
       );
       for (const nutrient of nutrients.values()) {
-        const row = createAppendElement(table, 'tr');
-        const ps = createAppendElement(row, 'td');
-        createAppendElement(ps, 'p', undefined, nutrient['name']);
-        createAppendElement(ps, 'p', undefined, nutrient['serving']);
-        createAppendElement(row, 'td', undefined, nutrient['percent-dv']);
+        const rowFrag = document.importNode(ingrRowTpl.content, true);
+        rowFrag.querySelector('.name').textContent = nutrient['name'];
+        rowFrag.querySelector('.serving').textContent = nutrient['serving'];
+        rowFrag.querySelector('.percent-dv').textContent = nutrient['percent-dv'];
+        table.appendChild(rowFrag);
       }
 
       // add supplements
@@ -78,47 +132,67 @@ class HTMLSupplementFactsElement extends HTMLElement {
       );
       if (supplements.size > 0) {
         if (nutrients.size > 0)
-          createAppendElement(table, 'tr', 'separator');
+          table.appendChild(document.importNode(separatorTpl.content, true));
         for (const supplement of supplements.values()) {
-          const row = createAppendElement(table, 'tr');
-          const ps = createAppendElement(row, 'td');
-          createAppendElement(ps, 'p', undefined, supplement['name']);
-          createAppendElement(ps, 'p', undefined, supplement['serving']);
-          createAppendElement(row, 'td', undefined, supplement['percent-dv']);
+          const rowFrag = document.importNode(ingrRowTpl.content, true);
+          rowFrag.querySelector('.name').textContent = supplement['name'];
+          rowFrag.querySelector('.serving').textContent = supplement['serving'];
+          rowFrag.querySelector('.percent-dv').textContent = supplement['percent-dv'];
+          table.appendChild(rowFrag);
         };
       }
 
       // add footnotes
+      // TODO: do we need to remove elements when either of these is false?
       const pdvfootnote = srcData['show-percent-dv-footnote'];
       const nodvsfootnote = srcData['show-no-dv-footnote'];
       if (pdvfootnote || nodvsfootnote) {
-        const footnote = createAppendElement(outline, 'div', 'footnotes');
         if (pdvfootnote) {
-          createAppendElement(
-            footnote, 'p', undefined, '* Percent Daily Values are based on a 2,000 calorie diet.'
-          );
+          factsFrag.querySelector('.percent-dv-footnote').textContent =
+            '* Percent Daily Values are based on a 2,000 calorie diet.';
         }
         if (nodvsfootnote) {
-          createAppendElement(
-            footnote, 'p', undefined, '† Daily Value not established.'
-          );
+          factsFrag.querySelector('.no-dv-footnote').textContent =
+            '† Daily Value not established.';
         }
       }
 
       // add other ingredients
+      // TODO: do we need to remove the div when there are no other ingredients?
       const otheringreds = cclIngredients.parseList(
         srcData['other-ingredients'], { servingKey: 'serving', errPrefix: 'Ingredient' }
       );
       if (otheringreds.size > 0) {
-        const footnote = createAppendElement(this, 'div', 'footnotes');
         const str = Array.from(otheringreds).map(([_, data]) => data.name).join(', ') + '.';
-        createAppendElement(footnote, 'p', undefined, `Other Ingredients: ${str}`);
+        factsFrag.querySelector('.other-ingredients').textContent = `Other Ingredients: ${str}`;
       }
+
+      // add frag to document
+      this.appendChild(factsFrag);
     }
     catch (err) {
-      console.log(`Error loading supplement facts: ${err}`);
+      console.log(`Supplement facts load failed due to ${err.stack.replace(/\s+/g, ' ')}`);
+      return;
     }
   }
-}
 
-customElements.define('ccl-supplement-facts', HTMLSupplementFactsElement);
+  // observed attributes
+  static observedAttributes = ['src-file', 'src-prop'];
+
+  /**
+   * Handle connection to dom.
+   */
+  connectedCallback() {
+    // only necessary in case element was not connected during attribute changes
+    setTimeout(() => { this.#rebuild() });
+  }
+
+  /**
+   * Handle observed attribute changed.
+   */
+  attributeChangedCallback(name, oldValue, newValue) {
+    // queue up rebuild in case of multiple attribute changes
+    if (this.isConnected)
+      setTimeout(() => { this.#rebuild() });
+  }
+});
