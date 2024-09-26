@@ -2,8 +2,8 @@
  * Async fetch text data from file, throw error if response is not ok.
  * @param {string} fileName - name of data file to fetch
  */
-export async function fetchText(fileName) {
-  const response = await fetch(fileName);
+export async function fetchText(fileName, { timeout = 30000 } = {}) {
+  const response = await fetch(fileName, { signal: AbortSignal.timeout(timeout) });
   if (!response.ok)
     throw `${response.status} ${response.statusText}`;
   return response.text();
@@ -13,8 +13,8 @@ export async function fetchText(fileName) {
  * Async fetch json data from file, throw error if response is not ok.
  * @param {string} fileName - name of data file to fetch
  */
-export async function fetchJson(fileName) {
-  const response = await fetch(fileName);
+export async function fetchJson(fileName, { timeout = 30000 } = {}) {
+  const response = await fetch(fileName, { signal: AbortSignal.timeout(timeout) });
   if (!response.ok)
     throw `${response.status} ${response.statusText}`;
   return response.json();
