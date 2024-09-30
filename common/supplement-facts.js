@@ -2,62 +2,127 @@ import * as cclIngredients from '/common/ingredients.js'
 import * as cclUtils from '/common/utils.js'
 
 customElements.define('ccl-supplement-facts', class extends HTMLElement {
-  // html fragment containing content templates
-  static s_htmlFrag;
-  get #htmlFrag() {
-    return this.constructor.s_htmlFrag;
-  }
-
-  // static initialization promise
-  static s_initPromise;
-  static s_initError;
-  #initPromise() {
-    return new Promise((resolve, reject) => {
-      return this.constructor.s_initPromise.then(() => {
-        if (this.constructor.s_initError === undefined)
-          resolve();
-        else
-          reject(this.constructor.s_initError);
-      })
-    });
-  }
+  /**
+   * Promise for html data fragment from static initialization.
+   * Resolves when loading is complete, returning the new document fragment if successful.
+   * On failure saves error in s_htmlError.
+   * @type {Promise<DocumentFragment|undefined>}
+   * */
+  static s_htmlPromise;
 
   /**
-   * Static initialization.
+   * Error loading html data fragment during static initialization.
+   * @type {Error}
+   * */
+  static s_htmlError;
+
+  /**
+   * Get html data promise.
+   * Resolves with document fragment when loading is successful, or rejects with load error.
+   * This accessor will reject every time it is called while s_htmlError is set.
+   * @param {AbortSignal} signal - abort signal
+   * @returns {Promise<DocumentFragment>}
    */
-  static {
-    this.s_initPromise = new Promise((resolve, reject) => {
+  #htmlPromise(signal) {
+    return new Promise((resolve, reject) => {
       (async () => {
-        try {
-          // fetch html and convert to document fragment
-          const htmlText = await cclUtils.fetchText('/common/supplement-facts.html');
-          const tpl = document.createElement('template');
-          tpl.innerHTML = htmlText;
-          this.s_htmlFrag = tpl.content;
-
-          // import stylesheet
-          const cssText = await cclUtils.fetchText('/common/supplement-facts.css');
-          const styleElem = document.createElement('style');
-          styleElem.appendChild(document.createTextNode(cssText));
-          document.head.appendChild(styleElem);
-
-          // success
-          return resolve();
-        }
-        catch (err) {
-          return reject(err);
-        }
+        const ret = await this.constructor.s_htmlPromise;
+        if (signal.aborted)
+          return reject(signal.reason);
+        if (this.constructor.s_htmlError)
+          return reject(this.constructor.s_htmlError);
+        return resolve(ret);
       })();
-    }).catch((err) => {
-      this.s_initError = err || 'Undefined error';
     });
   }
 
-  // data source identifier
-  #_srcId;
+  /**
+   * Promise for css stylesheet load from static initialization.
+   * Resolves when loading is complete.
+   * On failure saves error in s_styleError.
+   * @type {Promise<void>}
+   * */
+  static s_stylePromise;
 
   /**
-   * Async build html from data file.
+   * Error loading stylesheet during static initialization.
+   * @type {Error}
+   * */
+  static s_styleError;
+
+  /**
+   * Get style data promise.
+   * Resolves when loading is successful or rejects with load error.
+   * This accessor will reject every time it is called while s_styleError is set.
+   * @param {AbortSignal} signal - abort signal
+   * @returns {Promise<void>}
+   */
+  #stylePromise(signal) {
+    return new Promise((resolve, reject) => {
+      (async () => {
+        await this.constructor.s_stylePromise;
+        if (signal.aborted)
+          return reject(signal.reason);
+        if (this.constructor.s_styleError)
+          return reject(this.constructor.s_styleError);
+        return resolve();
+      })();
+    });
+  }
+
+  /** Static Initialization */
+  static {
+    // fetch html and convert to document fragment
+    // set error and resolve instead of rejecting, promise accessor will reject
+    this.s_htmlPromise = new Promise((resolve) => {
+      (async () => {
+        const htmlText = await cclUtils.fetchText('/common/supplement-facts.html');
+        const templateElem = document.createElement('template');
+        templateElem.innerHTML = htmlText;
+        return resolve(templateElem.content);
+      })().catch((err) => {
+        this.s_htmlError = err.stack ? err : new Error(err);
+        return resolve();
+      });
+    });
+
+    // fetch stylesheet and append to document head
+    // set error and resolve instead of rejecting, promise accessor will reject
+    this.s_stylePromise = new Promise((resolve) => {
+      (async () => {
+        const cssText = await cclUtils.fetchText('/common/supplement-facts.css');
+        const styleElem = document.createElement('style');
+        styleElem.appendChild(document.createTextNode(cssText));
+        document.head.appendChild(styleElem);
+        return resolve();
+      })().catch((err) => {
+        this.s_styleError = err.stack ? err : new Error(err);
+        return resolve();
+      });
+    });
+  }
+
+  /**
+   * Unique id for data source file and property.
+   * @type {string}
+   * */
+  #_dataId;
+
+  /**
+   * Abort controller for rebuild operation.
+   * @type {AbortController}
+   */
+  #_controller;
+
+  /**
+   * List of child nodes added by rebuild.
+   * @type {Node[]}
+   */
+  #_childNodes;
+
+  /**
+   * Rebuild html from data file.
+   * @returns {Promise<void>}
    */
   async #rebuild() {
     try {
@@ -68,16 +133,20 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
       const srcProp = this.getAttribute('src-prop');
 
       // rebuild may be called repeatedly with the same attributes, early out
-      const srcId = `'${srcFile}'${srcProp !== null ? `['${srcProp}']` : ''}`;
-      if (srcId === this.#_srcId)
+      const dataId = `'${srcFile}'${srcProp !== null ? `[${srcProp}]` : ''}`;
+      if (dataId === this.#_dataId)
         return;
-      this.#_srcId = srcId;
+      this.#_dataId = dataId;
 
-      // TODO: abort prev rebuilds still fetching src data
+      // abort previous operation
+      if (this.#_controller)
+        this.#_controller.abort();
+      const controller = new AbortController();
+      this.#_controller = controller;
 
       // fetch source data
       const srcData = await (async () => {
-        const srcDataFile = await cclUtils.fetchJson(srcFile);
+        const srcDataFile = await cclUtils.fetchJson(srcFile, { signal: controller.signal });
         if (srcProp === null)
           return srcDataFile;
         if (!srcDataFile.hasOwnProperty(srcProp))
@@ -85,16 +154,11 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
         return srcDataFile[srcProp];
       })();
 
-      // wait for init
-      await this.#initPromise();
-
-      // attributes may have changed while waiting for load
-      // new rebuild call will already be in the queue
-      if (this.#_srcId !== srcId)
-        return;
+      // get html templates
+      const htmlFrag = await this.#htmlPromise(controller.signal);
 
       // query facts template
-      const factsTpl = this.#htmlFrag.querySelector('#supplement-facts-template');
+      const factsTpl = htmlFrag.querySelector('#supplement-facts-template');
       const factsFrag = document.importNode(factsTpl.content, true);
 
       // headers
@@ -111,8 +175,8 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
 
       // body
       const table = factsFrag.querySelector('table');
-      const ingrRowTpl = this.#htmlFrag.querySelector('#ingredient-row-template');
-      const separatorTpl = this.#htmlFrag.querySelector('#separator-template');
+      const ingrRowTpl = htmlFrag.querySelector('#ingredient-row-template');
+      const separatorTpl = htmlFrag.querySelector('#separator-template');
 
       // add nutrients
       const nutrients = cclIngredients.parseList(
@@ -167,30 +231,40 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
         factsFrag.querySelector('.other-ingredients').textContent = `Other Ingredients: ${str}`;
       }
 
-      // add frag to document
+      // wait for styling
+      await this.#stylePromise(controller.signal);
+
+      // remove previous child nodes and append new frag
+      for (const node of this.#_childNodes || [])
+        this.removeChild(node);
+      this.#_childNodes = Array.from(factsFrag.childNodes);
       this.appendChild(factsFrag);
     }
     catch (err) {
-      console.log(`Supplement facts load failed due to ${err.stack.replace(/\s+/g, ' ')}`);
+      const msg = err.stack ? err.stack.replace(/\s+/g, ' ') : err;
+      console.log(`Supplement facts load failed: ${msg}`);
       return;
     }
   }
 
-  // observed attributes
+  /**
+   * Observed attributes for HTMLElement base class.
+   * @type {string[]}
+   */
   static observedAttributes = ['src-file', 'src-prop'];
 
   /**
    * Handle connection to dom.
    */
   connectedCallback() {
-    // only necessary in case element was not connected during attribute changes
+    // queue up rebuild in case element was not connected during attribute changes
     setTimeout(() => { this.#rebuild() });
   }
 
   /**
    * Handle observed attribute changed.
    */
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback() {
     // queue up rebuild in case of multiple attribute changes
     if (this.isConnected)
       setTimeout(() => { this.#rebuild() });

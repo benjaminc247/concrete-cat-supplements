@@ -12,9 +12,12 @@ export async function fetchText(fileName, { timeout = 30000 } = {}) {
 /**
  * Async fetch json data from file, throw error if response is not ok.
  * @param {string} fileName - name of data file to fetch
+ * @returns {Promise<object>}
  */
-export async function fetchJson(fileName, { timeout = 30000 } = {}) {
-  const response = await fetch(fileName, { signal: AbortSignal.timeout(timeout) });
+export async function fetchJson(fileName, { signal = undefined, timeout = 30000 } = {}) {
+  const timeoutSignal = AbortSignal.timeout(timeout);
+  signal = signal ? AbortSignal.any([timeoutSignal, signal]) : timeoutSignal;
+  const response = await fetch(fileName, { signal: signal });
   if (!response.ok)
     throw `${response.status} ${response.statusText}`;
   return response.json();

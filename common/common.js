@@ -11,7 +11,8 @@ window.addEventListener('error', (ev) => {
   console.log(`Unhandled Error: ${ev.message} at (${ev.filename}:${ev.lineno}:${ev.colno})`);
 });
 window.addEventListener('unhandledrejection', (ev) => {
-  console.log(`Unhandled promise rejection due to ${ev.reason.stack.replace(/\s+/g, ' ')}`);
+  const msg = ev.reason.stack ? ev.reason.stack.replace(/\s+/g, ' ') : ev.reason;
+  console.log(`Unhandled Rejection: ${msg}`);
 });
 
 // set up ccl elements in document
