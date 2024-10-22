@@ -33,17 +33,28 @@ cclElementRegistry.registerCallback("collapsible", 1000, (parentElement) => {
       collapse.appendChild(content);
 
       // set up collapse toggle
-      toggle.addEventListener("click", function () {
-        toggle.classList.toggle("active");
+      const updateHeight = () => {
         if (toggle.classList.contains("active"))
           collapse.style.maxHeight = collapse.scrollHeight + "px";
         else
           collapse.style.maxHeight = null;
+      };
+      toggle.addEventListener("click", () => {
+        toggle.classList.toggle("active");
+        updateHeight();
       });
 
       // append new children to collapsible
       collapsible.appendChild(header);
       collapsible.appendChild(collapse);
+
+      // expand after load if requested
+      if (collapsible.classList.contains("init-expanded"))
+        toggle.classList.add('active');
+
+      // update height on hierarchy changes
+      const observer = new MutationObserver(updateHeight);
+      observer.observe(collapse, { subtree: true, childList: true });
     }
     catch (err) {
       console.log("Error initializing collapsible: " + err);
