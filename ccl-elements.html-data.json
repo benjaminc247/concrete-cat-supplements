@@ -16,16 +16,16 @@
       ]
     },
     {
-      "name": "ccl-supplement-facts",
-      "description": "An element that loads supplement facts from a file and displays them fda label format.",
+      "name": "ccl-nutrition-facts",
+      "description": "An element that loads nutrition facts from a file and displays them fda label format.",
       "attributes": [
         {
           "name": "src-file",
-          "description": "File path from which to load supplement data."
+          "description": "File path from which to load nutrition data."
         },
         {
           "name": "src-prop",
-          "description": "Property name of supplement data in source file."
+          "description": "Property name of nutrition data in source file."
         }
       ]
     }

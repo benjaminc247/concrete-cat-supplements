@@ -1,7 +1,7 @@
 import * as cclIngredients from '/common/ingredients.js'
 import * as cclUtils from '/common/utils.js'
 
-customElements.define('ccl-supplement-facts', class extends HTMLElement {
+customElements.define('ccl-nutrition-facts', class extends HTMLElement {
   /**
    * Timeout to use for dependency loading.
    * @type {number}
@@ -101,7 +101,7 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
     this.s_htmlPromise = new Promise((resolve) => {
       (async () => {
         const htmlText = await cclUtils.fetchText(
-          '/common/supplement-facts.html',
+          '/common/nutrition-facts.html',
           { timeout: this.s_dependencyTimeout }
         );
         const templateElem = document.createElement('template');
@@ -119,7 +119,7 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
     this.s_stylePromise = new Promise((resolve) => {
       (async () => {
         const cssText = await cclUtils.fetchText(
-          '/common/supplement-facts.css',
+          '/common/nutrition-facts.css',
           { timeout: this.s_dependencyTimeout }
         );
         const styleElem = document.createElement('style');
@@ -193,7 +193,7 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
       const htmlFrag = await this.#htmlPromise(this.#_controller.signal);
 
       // query facts template
-      const factsTpl = htmlFrag.querySelector('#supplement-facts-template');
+      const factsTpl = htmlFrag.querySelector('#nutrition-facts-template');
       const factsFrag = document.importNode(factsTpl.content, true);
 
       // headers

@@ -1,36 +1,36 @@
-ccl-supplement-facts {
+ccl-nutrition-facts {
   font-family: 'Helvetica', sans-serif;
   display: flow-root;
 }
-ccl-supplement-facts .outline {
+ccl-nutrition-facts .outline {
   display: inline-block;
   border: 1px solid black;
   padding: 4px;
 }
-ccl-supplement-facts h1 {
+ccl-nutrition-facts h1 {
   font-style: bold;
   font-size: 32px;
   margin: 1px 4px;
 }
-ccl-supplement-facts h2 {
+ccl-nutrition-facts h2 {
   font-style: bold;
   font-size: 16px;
   margin: 1px 4px;
 }
-ccl-supplement-facts table {
+ccl-nutrition-facts table {
   border-collapse: collapse;
   border-top: 16px solid black;
   border-bottom: 16px solid black;
   width: 100%;
 }
-ccl-supplement-facts th {
+ccl-nutrition-facts th {
   font-style: bold;
   font-size: 12px;
   text-align: right;
   border-bottom: 10px solid black;
   padding: 1px 4px;
 }
-ccl-supplement-facts td {
+ccl-nutrition-facts td {
   font-style: normal;
   font-size: 16px;
   text-align: right;
@@ -38,34 +38,34 @@ ccl-supplement-facts td {
   border-bottom: 1px solid black;
   padding: 1px 4px;
 }
-ccl-supplement-facts td p {
+ccl-nutrition-facts td p {
   float: left;
   font-size: inherit;
   margin: 0px;
   padding: 0px;
 }
-ccl-supplement-facts td p + p {
+ccl-nutrition-facts td p + p {
   float: right;
   font-size: inherit;
   margin: 0px 0px 0px 16px;
   padding: 0px;
 }
-ccl-supplement-facts tr.separator {
+ccl-nutrition-facts tr.separator {
   border-top: 16px solid black;
   border-bottom: 16px solid black;
 }
-ccl-supplement-facts .footnotes {
+ccl-nutrition-facts .footnotes {
   font-size: 10px;
   margin: 0px;
   padding: 1px 4px;
 }
-ccl-supplement-facts .footnotes p {
+ccl-nutrition-facts .footnotes p {
   float: left;
   font-size: inherit;
   margin: 0px;
   padding: 0px;
 }
-ccl-supplement-facts .footnotes p + p {
+ccl-nutrition-facts .footnotes p + p {
   float: right;
   font-size: inherit;
   margin: 0px 0px 0px 16px;
