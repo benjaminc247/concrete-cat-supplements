@@ -3,6 +3,12 @@ import * as cclUtils from '/common/utils.js'
 
 customElements.define('ccl-supplement-facts', class extends HTMLElement {
   /**
+   * Timeout to use for dependency loading.
+   * @type {number}
+   */
+  get s_dependencyTimeout() { return 10000; }
+
+  /**
    * Promise for html data fragment from static initialization.
    * Resolves when loading is complete, returning the new document fragment if successful.
    * On failure saves error in s_htmlError.
@@ -18,7 +24,7 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
 
   /**
    * Get html data promise.
-   * Resolves with document fragment when loading is successful, or rejects with load error.
+   * Resolves with document fragment when loading is successful or rejects with load error.
    * This accessor will reject every time it is called while s_htmlError is set.
    * @param {AbortSignal} signal - abort signal
    * @returns {Promise<DocumentFragment>}
@@ -26,11 +32,20 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
   #htmlPromise(signal) {
     return new Promise((resolve, reject) => {
       (async () => {
-        const ret = await this.constructor.s_htmlPromise;
+        // check abort before call and listen for abort during await
         if (signal.aborted)
-          return reject(signal.reason);
+          return reject(`HTML promise early abort: ${signal.reason}`);
+        const onAbort = () => {
+          signal.removeEventListener('abort', onAbort);
+          return reject(`HTML promise aborted: ${signal.reason}`);
+        }
+        signal.addEventListener('abort', onAbort);
+        // html promise never rejects it sets html error instead
+        // saving error allows this promise to reject every time
+        const ret = await this.constructor.s_htmlPromise;
+        signal.removeEventListener('abort', onAbort);
         if (this.constructor.s_htmlError)
-          return reject(this.constructor.s_htmlError);
+          return reject(`HTML promise error: ${this.constructor.s_htmlError}`);
         return resolve(ret);
       })();
     });
@@ -60,11 +75,20 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
   #stylePromise(signal) {
     return new Promise((resolve, reject) => {
       (async () => {
-        await this.constructor.s_stylePromise;
+        // check abort before call and listen for abort during await
         if (signal.aborted)
-          return reject(signal.reason);
+          return reject(`Style promise early abort: ${signal.reason}`);
+        const onAbort = () => {
+          signal.removeEventListener('abort', onAbort);
+          return reject(`Style promise aborted: ${signal.reason}`);
+        }
+        signal.addEventListener('abort', onAbort);
+        // style promise never rejects it sets style error instead
+        // saving error allows this promise to reject every time
+        await this.constructor.s_stylePromise;
+        signal.removeEventListener('abort', onAbort);
         if (this.constructor.s_styleError)
-          return reject(this.constructor.s_styleError);
+          return reject(`Style promise error: ${this.constructor.s_styleError}`);
         return resolve();
       })();
     });
@@ -73,29 +97,37 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
   /** Static Initialization */
   static {
     // fetch html and convert to document fragment
-    // set error and resolve instead of rejecting, promise accessor will reject
+    // set error and resolve instead of rejecting, promise accessor will handle the error
     this.s_htmlPromise = new Promise((resolve) => {
       (async () => {
-        const htmlText = await cclUtils.fetchText('/common/supplement-facts.html');
+        const htmlText = await cclUtils.fetchText(
+          '/common/supplement-facts.html',
+          { timeout: this.s_dependencyTimeout }
+        );
         const templateElem = document.createElement('template');
         templateElem.innerHTML = htmlText;
         return resolve(templateElem.content);
       })().catch((err) => {
+        // this must ensure html error is not falsy
         this.s_htmlError = err.stack ? err : new Error(err);
-        return resolve();
+        return resolve(undefined);
       });
     });
 
     // fetch stylesheet and append to document head
-    // set error and resolve instead of rejecting, promise accessor will reject
+    // set error and resolve instead of rejecting, promise accessor will handle the error
     this.s_stylePromise = new Promise((resolve) => {
       (async () => {
-        const cssText = await cclUtils.fetchText('/common/supplement-facts.css');
+        const cssText = await cclUtils.fetchText(
+          '/common/supplement-facts.css',
+          { timeout: this.s_dependencyTimeout }
+        );
         const styleElem = document.createElement('style');
         styleElem.appendChild(document.createTextNode(cssText));
         document.head.appendChild(styleElem);
         return resolve();
       })().catch((err) => {
+        // this must ensure style error is not falsy
         this.s_styleError = err.stack ? err : new Error(err);
         return resolve();
       });
@@ -139,14 +171,16 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
       this.#_dataId = dataId;
 
       // abort previous operation
-      if (this.#_controller)
-        this.#_controller.abort();
-      const controller = new AbortController();
-      this.#_controller = controller;
+      // TODO: this abort should not cause an error message
+      this.#_controller?.abort('source attributes changed');
+      this.#_controller = new AbortController();
 
       // fetch source data
       const srcData = await (async () => {
-        const srcDataFile = await cclUtils.fetchJson(srcFile, { signal: controller.signal });
+        const srcDataFile = await cclUtils.fetchJson(
+          srcFile,
+          { signal: this.#_controller.signal, timeout: this.s_dependencyTimeout }
+        );
         if (srcProp === null)
           return srcDataFile;
         if (!srcDataFile.hasOwnProperty(srcProp))
@@ -155,7 +189,8 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
       })();
 
       // get html templates
-      const htmlFrag = await this.#htmlPromise(controller.signal);
+      // no need for timeout here html promise already has a timeout
+      const htmlFrag = await this.#htmlPromise(this.#_controller.signal);
 
       // query facts template
       const factsTpl = htmlFrag.querySelector('#supplement-facts-template');
@@ -163,6 +198,7 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
 
       // headers
       // TODO: do we need something else to handle empty serving size or servings per?
+      // TODO: handle failed queries?
       factsFrag.querySelector('.title').textContent = 'Supplement Facts';
       const svsize = srcData['serving-size'];
       if (svsize)
@@ -232,11 +268,11 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
       }
 
       // wait for styling
-      await this.#stylePromise(controller.signal);
+      // no need for timeout here style promise already has a timeout
+      await this.#stylePromise(this.#_controller.signal);
 
       // remove previous child nodes and append new frag
-      for (const node of this.#_childNodes || [])
-        this.removeChild(node);
+      this.#_childNodes?.forEach((node) => { this.removeChild(node); });
       this.#_childNodes = Array.from(factsFrag.childNodes);
       this.appendChild(factsFrag);
     }
@@ -258,15 +294,15 @@ customElements.define('ccl-supplement-facts', class extends HTMLElement {
    */
   connectedCallback() {
     // queue up rebuild in case element was not connected during attribute changes
-    setTimeout(() => { this.#rebuild() });
+    setTimeout(() => { this.#rebuild(); });
   }
 
   /**
    * Handle observed attribute changed.
    */
   attributeChangedCallback() {
-    // queue up rebuild in case of multiple attribute changes
+    // queue up rebuild so it is handled after all attribute changes
     if (this.isConnected)
-      setTimeout(() => { this.#rebuild() });
+      setTimeout(() => { this.#rebuild(); });
   }
 });
