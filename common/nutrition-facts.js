@@ -1,123 +1,64 @@
 import * as cclIngredients from '/common/ingredients.js'
 import * as cclUtils from '/common/utils.js'
+import cclAsyncResource from '/common/async-resource.js'
 
 customElements.define('ccl-nutrition-facts', class extends HTMLElement {
   /**
-   * Timeout to use for dependency loading.
+   * Timeout to use for dependency loading in ms.
    * @type {number}
    */
-  get s_dependencyTimeout() { return 10000; }
+  static s_dependencyTimeout = 10000;
 
   /**
-   * Promise for html data fragment from static initialization.
-   * Resolves when loading is complete, returning the new document fragment if successful.
-   * On failure saves error in s_htmlError.
-   * @type {Promise<DocumentFragment|undefined>}
-   * */
-  static s_htmlPromise;
+   * Async html data fragment resource.
+   * @type {cclAsyncResource<DocumentFragment>}
+   */
+  static s_htmlResource;
 
   /**
-   * Error loading html data fragment during static initialization.
-   * @type {Error}
-   * */
-  static s_htmlError;
+   * Async css stylesheet resource.
+   * @type {cclAsyncResource<undefined>}
+   */
+  static s_styleResource;
 
   /**
-   * Get html data promise.
-   * Resolves with document fragment when loading is successful or rejects with load error.
-   * This accessor will reject every time it is called while s_htmlError is set.
-   * @param {AbortSignal} signal - abort signal
+   * Access html data fragment resource promise.
+   * @param {AbortSignal} abortSignal
    * @returns {Promise<DocumentFragment>}
    */
-  #htmlPromise(signal) {
-    return new Promise((resolve, reject) => {
-      (async () => {
-        // check abort before call and listen for abort during await
-        if (signal.aborted)
-          return reject(`HTML promise early abort: ${signal.reason}`);
-        const onAbort = () => {
-          signal.removeEventListener('abort', onAbort);
-          return reject(`HTML promise aborted: ${signal.reason}`);
-        }
-        signal.addEventListener('abort', onAbort);
-        // html promise never rejects it sets html error instead
-        // saving error allows this promise to reject every time
-        const ret = await this.constructor.s_htmlPromise;
-        signal.removeEventListener('abort', onAbort);
-        if (this.constructor.s_htmlError)
-          return reject(`HTML promise error: ${this.constructor.s_htmlError}`);
-        return resolve(ret);
-      })();
-    });
+  #htmlPromise(abortSignal) {
+    return this.constructor.s_htmlResource.promise(abortSignal);
   }
 
   /**
-   * Promise for css stylesheet load from static initialization.
-   * Resolves when loading is complete.
-   * On failure saves error in s_styleError.
-   * @type {Promise<void>}
-   * */
-  static s_stylePromise;
-
-  /**
-   * Error loading stylesheet during static initialization.
-   * @type {Error}
-   * */
-  static s_styleError;
-
-  /**
-   * Get style data promise.
-   * Resolves when loading is successful or rejects with load error.
-   * This accessor will reject every time it is called while s_styleError is set.
-   * @param {AbortSignal} signal - abort signal
-   * @returns {Promise<void>}
+   * Access css stylesheet resource promise.
+   * @param {AbortSignal} abortSignal
+   * @returns {Promise<undefined>}
    */
-  #stylePromise(signal) {
-    return new Promise((resolve, reject) => {
-      (async () => {
-        // check abort before call and listen for abort during await
-        if (signal.aborted)
-          return reject(`Style promise early abort: ${signal.reason}`);
-        const onAbort = () => {
-          signal.removeEventListener('abort', onAbort);
-          return reject(`Style promise aborted: ${signal.reason}`);
-        }
-        signal.addEventListener('abort', onAbort);
-        // style promise never rejects it sets style error instead
-        // saving error allows this promise to reject every time
-        await this.constructor.s_stylePromise;
-        signal.removeEventListener('abort', onAbort);
-        if (this.constructor.s_styleError)
-          return reject(`Style promise error: ${this.constructor.s_styleError}`);
-        return resolve();
-      })();
-    });
+  #stylePromise(abortSignal) {
+    return this.constructor.s_styleResource.promise(abortSignal);
   }
 
   /** Static Initialization */
   static {
-    // fetch html and convert to document fragment
-    // set error and resolve instead of rejecting, promise accessor will handle the error
-    this.s_htmlPromise = new Promise((resolve) => {
-      (async () => {
+    // load html document fragment resource
+    this.s_htmlResource = cclAsyncResource.load(
+      'HTML',
+      async () => {
         const htmlText = await cclUtils.fetchText(
           '/common/nutrition-facts.html',
           { timeout: this.s_dependencyTimeout }
         );
         const templateElem = document.createElement('template');
         templateElem.innerHTML = htmlText;
-        return resolve(templateElem.content);
-      })().catch((err) => {
-        // this must ensure html error is not falsy
-        this.s_htmlError = err.stack ? err : new Error(err);
-        return resolve(undefined);
-      });
-    });
+        return templateElem.content;
+      }
+    );
 
-    // fetch stylesheet and append to document head
-    // set error and resolve instead of rejecting, promise accessor will handle the error
-    this.s_stylePromise = new Promise((resolve) => {
-      (async () => {
+    // load stylesheet resource and append to document
+    this.s_styleResource = cclAsyncResource.load(
+      'Style',
+      async () => {
         const cssText = await cclUtils.fetchText(
           '/common/nutrition-facts.css',
           { timeout: this.s_dependencyTimeout }
@@ -125,13 +66,8 @@ customElements.define('ccl-nutrition-facts', class extends HTMLElement {
         const styleElem = document.createElement('style');
         styleElem.appendChild(document.createTextNode(cssText));
         document.head.appendChild(styleElem);
-        return resolve();
-      })().catch((err) => {
-        // this must ensure style error is not falsy
-        this.s_styleError = err.stack ? err : new Error(err);
-        return resolve();
-      });
-    });
+      }
+    );
   }
 
   /**
