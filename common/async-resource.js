@@ -11,7 +11,7 @@ export default class AsyncResource {
 
   /**
    * Error thrown from load callback.
-   * @type {Error}
+   * @type {{message: any}}
    */
   #_error;
 
@@ -45,8 +45,8 @@ export default class AsyncResource {
         catch (err) {
           // save error for promise accessor, and ensure it looks like an error
           // do not reject this promise, error property will be checked for failure
-          resource.#_error = (err && err.stack && err.message) ? err : new Error(err);
-          resolve(undefined);
+          resource.#_error = (err && err.message) ? err : new Error(err);
+          resolve();
         }
       })();
     });
