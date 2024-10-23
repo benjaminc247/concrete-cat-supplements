@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2018",
+    "checkJs": true,
+    "baseUrl": ".",
+    "paths": { "/*": [ "*" ] }
+  },
+  "exclude": [ "node_modules", "**/node_modules/*" ]
+}

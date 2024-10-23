@@ -26,16 +26,11 @@ export default class AsyncResource {
   #_promise;
 
   /**
-   * Callback for async resource load function returning a resource promise.
-   * @callback LoadFn
-   * @returns {Promise<ResourceType>}
-   */
-
-  /**
    * Construct and load an async resource.
+   * @template ResourceType
    * @param {string} name - name of the resource for debugging and error messages.
-   * @param {LoadFn} loadFn - load function returning the resource promise.
-   * @returns {AsyncResource}
+   * @param {{():Promise<ResourceType>}} loadFn - load function returning the resource promise.
+   * @returns {AsyncResource<ResourceType>}
    */
   static load(name, loadFn) {
     const resource = new AsyncResource();

@@ -2,7 +2,7 @@ import * as cclIngredients from '/common/ingredients.js'
 import * as cclUtils from '/common/utils.js'
 import cclAsyncResource from '/common/async-resource.js'
 
-customElements.define('ccl-nutrition-facts', class extends HTMLElement {
+class cclNutritionFacts extends HTMLElement {
   /**
    * Timeout to use for dependency loading in ms.
    * @type {number}
@@ -17,7 +17,7 @@ customElements.define('ccl-nutrition-facts', class extends HTMLElement {
 
   /**
    * Async css stylesheet resource.
-   * @type {cclAsyncResource<undefined>}
+   * @type {cclAsyncResource<void>}
    */
   static s_styleResource;
 
@@ -27,16 +27,16 @@ customElements.define('ccl-nutrition-facts', class extends HTMLElement {
    * @returns {Promise<DocumentFragment>}
    */
   #htmlPromise(abortSignal) {
-    return this.constructor.s_htmlResource.promise(abortSignal);
+    return cclNutritionFacts.s_htmlResource.promise(abortSignal);
   }
 
   /**
    * Access css stylesheet resource promise.
    * @param {AbortSignal} abortSignal
-   * @returns {Promise<undefined>}
+   * @returns {Promise<void>}
    */
   #stylePromise(abortSignal) {
-    return this.constructor.s_styleResource.promise(abortSignal);
+    return cclNutritionFacts.s_styleResource.promise(abortSignal);
   }
 
   /** Static Initialization */
@@ -115,7 +115,7 @@ customElements.define('ccl-nutrition-facts', class extends HTMLElement {
       const srcData = await (async () => {
         const srcDataFile = await cclUtils.fetchJson(
           srcFile,
-          { signal: this.#_controller.signal, timeout: this.s_dependencyTimeout }
+          { signal: this.#_controller.signal, timeout: cclNutritionFacts.s_dependencyTimeout }
         );
         if (srcProp === null)
           return srcDataFile;
@@ -130,6 +130,8 @@ customElements.define('ccl-nutrition-facts', class extends HTMLElement {
 
       // query facts template
       const factsTpl = htmlFrag.querySelector('#nutrition-facts-template');
+      if (!(factsTpl instanceof HTMLTemplateElement))
+        throw 'nutrition facts template element must be of type template';
       const factsFrag = document.importNode(factsTpl.content, true);
 
       // headers
@@ -148,7 +150,11 @@ customElements.define('ccl-nutrition-facts', class extends HTMLElement {
       // body
       const table = factsFrag.querySelector('table');
       const ingrRowTpl = htmlFrag.querySelector('#ingredient-row-template');
+      if (!(ingrRowTpl instanceof HTMLTemplateElement))
+        throw 'ingredient row template element must be of type template';
       const separatorTpl = htmlFrag.querySelector('#separator-template');
+      if (!(separatorTpl instanceof HTMLTemplateElement))
+        throw 'separator template element must be of type template';
 
       // add nutrients
       const nutrients = cclIngredients.parseList(
@@ -241,4 +247,5 @@ customElements.define('ccl-nutrition-facts', class extends HTMLElement {
     if (this.isConnected)
       setTimeout(() => { this.#rebuild(); });
   }
-});
+};
+customElements.define('ccl-nutrition-facts', cclNutritionFacts);

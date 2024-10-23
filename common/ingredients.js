@@ -6,11 +6,12 @@ import * as Serving from '/common/serving.js';
  * If serving is not provided it will be looked up in data or defaulted.
  * Added ingredient is guaranteed to contain a name and serving property.
  * In case of non-fatal error the 'error' property will be set on the ingredient.
- * @param {string} [ingrId] - ingredient id, must be a unique non-empty string
- * @param {object} [ingrData = {}] - extended ingredient data
- * @param {string} [servingStr = undefined] - serving value, look up from data if not provided
- * @param {object} servingKey - name of serving parameter in ingredient data
- * @param {string} errPrefix - prefix for error messages
+ * @param {object} params
+ * @param {string} [params.ingrId] - ingredient id, must be a unique non-empty string
+ * @param {object} [params.ingrData = {}] - extended ingredient data
+ * @param {string} [params.servingStr = undefined] - serving value, defaults look up in data
+ * @param {object} params.servingKey - name of serving parameter in ingredient data
+ * @param {string} params.errPrefix - prefix for error messages
  * @return {object} - ingredient data
  */
 function parseIngredient({
@@ -63,8 +64,9 @@ function parseIngredient({
  *   - an 'error' param will be set with the error message.
  * Errors that cannot be contained to a single ingredient will be thrown.
  * @param {object|array} ingrList - ingredient list object or array
- * @param {string} [servingKey='serving'] - name of the serving key
- * @param {string} [errPrefix='Ingredient'] - prefix for error messages
+ * @param {object} opts
+ * @param {string} [opts.servingKey='serving'] - name of the serving key
+ * @param {string} [opts.errPrefix='Ingredient'] - prefix for error messages
  * @returns {Map} - the normalized ingredient list
  */
 export function parseList(ingrList, { servingKey = 'serving', errPrefix = 'Ingredient' } = {}) {

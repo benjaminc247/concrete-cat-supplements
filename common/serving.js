@@ -1,55 +1,5 @@
 import * as Utils from '/common/utils.js';
 
-class Units {
-  #units;
-  #equiv;
-
-  // params must be undefined or one of the objects below
-  // equiv must be undefined if units is undefined
-  constructor(units, equiv) {
-    this.#units = units;
-    this.#equiv = equiv;
-  }
-
-  // units and equiv are both either undefined or an object from below
-  toString() {
-    return [this.#units, this.#equiv].filter(Boolean).join(' ');
-  }
-
-  // internal equivalence test
-  static isEqual(lhs, rhs) {
-    return (lhs.units === rhs.units) && (lhs.equiv === rhs.equiv);
-  }
-}
-
-class Serving {
-  #value;
-  #units;
-
-  // value may be undefined
-  // units must always be an instance of Units
-  constructor(value, units) {
-    this.#value = value;
-    this.#units = units;
-  }
-
-  // value must be converted to string in case of '0'
-  // units must be converted to string to see if it is empty
-  toString() {
-    return [this.#value?.toString(), this.#units.toString()].filter(Boolean).join(' ');
-  }
-
-  // returned value may be undefined
-  get value() {
-    return this.#value;
-  }
-
-  // returned units will not be undefined
-  get units() {
-    return this.#units;
-  }
-}
-
 const g = Object.freeze({
   toString: () => 'g',
   gramRatio: () => 1
@@ -72,6 +22,71 @@ const dfe = Object.freeze({
 const rae = Object.freeze({
   toString: () => 'RAE'
 });
+
+class Units {
+  /** @type {g|mg|mcg|undefined} */
+  #units;
+
+  /** @type {ne|dfe|rae|undefined} */
+  #equiv;
+
+  /**
+   * @param {g|mg|mcg|undefined} units
+   * @param {ne|dfe|rae|undefined} equiv
+   */
+  constructor(units, equiv) {
+    this.#units = units;
+    this.#equiv = equiv;
+  }
+
+  /** @returns {string} */
+  toString() {
+    return [this.#units, this.#equiv].filter(Boolean).join(' ');
+  }
+
+  /**
+   * @param {Units} lhs
+   * @param {Units} rhs
+   * @returns {boolean}
+   */
+  static isEqual(lhs, rhs) {
+    return (lhs.#units === rhs.#units) && (lhs.#equiv === rhs.#equiv);
+  }
+}
+
+class Serving {
+  /** @type {number|undefined} */
+  #value;
+
+  /** @type {Units} */
+  #units;
+
+  /**
+   * @param {number|undefined} value
+   * @param {Units} units
+   */
+  constructor(value, units) {
+    this.#value = value;
+    this.#units = units;
+  }
+
+  /** @returns {string} */
+  toString() {
+    // value must be converted to string in case of '0'
+    // units must be converted to string to see if it is empty
+    return [this.#value?.toString(), this.#units.toString()].filter(Boolean).join(' ');
+  }
+
+  /** @returns {number|undefined} */
+  get value() {
+    return this.#value;
+  }
+
+  /** @returns {Units} */
+  get units() {
+    return this.#units;
+  }
+}
 
 /**
  * Parse serving from string
