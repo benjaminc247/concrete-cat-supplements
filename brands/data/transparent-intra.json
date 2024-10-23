@@ -1,121 +1,127 @@
 {
   "link": "https://www.transparentlabs.com/collections/bestsellers/products/coreseries-intra-workout",
   "name": "Transparent Labs Intra",
-  "serving-size": "1 Scoop",
-  "serving-weight": "18.7g",
-  "servings-per-container": "30",
+  "servingSize": "1 Scoop",
+  "servingWeight": "18.7g",
+  "servingsPerContainer": "30",
   "nutrition": {
-    "Calories": "10",
-    "Total Carbohydrate": "2g",
-    "Calcium": {
+    "calories": "10",
+    "totalCarbohydrate": "2g",
+    "calcium": {
       "as": "Calcium Bisglycinate Chelate",
-      "as-note": "TRAACS\u00ae",
+      "asNote": "TRAACS®",
       "serving": "60mg"
     },
-    "Magnesium": {
+    "magnesium": {
       "as": "Magnesium Bisglycinate",
       "serving": "25mg"
     },
-    "Sodium": {
+    "sodium": {
       "as": "Himalayan Rock Salt",
       "serving": "250mg"
     },
-    "Potassium": {
+    "potassium": {
       "as": [ "Potassium Chloride", "Coconut Water" ],
       "serving": "120mg"
     }
   },
   "supplements": {
-    "L-Leucine": {
+    "lLeucine": {
       "serving": "2669mg",
-      "from": "Amino9\u00ae Essential Amino Acids",
-      "from-weight": "6700mg"
+      "from": "Amino9® Essential Amino Acids",
+      "fromWeight": "6700mg"
     },
-    "L-Lysine HCl": {
+    "lLysine": {
+      "name": "L-Lysine HCl",
       "serving": "1267mg",
-      "from": "Amino9\u00ae Essential Amino Acids",
-      "from-weight": "6700mg"
+      "from": "Amino9® Essential Amino Acids",
+      "fromWeight": "6700mg"
     },
-    "L-Threonine": {
+    "lThreonine": {
       "serving": "712mg",
-      "from": "Amino9\u00ae Essential Amino Acids",
-      "from-weight": "6700mg"
+      "from": "Amino9® Essential Amino Acids",
+      "fromWeight": "6700mg"
     },
-    "L-Isoleucine": {
+    "lIsoleucine": {
       "serving": "585mg",
-      "from": "Amino9\u00ae Essential Amino Acids",
-      "from-weight": "6700mg"
+      "from": "Amino9® Essential Amino Acids",
+      "fromWeight": "6700mg"
     },
-    "L-Valine": {
+    "lValine": {
       "serving": "553mg",
-      "from": "Amino9\u00ae Essential Amino Acids",
-      "from-weight": "6700mg"
+      "from": "Amino9® Essential Amino Acids",
+      "fromWeight": "6700mg"
     },
-    "L-Phenylalanine": {
+    "lPhenylalanine": {
       "serving": "378mg",
-      "from": "Amino9\u00ae Essential Amino Acids",
-      "from-weight": "6700mg"
+      "from": "Amino9® Essential Amino Acids",
+      "fromWeight": "6700mg"
     },
-    "L-Methionine": {
+    "lMethionine": {
       "serving": "269mg",
-      "from": "Amino9\u00ae Essential Amino Acids",
-      "from-weight": "6700mg"
+      "from": "Amino9® Essential Amino Acids",
+      "fromWeight": "6700mg"
     },
-    "L-Histidine": {
+    "lHistidine": {
       "serving": "227mg",
-      "from": "Amino9\u00ae Essential Amino Acids",
-      "from-weight": "6700mg"
+      "from": "Amino9® Essential Amino Acids",
+      "fromWeight": "6700mg"
     },
-    "L-Tryptophan": {
+    "lTryptophan": {
       "serving": "40mg",
-      "from": "Amino9\u00ae Essential Amino Acids",
-      "from-weight": "6700mg"
+      "from": "Amino9® Essential Amino Acids",
+      "fromWeight": "6700mg"
     },
-    "Taurine": "2000mg",
-    "Betaine": {
-      "name": "BetaPure\u00ae Betaine Anhydrous",
+    "taurine": "2000mg",
+    "betaine": {
+      "name": "BetaPure® Betaine Anhydrous",
       "serving": "1250mg"
     },
-    "L-Tyrosine": "1000mg",
-    "Coconut Water Powder": {
+    "lTyrosine": "1000mg",
+    "coconutWaterPowder": {
+      "name": "Coconut Water Powder",
       "notes": [
         "Cocos nucifera",
         "fruit"
       ],
       "serving": "1000mg"
     },
-    "Ancient Peat": {
+    "ancientPeat": {
+      "name": "Ancient Peat",
       "serving": "",
-      "from": "elevATP\u00ae",
-      "from-notes": [
+      "from": "elevATP®",
+      "fromNotes": [
         "Malus spp.",
         "fruit"
       ],
-      "from-weight": "150mg"
+      "fromWeight": "150mg"
     },
-    "Apple Extract": {
+    "appleExtract": {
+      "name": "Apple Extract",
       "serving": "",
-      "from": "elevATP\u00ae",
-      "from-notes": [
+      "from": "elevATP®",
+      "fromNotes": [
         "Malus spp.",
         "fruit"
       ],
-      "from-weight": "150mg"
+      "fromWeight": "150mg"
     },
-    "Astragalus membranaceus": {
+    "astragalusMembranaceus": {
+      "name": "Astragalus membranaceus",
       "note": "root",
       "serving": "",
-      "from": "Astragin\u2122",
-      "from-weight": "50mg"
+      "from": "Astragin™",
+      "fromWeight": "50mg"
     },
-    "Panax notoginseng": {
+    "panaxNotoginseng": {
+      "name": "Panax notoginseng",
       "note": "root",
       "serving": "",
-      "from": "Astragin\u2122",
-      "from-weight": "50mg"
+      "from": "Astragin™",
+      "fromWeight": "50mg"
     }
   },
-  "other-ingredients": [
+  "otherIngredients": [
     {
       "name": "Citric Acid",
       "serving": "1,600mg"

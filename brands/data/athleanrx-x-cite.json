@@ -1,94 +1,94 @@
 {
   "link": "https://athleanx.com/athleanrx/x-cite",
   "name": "AthleanRX X-Cite",
-  "serving-size": "1 Scoop",
-  "serving-weight": "20.11g",
-  "servings-per-container": "22",
+  "servingSize": "1 Scoop",
+  "servingWeight": "20.11g",
+  "servingsPerContainer": "22",
   "nutrition": {
-    "Calories": "10",
-    "Total Carbohydrate": "2g",
-    "Dietary Fiber": "1g",
-    "Niacin": "15mg",
-    "Folate": {
+    "calories": "10",
+    "totalCarbohydrate": "2g",
+    "dietaryFiber": "1g",
+    "niacin": "15mg",
+    "folate": {
       "serving": "66.66mcg DFE",
-      "serving-note": "40mcg Folic Acid",
+      "servingNote": "40mcg Folic Acid",
       "from": "Folic Acid",
-      "from-weight": "40mcg"
+      "fromWeight": "40mcg"
     },
-    "Vitamin B12": {
+    "vitaminB12": {
       "as": "Methylcobalamin",
       "serving": "400mcg"
     },
-    "Pantothenic Acid": {
+    "pantothenicAcid": {
       "as": "Calcium-D-Pantothenate",
       "serving": "100mg"
     },
-    "Choline": {
+    "choline": {
       "as": "Choline Bitartrate",
       "serving": "400mg"
     },
-    "Iron": "0.18mg",
-    "Manganese": {
+    "iron": "0.18mg",
+    "manganese": {
       "from": "Manganese Sulfate",
       "serving": "6.4mg"
     },
-    "Sodium": {
+    "sodium": {
       "from": "Sodium Chloride",
       "serving": "95mg"
     },
-    "Potassium": {
+    "potassium": {
       "from": "Potassium Chloride",
       "serving": "94mg"
     }
   },
   "supplements": {
-    "L-Citrulline": {
+    "lCitrulline": {
       "serving": "4000mg",
       "from": "L-Citrulline Malate",
-      "from-weight": "6000mg"
+      "fromWeight": "6000mg"
     },
-    "Malic Acid": {
+    "malicAcid": {
       "serving": "2000mg",
       "from": "L-Citrulline Malate",
-      "from-weight": "6000mg"
+      "fromWeight": "6000mg"
     },
-    "Beta-Alanine": {
-      "note": "as CarnoSyn\u00AE",
+    "betaAlanine": {
+      "note": "as CarnoSyn®",
       "serving": "3200mg"
     },
-    "Creatine": {
-      "name": "Patented Creatine HCl\u00AE",
-      "note": "as CON-CRET\u00AE",
+    "creatine": {
+      "name": "Patented Creatine HCl®",
+      "note": "as CON-CRET®",
       "serving": "2000mg"
     },
-    "L-Tyrosine": "1500mg",
-    "Betaine": {
+    "lTyrosine": "1500mg",
+    "betaine": {
       "name": "Betaine Anhydrous",
       "serving": "1250mg"
     },
-    "Inulin": "1080mg",
-    "Taurine": "1000mg",
-    "Sodium Chloride": {
+    "inulin": "1080mg",
+    "taurine": "1000mg",
+    "sodiumChloride": {
       "serving": "",
       "from": "Electrolyte Complex",
-      "from-weight": "500mg"
+      "fromWeight": "500mg"
     },
-    "Potassium Chloride": {
+    "potassiumChloride": {
       "serving": "",
       "from": "Electrolyte Complex",
-      "from-weight": "500mg"
+      "fromWeight": "500mg"
     },
-    "Manganese Sulfate": {
+    "manganeseSulfate": {
       "serving": "",
       "from": "Electrolyte Complex",
-      "from-weight": "500mg"
+      "fromWeight": "500mg"
     },
-    "Caffeine": {
+    "caffeine": {
       "name": "Caffeine Anhydrous",
       "serving": "200mg"
     }
   },
-  "other-ingredients": [
+  "otherIngredients": [
     "Silicon Dioxide",
     "Natural Flavors",
     "Acesulfame Potassium",
@@ -98,7 +98,7 @@
       "note": "Color"
     }
   ],
-  "facility-allergens": [
+  "facilityAllergens": [
     "Peanuts",
     "Eggs",
     "Wheat",

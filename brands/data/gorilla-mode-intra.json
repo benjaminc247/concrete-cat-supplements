@@ -1,59 +1,63 @@
 {
   "link": "https://gorillamind.com/products/gorilla-mode-intra",
   "name": "Gorilla Mode Intra",
-  "serving-size": "1 Scoop",
-  "serving-weight": "59.5g",
-  "servings-per-container": "30",
+  "servingSize": "1 Scoop",
+  "servingWeight": "59.5g",
+  "servingsPerContainer": "30",
   "nutrition": {
-    "Calories": "170",
-    "Total Carbohydrate": "42g",
-    "Total Sugars": "26g",
-    "Added Sugars": "12g",
-    "Calcium": {
+    "calories": "170",
+    "totalCarbohydrate": "42g",
+    "totalSugars": "26g",
+    "addedSugars": "12g",
+    "calcium": {
       "as": "Calcium Citrate",
       "serving": "10mg"
     },
-    "Magnesium": {
+    "magnesium": {
       "as": "Magnesium Bisglycinate Chelate",
       "serving": "40mg"
     },
-    "Sodium": {
+    "sodium": {
       "as": [ "Pink Himalayan Sea Salt", "Sodium Chloride" ],
       "serving": "500mg"
     },
-    "Potassium": {
+    "potassium": {
       "as": [ "Potassium Citrate", "Coconut Water Powder" ],
       "serving": "200mg"
     }
   },
   "supplements": {
-    "Cluster Dextrin\u2122": {
+    "clusterDextrin": {
+      "name": "Cluster Dextrin™",
       "note": "Highly Branched Cyclic Dextrin",
       "serving": "15g"
     },
-    "Dextrose": "15g",
-    "Fructose": "7.5g",
-    "D-Ribose": "5g",
-    "Creatine": {
+    "dextrose": "15g",
+    "fructose": "7.5g",
+    "dRibose": "5g",
+    "creatine": {
       "name": "Creatine Monohydrate",
       "serving": "2500mg"
     },
-    "Betaine": {
+    "betaine": {
       "name": "Betaine Anhydrous",
       "serving": "2000mg"
     },
-    "L-Ornithine": {
+    "lOrnithine": {
       "name": "L-Ornithine HCl",
       "serving": "2000mg"
     },
-    "Taurine": "1500mg",
-    "Coconut Water Powder": "1000mg",
-    "Sodium Chloride": {
+    "taurine": "1500mg",
+    "coconutWaterPowder": {
+      "name": "Coconut Water Powder",
+      "serving": "1000mg"
+    },
+    "sodiumChloride": {
       "name": "Pink Himalayan Sea Salt",
       "serving": "1000mg"
     }
   },
-  "other-ingredients": [
+  "otherIngredients": [
     "Malic Acid",
     "Citric Acid",
     "Natural Flavors",

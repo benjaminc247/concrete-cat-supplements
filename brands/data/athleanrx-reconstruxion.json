@@ -1,28 +1,28 @@
 {
   "link": "https://athleanx.com/athleanrx/reconstruxion",
   "name": "AthleanRX Reconstruxion",
-  "serving-size": "1 Scoop",
-  "serving-weight": "20.11g",
-  "servings-per-container": "22",
+  "servingSize": "1 Scoop",
+  "servingWeight": "20.11g",
+  "servingsPerContainer": "22",
   "nutrition": {
-    "Calories": "15",
-    "Total Carbohydrate": "4g"
+    "calories": "15",
+    "totalCarbohydrate": "4g"
   },
   "supplements": {
-    "L-Glutamine": "10g",
-    "L-Leucine": "6g",
-    "L-Carnitine": {
+    "lGlutamine": "10g",
+    "lLeucine": "6g",
+    "lCarnitine": {
       "name": "L-Carnitine Tartrate",
       "serving": "2g"
     },
-    "Glycine": "2g",
-    "Betaine": {
+    "glycine": "2g",
+    "betaine": {
       "name": "Betaine Anhydrous",
       "serving": "1.25g"
     },
-    "L-Theanine": "200mg"
+    "lTheanine": "200mg"
   },
-  "other-ingredients": [
+  "otherIngredients": [
     "Rice Syrup Solids",
     "Citric Acid",
     "Silicon Dioxide",
@@ -35,7 +35,7 @@
       "note": "color"
     }
   ],
-  "facility-allergens": [
+  "facilityAllergens": [
     "Peanuts",
     "Eggs",
     "Wheat",

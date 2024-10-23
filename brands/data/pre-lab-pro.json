@@ -1,77 +1,78 @@
 {
   "link": "https://www.performancelab.com/products/pre-lab-pro",
   "name": "Pre Lab Pro",
-  "serving-size": "1 Scoop",
-  "serving-weight": "13g",
-  "servings-per-container": "20",
+  "servingSize": "1 Scoop",
+  "servingWeight": "13g",
+  "servingsPerContainer": "20",
   "nutrition": {
-    "Vitamin D": {
+    "vitaminD": {
       "name": "Vitamin D3",
       "note": "from Algae",
       "serving": "12.5mcg"
     },
-    "Riboflavin": {
-      "note": "as NutriGenesis\u00AE",
+    "riboflavin": {
+      "note": "as NutriGenesis®",
       "serving": "0.5mg"
     },
-    "Vitamin B6": {
-      "note": "as NutriGenesis\u00AE",
+    "vitaminB6": {
+      "note": "as NutriGenesis®",
       "serving": "0.75mg"
     },
-    "Folate": {
-      "note": "as NutriGenesis\u00AE",
+    "folate": {
+      "note": "as NutriGenesis®",
       "serving": "167mcg DFE"
     },
-    "Vitamin B12": {
-      "note": "as NutriGenesis\u00AE",
+    "vitaminB12": {
+      "note": "as NutriGenesis®",
       "serving": "2mcg"
     },
-    "Potassium": {
-      "note": "as NutriGenesis\u00AE",
+    "potassium": {
+      "note": "as NutriGenesis®",
       "serving": "49.5mg"
     },
-    "Iron": {
-      "note": "as NutriGenesis\u00AE",
+    "iron": {
+      "note": "as NutriGenesis®",
       "serving": "2.5mg"
     },
-    "Sodium": {
+    "sodium": {
       "note": "from Himalayan Pink Salt",
       "serving": "200mg"
     }
   },
   "supplements": {
-    "Caffeine": {
+    "caffeine": {
       "name": "Natural Caffeine",
       "note": "from Coffea Robusta Seeds",
       "serving": "80mg"
     },
-    "L-Theanine": {
+    "lTheanine": {
       "note": "from Green Tea",
       "serving": "160mg"
     },
-    "L-Tyrosine": "400mg",
-    "L-Citrulline": {
-      "note": "Kyowa Quality\u00AE",
+    "lTyrosine": "400mg",
+    "lCitrulline": {
+      "note": "Kyowa Quality®",
       "serving": "2000mg",
-      "from": "Setria\u00AE Performance Blend",
-      "from-weight": "2200mg"
+      "from": "Setria® Performance Blend",
+      "fromWeight": "2200mg"
     },
-    "L-Glutathione": {
-      "note": "Setria\u00AE",
+    "lGlutathione": {
+      "note": "Setria®",
       "serving": "200mg",
-      "from": "Setria\u00AE Performance Blend",
-      "from-weight": "2200mg"
+      "from": "Setria® Performance Blend",
+      "fromWeight": "2200mg"
     },
-    "Beet Root Powder": {
+    "beetRootPowder": {
+      "name": "Beet Root Powder",
       "note": "Beta Vulgaris L - root",
       "serving": "1500mg"
     },
-    "Sodium Chloride": {
+    "sodiumChloride": {
       "name": "Himalayan Pink Salt",
       "serving": "500mg"
     }
   },
-  "other-ingredients": [
+  "otherIngredients": [
     "DL-Malic Acid",
     "Dextrose",
     "Xylitol",
@@ -79,7 +80,7 @@
     "Monk Fruit Extract",
     "Stevia (Stevia rebaudiana) Leaf Extract (95% Rebaudioside A)",
     "Erythritol",
-    "Swerve\u00AE",
+    "Swerve®",
     "Natural Flavors"
   ]
 }

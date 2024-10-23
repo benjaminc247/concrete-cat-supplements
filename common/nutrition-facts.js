@@ -136,10 +136,10 @@ customElements.define('ccl-nutrition-facts', class extends HTMLElement {
       // TODO: do we need something else to handle empty serving size or servings per?
       // TODO: handle failed queries?
       factsFrag.querySelector('.title').textContent = 'Supplement Facts';
-      const svsize = srcData['serving-size'];
+      const svsize = srcData.servingSize;
       if (svsize)
         factsFrag.querySelector('.serving-size').textContent = `Serving Size: ${svsize}`;
-      const svper = srcData['servings-per-container'];
+      const svper = srcData.servingsPerContainer;
       if (svper)
         factsFrag.querySelector('.servings-per').textContent = `Servings Per Container: ${svper}`;
       factsFrag.querySelector('.serving-header').textContent = 'Amount Per Serving';
@@ -180,8 +180,8 @@ customElements.define('ccl-nutrition-facts', class extends HTMLElement {
 
       // add footnotes
       // TODO: do we need to remove elements when either of these is false?
-      const pdvfootnote = srcData['show-percent-dv-footnote'];
-      const nodvsfootnote = srcData['show-no-dv-footnote'];
+      const pdvfootnote = srcData.showPdvFootnote;
+      const nodvsfootnote = srcData.showNdvFootnote;
       if (pdvfootnote || nodvsfootnote) {
         if (pdvfootnote) {
           factsFrag.querySelector('.percent-dv-footnote').textContent =
@@ -196,7 +196,7 @@ customElements.define('ccl-nutrition-facts', class extends HTMLElement {
       // add other ingredients
       // TODO: do we need to remove the div when there are no other ingredients?
       const otheringreds = cclIngredients.parseList(
-        srcData['other-ingredients'], { servingKey: 'serving', errPrefix: 'Ingredient' }
+        srcData.otherIngredients, { servingKey: 'serving', errPrefix: 'Ingredient' }
       );
       if (otheringreds.size > 0) {
         const str = Array.from(otheringreds).map(([_, data]) => data.name).join(', ') + '.';

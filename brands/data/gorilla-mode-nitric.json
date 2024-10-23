@@ -1,48 +1,50 @@
 {
   "link": "https://gorillamind.com/products/gorilla-mode-nitric",
   "name": "Gorilla Mode Nitric",
-  "serving-size": "1 Scoop",
-  "serving-weight": "18.2g",
-  "servings-per-container": 40,
+  "servingSize": "1 Scoop",
+  "servingWeight": "18.2g",
+  "servingsPerContainer": 40,
   "nutrition": {
-    "Sodium": {
+    "sodium": {
       "note": "from Sodium Nitrate",
       "serving": "210mg"
     },
-    "Potassium": {
+    "potassium": {
       "note": "from Inositol-Stabilized Arginine Silicate",
       "serving": "40mg"
     }
   },
   "supplements": {
-    "L-Citrulline": "5000mg",
-    "Creatine": {
+    "lCitrulline": "5000mg",
+    "creatine": {
       "name": "Creatine Monohydrate",
       "serving": "2500mg"
     },
-    "Betaine": {
+    "betaine": {
       "name": "Betaine Anhydrous",
       "serving": "2000mg"
     },
-    "Glycerol": {
-      "name": "GlycerPump\u2122",
+    "glycerol": {
+      "name": "GlycerPump™",
       "note": "65% Glycerol Powder",
       "serving": "1300mg",
-      "serving-weight": "2000mg"
+      "servingWeight": "2000mg"
     },
-    "Malic Acid": "1500mg",
-    "Agmatine Sulfate": "750mg",
-    "Nitrosigine\u00AE": {
+    "malicAcid": "1500mg",
+    "agmatineSulfate": "750mg",
+    "nitrosigine": {
+      "name": "Nitrosigine®",
       "serving": "750mg",
       "note": "Inositol-Stabilized Arginine Silicate"
     },
-    "Sodium Nitrate": "750mg",
-    "VasoDrive-AP\u00AE": {
+    "sodiumNitrate": "750mg",
+    "vasoDriveAP": {
+      "name": "VasoDrive-AP®",
       "serving": "127mg",
       "note": "Isoleucyl-Prolyl-Proline (IPP) and Valyl-Prolyl-Proline (VPP) Isolated from Hydrolyzed Milk Casein"
     }
   },
-  "other-ingredients": [
+  "otherIngredients": [
     "Natural Flavors",
     "Citric Acid",
     "Calcium Silicate",

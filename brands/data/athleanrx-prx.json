@@ -1,33 +1,33 @@
 {
   "link": "https://athleanx.com/prx",
   "name": "AthleanRX PRX",
-  "serving-size": "1 Scoop",
-  "serving-weight": "12g",
-  "servings-per-container": "22",
+  "servingSize": "1 Scoop",
+  "servingWeight": "12g",
+  "servingsPerContainer": "22",
   "nutrition": {
-    "Calories": "5",
-    "Total Carbohydrate": "1g",
-    "Total Sugars": "<1g",
-    "Added Sugars": "<1g",
-    "Calcium": {
+    "calories": "5",
+    "totalCarbohydrate": "1g",
+    "totalSugars": "<1g",
+    "addedSugars": "<1g",
+    "calcium": {
       "as": "Calcium Silicate",
       "serving": "40mg"
     },
-    "Sodium": "15mg"
+    "sodium": "15mg"
   },
   "supplements": {
-    "L-Citrulline": {
+    "lCitrulline": {
       "serving": "4000mg",
       "from": "L-Citrulline Malate",
-      "from-weight": "6000mg"
+      "fromWeight": "6000mg"
     },
-    "Malic Acid": {
+    "malicAcid": {
       "serving": "2000mg",
       "from": "L-Citrulline Malate",
-      "from-weight": "6000mg"
+      "fromWeight": "6000mg"
     },
-    "Creatine": {
-      "name": "Kre-Alkalyn\u00AE buffered creatine monohydrate",
+    "creatine": {
+      "name": "Kre-Alkalyn® buffered creatine monohydrate",
       "serving": "3g",
       "CoEnzyme Q10": "100mg",
       "NADH": {
@@ -37,7 +37,7 @@
       }
     }
   },
-  "other-ingredients": [
+  "otherIngredients": [
     "Rice Syrup Solids",
     "Silicon Dioxide",
     "Natural Flavors",
@@ -45,7 +45,7 @@
     "Sucralose",
     "Citric Acid"
   ],
-  "facility-allergens": [
+  "facilityAllergens": [
     "Soy",
     "Wheat",
     "Milk",

@@ -1,75 +1,80 @@
 {
   "link": "https://clubearlybird.com/",
   "name": "EarlyBird",
-  "serving-size": "1 Scoop",
-  "serving-weight": "4g",
-  "servings-per-container": "45",
+  "servingSize": "1 Scoop",
+  "servingWeight": "4g",
+  "servingsPerContainer": "45",
   "nutrition": {
-    "Calcium": {
+    "calcium": {
       "as": "Calcium Citrate",
       "serving": "40mg"
     },
-    "Sodium": {
+    "sodium": {
       "as": "Sodium Chloride",
       "serving": "120mg"
     },
-    "Potassium": {
+    "potassium": {
       "as": "Potassium Chloride",
       "serving": "100mg"
     }
   },
   "supplements": {
-    "L-Tyrosine": {
+    "lTyrosine": {
       "serving": "",
       "from": "EarlyBird Clean Energy Blend",
-      "from-weight": "575mg"
+      "fromWeight": "575mg"
     },
-    "Caffeine": {
-      "name": "PurCaf\u00AE",
+    "caffeine": {
+      "name": "PurCaf®",
       "note": "Organic Green Coffee Caffeine",
       "serving": "",
       "from": "EarlyBird Clean Energy Blend",
-      "from-weight": "575mg"
+      "fromWeight": "575mg"
     },
-    "Blueberry Powder": {
+    "blueberryPowder": {
+      "name": "Blueberry Powder",
       "serving": "",
       "from": "EarlyBird Clean Energy Blend - EarlyBird Antioxidant Blend",
-      "from-weight": "575mg"
+      "fromWeight": "575mg"
     },
-    "Broccoli Extract": {
+    "broccoliExtract": {
+      "name": "Broccoli Extract",
       "name": "Broccoli Extract 4:1",
       "serving": "",
       "from": "EarlyBird Clean Energy Blend - EarlyBird Antioxidant Blend",
-      "from-weight": "575mg"
+      "fromWeight": "575mg"
     },
-    "Green Tea Extract": {
+    "greenTeaExtract": {
+      "name": "Green Tea Extract",
       "serving": "",
       "from": "EarlyBird Clean Energy Blend - EarlyBird Antioxidant Blend",
-      "from-weight": "575mg"
+      "fromWeight": "575mg"
     },
-    "Turmeric Powder": {
+    "turmericPowder": {
+      "name": "Turmeric Powder",
       "serving": "",
       "from": "EarlyBird Clean Energy Blend - EarlyBird Antioxidant Blend",
-      "from-weight": "575mg"
+      "fromWeight": "575mg"
     },
-    "Tart Cherry Extract": {
+    "tartCherryExtract": {
+      "name": "Tart Cherry Extract",
       "serving": "",
       "from": "EarlyBird Clean Energy Blend - EarlyBird Antioxidant Blend",
-      "from-weight": "575mg"
+      "fromWeight": "575mg"
     },
-    "DiCaffeine Malate": {
-      "name": "Infinergy\u00AE DiCaffeine Malate",
+    "diCaffeineMalate": {
+      "name": "Infinergy® DiCaffeine Malate",
       "serving": "",
       "from": "EarlyBird Clean Energy Blend",
-      "from-weight": "575mg"
+      "fromWeight": "575mg"
     },
-    "L-Theanine": {
+    "lTheanine": {
       "serving": "",
       "from": "EarlyBird Clean Energy Blend",
-      "from-weight": "575mg"
+      "fromWeight": "575mg"
     },
-    "Ashwagandha Extract": {
-      "name": "KSM-66\u2122 Ashwagandha Extract",
+    "ashwagandhaExtract": {
+      "name": "KSM-66™ Ashwagandha Extract",
       "notes": [
         "made with certified ashwagandha",
         "Withania Somnifera [Root] Extract",
@@ -77,29 +82,29 @@
       ],
       "serving": "",
       "from": "EarlyBird Motivation Blend",
-      "from-weight": "500mg"
+      "fromWeight": "500mg"
     },
-    "Theobromine": {
+    "theobromine": {
       "serving": "",
       "from": "EarlyBird Motivation Blend",
-      "from-weight": "500mg"
+      "fromWeight": "500mg"
     },
-    "Coffea Arabica Extract": {
-      "name": "CoffeeBerry\u00AE",
+    "coffeaArabicaExtract": {
+      "name": "CoffeeBerry®",
       "note": "Coffea arabica [Fruit] Extract",
       "serving": "",
       "from": "EarlyBird Motivation Blend",
-      "from-weight": "500mg"
+      "fromWeight": "500mg"
     },
-    "Black Pepper Extract": {
-      "name": "BioPerine\u00AE Black Pepper (Piper Nigrum) [Fruit]",
+    "blackPepperExtract": {
+      "name": "BioPerine® Black Pepper (Piper Nigrum) [Fruit]",
       "note": "Standardized to contain 95% piperine",
       "serving": "",
       "from": "EarlyBird Motivation Blend",
-      "from-weight": "500mg"
+      "fromWeight": "500mg"
     }
   },
-  "other-ingredients": [
+  "otherIngredients": [
     "Citric Acid",
     "Natural Flavors",
     "Silica",

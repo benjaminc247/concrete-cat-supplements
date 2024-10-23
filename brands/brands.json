@@ -1,17 +1,17 @@
 {
-  "pre-workout": [
+  "preWorkout": [
     "transparent-bulk",
     "pre-lab-pro",
     "gorilla-mode",
     "gorilla-mode-nitric",
     "athleanrx-x-cite"
   ],
-  "intra-workout": [
+  "intraWorkout": [
     "transparent-intra",
     "gorilla-mode-intra",
     "athleanrx-prx"
   ],
-  "post-workout": [
+  "postWorkout": [
     "transparent-intra",
     "gorilla-mode-intra",
     "athleanrx-reconstruxion"

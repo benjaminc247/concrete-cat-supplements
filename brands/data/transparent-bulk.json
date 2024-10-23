@@ -1,60 +1,60 @@
 {
   "link": "https://www.transparentlabs.com/products/preseries-bulk-preworkout",
   "name": "Transparent Labs Bulk",
-  "serving-size": "1 Scoop",
-  "serving-weight": "21.2g",
-  "servings-per-container": "30",
+  "servingSize": "1 Scoop",
+  "servingWeight": "21.2g",
+  "servingsPerContainer": "30",
   "nutrition": {
-    "Calories": "5",
-    "Total Carbohydrate": "1g",
-    "Vitamin B6": {
+    "calories": "5",
+    "totalCarbohydrate": "1g",
+    "vitaminB6": {
       "as": "Pyridoxal-5-Phosphate",
       "serving": "5mg"
     },
-    "Vitamin B12": {
+    "vitaminB12": {
       "as": "Methylcobalamin",
       "serving": "100mcg"
     },
-    "Zinc": {
+    "zinc": {
       "as": "Zinc Chelate",
       "serving": "10mg"
     },
-    "Sodium": {
+    "sodium": {
       "as": "Himalayan Rock Salt",
       "serving": "180mg"
     },
-    "Potassium": {
+    "potassium": {
       "as": "Potassium Chloride",
       "serving": "125mg"
     }
   },
   "supplements": {
-    "L-Citrulline": {
+    "lCitrulline": {
       "serving": "5333mg",
       "from": "Citrulline Malate 2:1",
-      "from-weight": "8000mg"
+      "fromWeight": "8000mg"
     },
-    "Malic Acid": {
+    "malicAcid": {
       "serving": "2667mg",
       "from": "Citrulline Malate 2:1",
-      "from-weight": "8000mg"
+      "fromWeight": "8000mg"
     },
-    "Beta-Alanine": "4000mg",
-    "Betaine": {
+    "betaAlanine": "4000mg",
+    "betaine": {
       "name": "Betaine Anhydrous",
-      "note": "BetaPure\u2122",
+      "note": "BetaPure™",
       "serving": "2500mg"
     },
-    "Taurine": "1300mg",
-    "L-Tyrosine": "1000mg",
-    "Alpha-GPC": {
-      "name": "AlphaSize\u00AE 50% Alpha-Glyceryl Phosphoryl Choline",
+    "taurine": "1300mg",
+    "lTyrosine": "1000mg",
+    "alphaGPC": {
+      "name": "AlphaSize® 50% Alpha-Glyceryl Phosphoryl Choline",
       "note": "Alpha-GPC",
       "serving": "150mg",
-      "serving-weight": "300mg"
+      "servingWeight": "300mg"
     },
-    "Caffeine": {
-      "name": "PurCaf\u00AE Organic Caffeine",
+    "caffeine": {
+      "name": "PurCaf® Organic Caffeine",
       "notes": [
         "from Green Coffee Bean",
         "Coffea arabica",
@@ -62,34 +62,36 @@
       ],
       "serving": "200mg"
     },
-    "L-Theanine": "200mg",
-    "Theobromine": "50mg",
-    "Panax Notoginseng": {
+    "lTheanine": "200mg",
+    "theobromine": "50mg",
+    "panaxNotoginseng": {
+      "name": "Panax Notoginseng",
       "note": "root",
       "serving": "",
-      "from": "Senactiv\u00AE",
-      "from-weight": "50mg"
+      "from": "Senactiv®",
+      "fromWeight": "50mg"
     },
-    "Rosa Roxburghii": {
+    "rosaRoxburghii": {
+      "name": "Rosa Roxburghii",
       "note": "root",
       "serving": "",
-      "from": "Senactiv\u00AE",
-      "from-weight": "50mg"
+      "from": "Senactiv®",
+      "fromWeight": "50mg"
     },
-    "Black Pepper Extract": {
-      "name": "BioPerine\u00AE",
+    "blackPepperExtract": {
+      "name": "BioPerine®",
       "notes": [
         "Piper Nigrum",
         "Black Pepper (Fruit) Extract"
       ],
       "serving": "5mg"
     },
-    "Boron": {
+    "boron": {
       "note": "as Boron Citrate",
       "serving": "3000mcg"
     }
   },
-  "other-ingredients": [
+  "otherIngredients": [
     {
       "name": "Natural Flavors",
       "serving": "1,250mg"

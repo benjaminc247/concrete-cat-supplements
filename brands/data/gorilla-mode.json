@@ -1,71 +1,71 @@
 {
   "link": "https://gorillamind.com/products/gorilla-mode",
   "name": "Gorilla Mode",
-  "serving-size": "1 Scoop",
-  "serving-weight": "20.4g",
-  "servings-per-container": "40",
+  "servingSize": "1 Scoop",
+  "servingWeight": "20.4g",
+  "servingsPerContainer": "40",
   "nutrition": {
-    "Calories": "5",
-    "Total Carbohydrate": "1g",
-    "Sodium": "190mg",
-    "Niacin": {
+    "calories": "5",
+    "totalCarbohydrate": "1g",
+    "sodium": "190mg",
+    "niacin": {
       "as": "Niacinamide",
       "serving": "16mg NE"
     },
-    "Vitamin B6": {
+    "vitaminB6": {
       "as": "Pyridoxal 5'-Phosphate",
       "serving": "10mg"
     },
-    "Vitamin B12": {
+    "vitaminB12": {
       "as": "Methylcobalamin",
       "serving": "125mcg"
     },
-    "Magnesium": {
+    "magnesium": {
       "as": "Magnesium Bisglycinate",
       "serving": "25mg"
     },
-    "Potassium": {
+    "potassium": {
       "as": "Potassium Chloride",
       "serving": "190mg"
     }
   },
   "supplements": {
-    "L-Citrulline": "5000mg",
-    "Creatine": {
+    "lCitrulline": "5000mg",
+    "creatine": {
       "name": "Creatine Monohydrate",
       "serving": "2500mg"
     },
-    "L-Tyrosine": "2500mg",
-    "Betaine": {
+    "lTyrosine": "2500mg",
+    "betaine": {
       "name": "Betaine Anhydrous",
       "serving": "2000mg"
     },
-    "Glycerol": {
-      "name": "HydroPrime\u00AE Glycerol Powder (65%)",
+    "glycerol": {
+      "name": "HydroPrime® Glycerol Powder (65%)",
       "serving": "1300mg",
-      "serving-weight": "2000mg"
+      "servingWeight": "2000mg"
     },
-    "Malic Acid": "1500mg",
-    "Sodium Chloride": {
+    "malicAcid": "1500mg",
+    "sodiumChloride": {
       "name": "Pink Himalayan Sea Salt",
       "serving": "500mg"
     },
-    "Alpha-GPC": {
+    "alphaGPC": {
       "name": "Alpha-GPC 50%",
       "note": "L-Alpha-Glycerylphosphorylcholine",
       "serving": "200mg",
-      "serving-weight": "400mg"
+      "servingWeight": "400mg"
     },
-    "Caffeine": {
+    "caffeine": {
       "name": "Caffeine Anhydrous",
       "serving": "200mg"
     },
-    "Huperzine A": {
+    "huperzineA": {
       "note": "Huperzia serrata leaf standardized extract",
       "serving": "100mcg"
     }
   },
-  "other-ingredients": [
+  "otherIngredients": [
     "Natural & Artificial Flavor",
     "Calcium Silicate",
     "Silica",
