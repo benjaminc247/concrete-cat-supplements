@@ -20,11 +20,13 @@
   },
   "supplements": {
     "lTyrosine": {
+      "name": "L-Tyrosine",
       "serving": "",
       "from": "EarlyBird Clean Energy Blend",
       "fromWeight": "575mg"
     },
     "caffeine": {
+      "shortName": "Caffeine",
       "name": "PurCaf®",
       "note": "Organic Green Coffee Caffeine",
       "serving": "",
@@ -38,7 +40,7 @@
       "fromWeight": "575mg"
     },
     "broccoliExtract": {
-      "name": "Broccoli Extract",
+      "shortName": "Broccoli Extract",
       "name": "Broccoli Extract 4:1",
       "serving": "",
       "from": "EarlyBird Clean Energy Blend - EarlyBird Antioxidant Blend",
@@ -63,17 +65,20 @@
       "fromWeight": "575mg"
     },
     "diCaffeineMalate": {
+      "shortName": "DiCaffeine Malate",
       "name": "Infinergy® DiCaffeine Malate",
       "serving": "",
       "from": "EarlyBird Clean Energy Blend",
       "fromWeight": "575mg"
     },
     "lTheanine": {
+      "name": "L-Theanine",
       "serving": "",
       "from": "EarlyBird Clean Energy Blend",
       "fromWeight": "575mg"
     },
     "ashwagandhaExtract": {
+      "shortName": "Ashwagandha Extract",
       "name": "KSM-66™ Ashwagandha Extract",
       "notes": [
         "made with certified ashwagandha",
@@ -90,6 +95,7 @@
       "fromWeight": "500mg"
     },
     "coffeaArabicaExtract": {
+      "shortName": "Coffea Arabica Extract",
       "name": "CoffeeBerry®",
       "note": "Coffea arabica [Fruit] Extract",
       "serving": "",
@@ -97,6 +103,7 @@
       "fromWeight": "500mg"
     },
     "blackPepperExtract": {
+      "shortName": "Black Pepper Extract",
       "name": "BioPerine® Black Pepper (Piper Nigrum) [Fruit]",
       "note": "Standardized to contain 95% piperine",
       "serving": "",

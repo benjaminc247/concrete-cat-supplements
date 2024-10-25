@@ -27,57 +27,70 @@
   },
   "supplements": {
     "lLeucine": {
+      "name": "L-Leucine",
       "serving": "2669mg",
       "from": "Amino9® Essential Amino Acids",
       "fromWeight": "6700mg"
     },
     "lLysine": {
+      "shortName": "L-Lysine",
       "name": "L-Lysine HCl",
       "serving": "1267mg",
       "from": "Amino9® Essential Amino Acids",
       "fromWeight": "6700mg"
     },
     "lThreonine": {
+      "name": "L-Threonine",
       "serving": "712mg",
       "from": "Amino9® Essential Amino Acids",
       "fromWeight": "6700mg"
     },
     "lIsoleucine": {
+      "name": "L-Isoleucine",
       "serving": "585mg",
       "from": "Amino9® Essential Amino Acids",
       "fromWeight": "6700mg"
     },
     "lValine": {
+      "name": "L-Valine",
       "serving": "553mg",
       "from": "Amino9® Essential Amino Acids",
       "fromWeight": "6700mg"
     },
     "lPhenylalanine": {
+      "name": "L-Phenylalanine",
       "serving": "378mg",
       "from": "Amino9® Essential Amino Acids",
       "fromWeight": "6700mg"
     },
     "lMethionine": {
+      "name": "L-Methionine",
       "serving": "269mg",
       "from": "Amino9® Essential Amino Acids",
       "fromWeight": "6700mg"
     },
     "lHistidine": {
+      "name": "L-Histidine",
       "serving": "227mg",
       "from": "Amino9® Essential Amino Acids",
       "fromWeight": "6700mg"
     },
     "lTryptophan": {
+      "name": "L-Tryptophan",
       "serving": "40mg",
       "from": "Amino9® Essential Amino Acids",
       "fromWeight": "6700mg"
     },
     "taurine": "2000mg",
     "betaine": {
+      "shortName": "Betaine",
       "name": "BetaPure® Betaine Anhydrous",
       "serving": "1250mg"
     },
-    "lTyrosine": "1000mg",
+    "lTyrosine": {
+      "name": "L-Tyrosine",
+      "serving": "1000mg"
+    },
     "coconutWaterPowder": {
       "name": "Coconut Water Powder",
       "notes": [

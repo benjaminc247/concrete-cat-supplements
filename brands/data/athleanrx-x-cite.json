@@ -43,6 +43,7 @@
   },
   "supplements": {
     "lCitrulline": {
+      "name": "L-Citrulline",
       "serving": "4000mg",
       "from": "L-Citrulline Malate",
       "fromWeight": "6000mg"
@@ -53,16 +54,22 @@
       "fromWeight": "6000mg"
     },
     "betaAlanine": {
+      "shortName": "β-Alanine",
       "note": "as CarnoSyn®",
       "serving": "3200mg"
     },
     "creatine": {
+      "shortName": "Creatine",
       "name": "Patented Creatine HCl®",
       "note": "as CON-CRET®",
       "serving": "2000mg"
     },
-    "lTyrosine": "1500mg",
+    "lTyrosine": {
+      "name": "L-Tyrosine",
+      "serving": "1500mg"
+    },
     "betaine": {
+      "shortName": "Betaine",
       "name": "Betaine Anhydrous",
       "serving": "1250mg"
     },
@@ -84,6 +91,7 @@
       "fromWeight": "500mg"
     },
     "caffeine": {
+      "shortName": "Caffeine",
       "name": "Caffeine Anhydrous",
       "serving": "200mg"
     }

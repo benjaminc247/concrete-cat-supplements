@@ -33,13 +33,13 @@ export function registerCallback(name, priority, callback) {
 
 /**
  * Call all registered ccl element initialization callbacks
- * @param {HTMLElement} parentElement - The element under which to search for ccl elements
+ * @param {ParentNode} parentNode - The parent node under which to search for ccl elements
  */
-export function raiseCallbacks(parentElement) {
+export function raiseCallbacks(parentNode) {
   for (const callback of callbacks) {
     try {
       // console.log("executing callback '" + callback.name + "'...");
-      callback.callback(parentElement);
+      callback.callback(parentNode);
     }
     catch (err) {
       console.log("While running ccl element callback '" + callback.name + "': " + err);

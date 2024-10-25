@@ -10,17 +10,25 @@
   },
   "supplements": {
     "lGlutamine": "10g",
-    "lLeucine": "6g",
+    "lLeucine": {
+      "name": "L-Leucine",
+      "serving": "6g"
+    },
     "lCarnitine": {
+      "shortName": "L-Carnitine",
       "name": "L-Carnitine Tartrate",
       "serving": "2g"
     },
     "glycine": "2g",
     "betaine": {
+      "shortName": "Betaine",
       "name": "Betaine Anhydrous",
       "serving": "1.25g"
     },
-    "lTheanine": "200mg"
+    "lTheanine": {
+      "name": "L-Theanine",
+      "serving": "200mg"
+    }
   },
   "otherIngredients": [
     "Rice Syrup Solids",

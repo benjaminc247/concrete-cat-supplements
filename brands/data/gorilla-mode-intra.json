@@ -36,14 +36,17 @@
     "fructose": "7.5g",
     "dRibose": "5g",
     "creatine": {
+      "shortName": "Creatine",
       "name": "Creatine Monohydrate",
       "serving": "2500mg"
     },
     "betaine": {
+      "shortName": "Betaine",
       "name": "Betaine Anhydrous",
       "serving": "2000mg"
     },
     "lOrnithine": {
+      "shortName": "L-Ornithine",
       "name": "L-Ornithine HCl",
       "serving": "2000mg"
     },
@@ -53,6 +56,7 @@
       "serving": "1000mg"
     },
     "sodiumChloride": {
+      "shortName": "Sodium Chloride",
       "name": "Pink Himalayan Sea Salt",
       "serving": "1000mg"
     }

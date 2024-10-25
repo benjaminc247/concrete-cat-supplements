@@ -15,16 +15,22 @@
     }
   },
   "supplements": {
-    "lCitrulline": "5000mg",
+    "lCitrulline": {
+      "name": "L-Citrulline",
+      "serving": "5000mg"
+    },
     "creatine": {
+      "shortName": "Creatine",
       "name": "Creatine Monohydrate",
       "serving": "2500mg"
     },
     "betaine": {
+      "shortName": "Betaine",
       "name": "Betaine Anhydrous",
       "serving": "2000mg"
     },
     "glycerol": {
+      "shortName": "Glycerol",
       "name": "GlycerPump™",
       "note": "65% Glycerol Powder",
       "serving": "1300mg",
@@ -38,7 +44,7 @@
       "note": "Inositol-Stabilized Arginine Silicate"
     },
     "sodiumNitrate": "750mg",
-    "vasoDriveAP": {
+    "vasodriveAp": {
       "name": "VasoDrive-AP®",
       "serving": "127mg",
       "note": "Isoleucyl-Prolyl-Proline (IPP) and Valyl-Prolyl-Proline (VPP) Isolated from Hydrolyzed Milk Casein"

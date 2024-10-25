@@ -1,25 +1,16 @@
-import * as cclElementRegistry from "/ccl-elements/registry.js";
-import * as cclIngredients from "/common/ingredients.js"
-import * as cclServing from "/common/serving.js"
-
-/**
- * Async load json data from file
- * @param {string} fileName - name of json file to load
- * @returns {object} - json data from file
- */
-async function loadJsonFile(fileName) {
-  try {
-    const response = await fetch(fileName);
-    return await response.json();
-  }
-  catch (err) {
-    console.log("Error loading json file '" + name + "': " + err);
-  }
-}
+import * as cclElementRegistry from '/ccl-elements/registry.js';
+import * as cclUtils from '/common/utils.js';
+import * as cclIngredients from '/common/ingredients.js';
+import * as cclServing from '/common/serving.js';
 
 class HTMLCompTableElement extends HTMLElement {
+  /** @type {Map<string, object>} */
   #_brandDataList;
+
+  /** @type {Map<string, {units: ReturnType<typeof cclServing.parse>, name: string}>} */
   #_nutrientList;
+
+  /** @type {Map<string, {units: ReturnType<typeof cclServing.parse>, name: string}>} */
   #_supplementList;
 
   /**
@@ -35,40 +26,46 @@ class HTMLCompTableElement extends HTMLElement {
       throw 'Data source property attribute \'data-prop\' not set.';
 
     // load brand id list
-    const brandIdList = (await loadJsonFile(srcFile))[srcProp];
+    const brandIdList = (await cclUtils.fetchJson(srcFile))[srcProp];
     if (!Array.isArray(brandIdList))
       throw `Brand list '${srcProp}' does not exist or is not an array.`;
 
-    // load nutrient data
-    const nutrientDataMap = cclIngredients.parseList(
-      await loadJsonFile("/nutrients.json"),
-      { servingKey: "dv", errPrefix: "Nutrient" }
+    // load nutrient database
+    const nutrientDb = cclIngredients.parseList(
+      await cclUtils.fetchJson('/nutrientdb.json'),
+      { servingKey: 'dv', errPrefix: 'Nutrient' }
     );
 
     // load all brand data
     this.#_brandDataList = new Map();
     for (const brandId of brandIdList) {
-      this.#_brandDataList.set(brandId, await (loadJsonFile("/brands/data/" + brandId + ".json")));
+      const brandData = await cclUtils.fetchJson(`/brands/data/${brandId}.json`);
+      if (!brandData.name)
+        throw `${brandId} data must contain a name property.`;
+      this.#_brandDataList.set(brandId, brandData);
     }
 
     // build list of nutrients to be displayed and their units
     // only display nutrients which exist in at least one brand
-    // all nutrients are known, alert if brand contains invalid nutrient data
+    // all nutrients are known, warn if brand contains invalid nutrient data
     this.#_nutrientList = new Map();
     for (const [brandId, brandData] of this.#_brandDataList.entries()) {
       brandData.nutrition = cclIngredients.parseList(
         brandData.nutrition,
-        { servingKey: "serving", errPrefix: "Nutrient" }
+        { servingKey: 'serving', errPrefix: 'Nutrient' }
       );
-      for (const [brandNutrientName, _] of brandData.nutrition.entries()) {
-        if (this.#_nutrientList.has(brandNutrientName))
+      for (const [nutrientId, _] of brandData.nutrition.entries()) {
+        if (this.#_nutrientList.has(nutrientId))
           continue;
-        const nutrientData = nutrientDataMap.get(brandNutrientName);
+        const nutrientData = nutrientDb.get(nutrientId);
         if (!nutrientData) {
-          alert(brandId + " lists invalid nutrient '" + brandNutrientName + "'");
+          console.log(`${brandId} lists invalid nutrient '${nutrientId}'`);
           continue;
         }
-        this.#_nutrientList.set(brandNutrientName, nutrientData.dv.units);
+        this.#_nutrientList.set(nutrientId, {
+          units: nutrientData.dv.units,
+          name: nutrientData.name || cclIngredients.idToName(nutrientId)
+        });
       }
     }
 
@@ -79,12 +76,23 @@ class HTMLCompTableElement extends HTMLElement {
     for (const [brandId, brandData] of this.#_brandDataList.entries()) {
       brandData.supplements = cclIngredients.parseList(
         brandData.supplements,
-        { servingKey: "serving", errPrefix: "Supplement" }
+        { servingKey: 'serving', errPrefix: `${brandId} Supplement` }
       );
-      for (const [brandSupplementName, brandSupplementData] of brandData.supplements.entries()) {
-        if (this.#_supplementList.has(brandSupplementName))
+      for (const [supplementId, brandSupplementData] of brandData.supplements.entries()) {
+        // figure out display name
+        const name = brandSupplementData.shortName ||
+          brandSupplementData.name ||
+          cclIngredients.idToName(supplementId)
+        if (this.#_supplementList.has(supplementId)) {
+          const prev = this.#_supplementList.get(supplementId);
+          if (prev.name !== name)
+            console.log(`${brandId} ${supplementId} has display name '${name}' but previous brand used '${prev.name}'`);
           continue;
-        this.#_supplementList.set(brandSupplementName, brandSupplementData.serving.units);
+        }
+        this.#_supplementList.set(supplementId, {
+          units: brandSupplementData.serving.units,
+          name: name
+        });
       }
     }
   }
@@ -94,57 +102,55 @@ class HTMLCompTableElement extends HTMLElement {
    */
   #build() {
     // table frag
-    const tableTpl = document.querySelector("template.ccl-comp-table");
-    if (!tableTpl)
-      throw "ccl-comp-table requires a content template matching 'template.ccl-comp-table'";
+    const tableTpl = document.querySelector('template.ccl-comp-table');
+    if (!(tableTpl instanceof HTMLTemplateElement))
+      throw 'ccl-comp-table requires a template matching \'template.ccl-comp-table\'';
     const tableFrag = document.importNode(tableTpl.content, true);
 
     // top level element parts
-    const headerRow = tableFrag.querySelector("table thead tr");
+    const headerRow = tableFrag.querySelector('table thead tr');
     if (!headerRow)
-      throw "ccl-comp-table must contain a header row element matching 'table thead tr'";
-    const body = tableFrag.querySelector("table tbody");
+      throw 'ccl-comp-table must contain an element matching \'table thead tr\'';
+    const body = tableFrag.querySelector('table tbody');
     if (!body)
-      throw "ccl-comp-table must contain a body element matching 'table tbody'";
+      throw 'ccl-comp-table must contain an element matching \'table tbody\'';
 
     // brand header template
-    const brandHeaderTpl = tableFrag.querySelector("template.brand-header");
-    if (!brandHeaderTpl)
-      throw "ccl-comp-table must contain a brand header template matching 'template.brand-header'";
-    if (!brandHeaderTpl.content.querySelector(".brand-name"))
-      throw "ccl-comp-table brand-header must contain a text element matching '.brand-name'";
+    const brandHeaderTpl = tableFrag.querySelector('template.brand-header');
+    if (!(brandHeaderTpl instanceof HTMLTemplateElement))
+      throw 'ccl-comp-table must contain a template matching \'template.brand-header\'';
+    if (!brandHeaderTpl.content.querySelector('.brand-name'))
+      throw 'ccl-comp-table brand-header must contain an element matching \'.brand-name\'';
 
     // ingredient row template
-    const ingredientRowTpl = tableFrag.querySelector("template.ingredient-row");
-    if (!ingredientRowTpl)
-      throw "ccl-comp-table must contain an ingredient row template matching 'template.ingredient-row'";
-    if (!ingredientRowTpl.content.querySelector("tr"))
-      throw "ccl-comp-table ingredient-row must contain a row element matching 'tr'";
-    if (!ingredientRowTpl.content.querySelector(".ingredient-name"))
-      throw "ccl-comp-table ingredient-row must contain a text element matching '.ingredient-name'";
+    const ingredientRowTpl = tableFrag.querySelector('template.ingredient-row');
+    if (!(ingredientRowTpl instanceof HTMLTemplateElement))
+      throw 'ccl-comp-table must contain a template matching \'template.ingredient-row\'';
+    if (!ingredientRowTpl.content.querySelector('tr'))
+      throw 'ccl-comp-table ingredient-row must contain an element matching \'tr\'';
+    if (!ingredientRowTpl.content.querySelector('.ingredient-name'))
+      throw 'ccl-comp-table ingredient-row must contain an element matching \'.ingredient-name\'';
 
     // serving cell template
-    const servingCellTpl = tableFrag.querySelector("template.serving-cell");
-    if (!servingCellTpl)
-      throw "ccl-comp-table must contain a serving cell template matching 'template.serving-cell'";
-    if (!servingCellTpl.content.querySelector(".serving"))
-      throw "ccl-comp-table serving-cell must contain a text element matching '.serving'";
-
-    // TODO: ensure data: brandData["name"]
+    const servingCellTpl = tableFrag.querySelector('template.serving-cell');
+    if (!(servingCellTpl instanceof HTMLTemplateElement))
+      throw 'ccl-comp-table must contain a template matching \'template.serving-cell\'';
+    if (!servingCellTpl.content.querySelector('.serving'))
+      throw 'ccl-comp-table serving-cell must contain an element matching \'.serving\'';
 
     // build header row
     for (const [_, brandData] of this.#_brandDataList.entries()) {
       const brandHeaderFrag = document.importNode(brandHeaderTpl.content, true);
-      brandHeaderFrag.querySelector(".brand-name").textContent = brandData["name"];
+      brandHeaderFrag.querySelector('.brand-name').textContent = brandData.name;
       headerRow.appendChild(brandHeaderFrag);
     }
 
     // build nutrient rows
-    for (const [nutrientName, nutrientUnits] of this.#_nutrientList.entries()) {
+    for (const [nutrientId, nutrientData] of this.#_nutrientList.entries()) {
       // create row
       const ingredientRowFrag = document.importNode(ingredientRowTpl.content, true);
-      const ingredientRow = ingredientRowFrag.querySelector("tr");
-      ingredientRowFrag.querySelector(".ingredient-name").textContent = nutrientName;
+      const ingredientRow = ingredientRowFrag.querySelector('tr');
+      ingredientRowFrag.querySelector('.ingredient-name').textContent = nutrientData.name;
       body.appendChild(ingredientRowFrag);
 
       // create serving cells
@@ -153,26 +159,26 @@ class HTMLCompTableElement extends HTMLElement {
 
         // create cell
         const servingCellFrag = document.importNode(servingCellTpl.content, true);
-        const servingText = servingCellFrag.querySelector(".serving");
+        const servingText = servingCellFrag.querySelector('.serving');
         ingredientRow.appendChild(servingCellFrag);
 
         // if brand does not contain this nutrient the property will not exist
-        if (!brandNutrition.has(nutrientName)) {
-          servingText.textContent = "-";
+        if (!brandNutrition.has(nutrientId)) {
+          servingText.textContent = '-';
           continue;
         }
 
         // parse brand serving size from data
-        const brandServing = brandNutrition.get(nutrientName).serving;
-        if (!brandServing || !nutrientUnits) {
-          servingText.textContent = "ERR";
+        const brandServing = brandNutrition.get(nutrientId).serving;
+        if (!brandServing || !nutrientData.units) {
+          servingText.textContent = 'ERR';
           continue;
         }
 
         // require strict units for nutrients, alert on mismatch
-        if (!cclServing.unitsMatch(brandServing, nutrientUnits)) {
-          alert(brandId + " " + nutrientName + " must be supplied in " + nutrientUnits);
-          servingText.textContent = "ERR";
+        if (!cclServing.unitsMatch(brandServing, nutrientData.units)) {
+          alert(`${brandId} ${nutrientId} must be supplied in ${nutrientData.units}`);
+          servingText.textContent = 'ERR';
           continue;
         }
 
@@ -182,11 +188,11 @@ class HTMLCompTableElement extends HTMLElement {
     }
 
     // build supplement rows
-    for (const [supplementName, supplementUnits] of this.#_supplementList.entries()) {
+    for (const [supplementId, supplementData] of this.#_supplementList.entries()) {
       // create row
       const ingredientRowFrag = document.importNode(ingredientRowTpl.content, true);
-      const ingredientRow = ingredientRowFrag.querySelector("tr");
-      ingredientRow.querySelector(".ingredient-name").textContent = supplementName;
+      const ingredientRow = ingredientRowFrag.querySelector('tr');
+      ingredientRow.querySelector('.ingredient-name').textContent = supplementData.name;
       body.appendChild(ingredientRowFrag);
 
       // create serving cells
@@ -195,26 +201,26 @@ class HTMLCompTableElement extends HTMLElement {
 
         // create cell
         const servingCellFrag = document.importNode(servingCellTpl.content, true);
-        const servingText = servingCellFrag.querySelector(".serving");
+        const servingText = servingCellFrag.querySelector('.serving');
         ingredientRow.appendChild(servingCellFrag);
 
         // if brand does not contain this supplement the property will not exist
-        if (!brandSupplements.has(supplementName)) {
-          servingText.textContent = "-";
+        if (!brandSupplements.has(supplementId)) {
+          servingText.textContent = '-';
           continue;
         }
 
         // parse brand serving size from data
-        const brandServing = brandSupplements.get(supplementName).serving;
-        if (!brandServing || !supplementUnits) {
-          servingText.textContent = "ERR";
+        const brandServing = brandSupplements.get(supplementId).serving;
+        if (!brandServing || !supplementData.units) {
+          servingText.textContent = 'ERR';
           continue;
         }
 
         // TODO: convert to units
-        if (!cclServing.unitsMatch(brandServing, supplementUnits)) {
-          alert(brandId + " " + supplementName + " must be supplied in " + supplementUnits);
-          servingText.textContent = "ERR";
+        if (!cclServing.unitsMatch(brandServing, supplementData.units)) {
+          alert(`${brandId} ${supplementId} must be supplied in ${supplementData.units}`);
+          servingText.textContent = 'ERR';
           continue;
         }
 
@@ -234,7 +240,7 @@ class HTMLCompTableElement extends HTMLElement {
     this.#load()
       .then(() => this.#build())
       .catch((reason) => {
-        console.log("Error loading side-by-side comparison: " + reason);
+        console.log(`Error loading side-by-side comparison: ${reason}`);
       });
   }
 }

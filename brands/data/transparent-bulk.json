@@ -30,6 +30,7 @@
   },
   "supplements": {
     "lCitrulline": {
+      "name": "L-Citrulline",
       "serving": "5333mg",
       "from": "Citrulline Malate 2:1",
       "fromWeight": "8000mg"
@@ -39,21 +40,30 @@
       "from": "Citrulline Malate 2:1",
       "fromWeight": "8000mg"
     },
-    "betaAlanine": "4000mg",
+    "betaAlanine": {
+      "shortName": "β-Alanine",
+      "serving": "4000mg"
+    },
     "betaine": {
+      "shortName": "Betaine",
       "name": "Betaine Anhydrous",
       "note": "BetaPure™",
       "serving": "2500mg"
     },
     "taurine": "1300mg",
-    "lTyrosine": "1000mg",
+    "lTyrosine": {
+      "name": "L-Tyrosine",
+      "serving": "1000mg"
+    },
     "alphaGPC": {
+      "shortName": "Alpha-GPC",
       "name": "AlphaSize® 50% Alpha-Glyceryl Phosphoryl Choline",
       "note": "Alpha-GPC",
       "serving": "150mg",
       "servingWeight": "300mg"
     },
     "caffeine": {
+      "shortName": "Caffeine",
       "name": "PurCaf® Organic Caffeine",
       "notes": [
         "from Green Coffee Bean",
@@ -62,7 +72,10 @@
       ],
       "serving": "200mg"
     },
-    "lTheanine": "200mg",
+    "lTheanine": {
+      "name": "L-Theanine",
+      "serving": "200mg"
+    },
     "theobromine": "50mg",
     "panaxNotoginseng": {
       "name": "Panax Notoginseng",
@@ -79,6 +92,7 @@
       "fromWeight": "50mg"
     },
     "blackPepperExtract": {
+      "shortName": "Black Pepper Extract",
       "name": "BioPerine®",
       "notes": [
         "Piper Nigrum",

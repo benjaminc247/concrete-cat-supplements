@@ -74,7 +74,7 @@ class Serving {
   toString() {
     // value must be converted to string in case of '0'
     // units must be converted to string to see if it is empty
-    return [this.#value?.toString(), this.#units.toString()].filter(Boolean).join(' ');
+    return [this.#value?.toString(), this.#units.toString()].filter(Boolean).join('');
   }
 
   /** @returns {number|undefined} */
@@ -91,6 +91,7 @@ class Serving {
 /**
  * Parse serving from string
  * @param {string} str
+ * @returns {Serving}
  */
 export function parse(str) {
   // validate arguments

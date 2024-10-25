@@ -6,6 +6,7 @@
   "servingsPerContainer": "20",
   "nutrition": {
     "vitaminD": {
+      "shortName": "Vitamin D",
       "name": "Vitamin D3",
       "note": "from Algae",
       "serving": "12.5mcg"
@@ -41,33 +42,40 @@
   },
   "supplements": {
     "caffeine": {
+      "shortName": "Caffeine",
       "name": "Natural Caffeine",
       "note": "from Coffea Robusta Seeds",
       "serving": "80mg"
     },
     "lTheanine": {
+      "name": "L-Theanine",
       "note": "from Green Tea",
       "serving": "160mg"
     },
-    "lTyrosine": "400mg",
+    "lTyrosine": {
+      "name": "L-Tyrosine",
+      "serving": "400mg"
+    },
     "lCitrulline": {
+      "shortName": "L-Citrulline",
       "note": "Kyowa Quality®",
       "serving": "2000mg",
       "from": "Setria® Performance Blend",
       "fromWeight": "2200mg"
     },
     "lGlutathione": {
+      "shortName": "L-Glutathione",
       "note": "Setria®",
       "serving": "200mg",
       "from": "Setria® Performance Blend",
       "fromWeight": "2200mg"
     },
     "beetRootPowder": {
-      "name": "Beet Root Powder",
       "note": "Beta Vulgaris L - root",
       "serving": "1500mg"
     },
     "sodiumChloride": {
+      "shortName": "Sodium Chloride",
       "name": "Himalayan Pink Salt",
       "serving": "500mg"
     }

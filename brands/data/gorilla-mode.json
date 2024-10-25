@@ -30,33 +30,45 @@
     }
   },
   "supplements": {
-    "lCitrulline": "5000mg",
+    "lCitrulline": {
+      "name": "L-Citrulline",
+      "serving": "5000mg"
+    },
     "creatine": {
+      "shortName": "Creatine",
       "name": "Creatine Monohydrate",
       "serving": "2500mg"
     },
-    "lTyrosine": "2500mg",
+    "lTyrosine": {
+      "name": "L-Tyrosine",
+      "serving": "2500mg"
+    },
     "betaine": {
+      "shortName": "Betaine",
       "name": "Betaine Anhydrous",
       "serving": "2000mg"
     },
     "glycerol": {
+      "shortName": "Glycerol",
       "name": "HydroPrime® Glycerol Powder (65%)",
       "serving": "1300mg",
       "servingWeight": "2000mg"
     },
     "malicAcid": "1500mg",
     "sodiumChloride": {
+      "shortName": "Sodium Chloride",
       "name": "Pink Himalayan Sea Salt",
       "serving": "500mg"
     },
     "alphaGPC": {
+      "shortName": "Alpha-GPC",
       "name": "Alpha-GPC 50%",
       "note": "L-Alpha-Glycerylphosphorylcholine",
       "serving": "200mg",
       "servingWeight": "400mg"
     },
     "caffeine": {
+      "shortName": "Caffeine",
       "name": "Caffeine Anhydrous",
       "serving": "200mg"
     },

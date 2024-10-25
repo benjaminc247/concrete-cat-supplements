@@ -27,14 +27,19 @@
       "fromWeight": "6000mg"
     },
     "creatine": {
+      "shortName": "Creatine",
       "name": "Kre-Alkalyn® buffered creatine monohydrate",
-      "serving": "3g",
-      "CoEnzyme Q10": "100mg",
-      "NADH": {
-        "name": "Nicotinamide Adenine Dinucleotide",
-        "note": "NADH",
-        "serving": "15mg"
-      }
+      "serving": "3g"
+    },
+    "coEnzymeQ10": {
+      "name": "CoEnzyme Q10",
+      "serving": "100mg"
+    },
+    "nadh": {
+      "shortName": "NADH",
+      "name": "Nicotinamide Adenine Dinucleotide",
+      "note": "NADH",
+      "serving": "15mg"
     }
   },
   "otherIngredients": [
