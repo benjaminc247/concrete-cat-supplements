@@ -57,7 +57,7 @@ export default class AsyncResource {
    * Get a new resource promise.
    * Resolves with return value from load function when successful.
    * Rejects with error thrown from load function.
-   * @param {AbortSignal|null} signal
+   * @param {AbortSignal} [signal]
    * @returns {Promise<ResourceType>}
    */
   promise(signal) {
