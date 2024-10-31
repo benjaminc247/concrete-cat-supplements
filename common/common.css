@@ -10,6 +10,7 @@ body {
   /* fonts */
   font-family: 'Roboto Flex', sans-serif;
   --icon-font-family: 'Font Awesome 6 Free';
+  --icon-font-solid: var(--fa-font-solid);
   font-size: 16px;
   font-optical-sizing: auto;
   /* greyscale colors for generic text */

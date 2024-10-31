@@ -1,0 +1,107 @@
+#card.success {
+  --icon: "\f058";
+  --text-color: var(--main-text-color);
+  --fg-color: #3ebd61;
+  --bg-color: #d8f2df;
+}
+#card.info {
+  --icon: "\f05a";
+  --text-color: var(--main-text-color);
+  --fg-color: #006ce3;
+  --bg-color: #cce2f9;
+}
+#card.warning {
+  --icon: "\f071";
+  --text-color: var(--main-text-color);
+  --fg-color: #ef9400;
+  --bg-color: #fceacc;
+}
+#card.error {
+  --icon: "\f057";
+  --text-color: var(--main-text-color);
+  --fg-color: #ec4d2b;
+  --bg-color: #fbdbd5;
+}
+#collapse {
+  display: flex;
+  flex-direction: column;
+}
+#margin {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 6px 0;
+  overflow: hidden;
+}
+#card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  border: 2px solid var(--fg-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+#content {
+  --icon-font-size: 48px;
+  --icon-size: calc(var(--icon-font-size) + 8px);
+  --close-font-size: 18px;
+  --close-size: calc(var(--close-font-size) + 8px);
+  --text-margin-left: calc(var(--icon-size) + 4px);
+  position: relative;
+  margin: 4px;
+  overflow: hidden;
+}
+#icon {
+  float: left;
+  color: var(--fg-color);
+  font: var(--icon-font-solid);
+  font-size: var(--icon-font-size);
+  line-height: var(--icon-size);
+  text-align: center;
+  width: var(--icon-size);
+  margin-right: 4px;
+}
+#icon::before {
+  content: var(--icon);
+}
+#close-float {
+  float: right;
+  width: calc(var(--close-size) + 6px);
+  height: calc(var(--close-size) + 2px);
+}
+#close-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--bg-color);
+}
+#close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--fg-color);
+  font: var(--icon-font-solid);
+  font-size: var(--close-font-size);
+  line-height: var(--close-size);
+  text-align: center;
+  width: var(--close-size);
+  margin: 0px 0px 2px 6px;
+}
+#close::before {
+  content: "\f00d";
+}
+#title {
+  white-space: nowrap;
+  width: max-content;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 8px 0 3px var(--text-margin-left);
+}
+#title-text {
+  white-space: normal;
+}
+#message {
+  font-size: 16px;
+  margin-left: var(--text-margin-left);
+}

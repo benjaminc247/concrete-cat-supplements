@@ -57,26 +57,29 @@ export default class AsyncResource {
    * Get a new resource promise.
    * Resolves with return value from load function when successful.
    * Rejects with error thrown from load function.
-   * @param {AbortSignal} abortSignal - used to abort the resource promise.
+   * @param {AbortSignal|null} signal
    * @returns {Promise<ResourceType>}
    */
-  promise(abortSignal) {
+  promise(signal) {
     // return a new promise that awaits the internal promise and checks error property for failure
     // abort signal aborts this promise not the static load
     return new Promise((resolve, reject) => {
       (async () => {
         // check abort before call and listen for abort during await
-        if (abortSignal.aborted)
-          return reject(`${this.#_name} promise early abort: ${abortSignal.reason}`);
         const onAbort = () => {
-          abortSignal.removeEventListener('abort', onAbort);
-          return reject(`${this.#_name} promise aborted: ${abortSignal.reason}`);
+          signal.removeEventListener('abort', onAbort);
+          return reject(`${this.#_name} promise aborted: ${signal.reason}`);
         }
-        abortSignal.addEventListener('abort', onAbort);
+        if (signal) {
+          if (signal.aborted)
+            return reject(`${this.#_name} promise early abort: ${signal.reason}`);
+          signal.addEventListener('abort', onAbort);
+        }
         // internal promise never rejects it sets error instead
         // saving error allows this promise to reject every time
         const result = await this.#_promise;
-        abortSignal.removeEventListener('abort', onAbort);
+        if (signal)
+          signal.removeEventListener('abort', onAbort);
         if (this.#_error)
           return reject(`${this.#_name} promise error: ${this.#_error}`);
         return resolve(result);

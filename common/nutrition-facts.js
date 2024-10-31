@@ -1,6 +1,7 @@
 import * as cclIngredients from '/common/ingredients.js'
 import * as cclUtils from '/common/utils.js'
 import cclAsyncResource from '/common/async-resource.js'
+import cclMessageStack from '/ccl-elements/message-stack.js'
 
 class cclNutritionFacts extends HTMLElement {
   /**
@@ -83,6 +84,12 @@ class cclNutritionFacts extends HTMLElement {
   #_controller;
 
   /**
+   * Message stack.
+   * @type {cclMessageStack}
+   */
+  #_messageStack;
+
+  /**
    * List of child nodes added by rebuild.
    * @type {Node[]}
    */
@@ -93,6 +100,12 @@ class cclNutritionFacts extends HTMLElement {
    * @returns {Promise<void>}
    */
   async #rebuild() {
+    // create message stack if it does not yet exist
+    if (!this.#_messageStack) {
+      this.#_messageStack = new cclMessageStack();
+      this.appendChild(this.#_messageStack);
+    }
+
     try {
       // read source attributes
       const srcFile = this.getAttribute('src-file');
@@ -219,6 +232,8 @@ class cclNutritionFacts extends HTMLElement {
       this.appendChild(factsFrag);
     }
     catch (err) {
+      if (this.#_messageStack)
+        this.#_messageStack.error('Supplement Facts Load Failed', err.message ? err.message : err);
       const msg = err.stack ? err.stack.replace(/\s+/g, ' ') : err;
       console.log(`Supplement facts load failed: ${msg}`);
       return;
