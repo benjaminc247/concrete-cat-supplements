@@ -85,6 +85,7 @@
   text-align: center;
   width: var(--close-size);
   margin: 0px 0px 2px 6px;
+  padding: 0;
 }
 #close::before {
   content: "\f00d";
@@ -104,4 +105,7 @@
 #message {
   font-size: 16px;
   margin-left: var(--text-margin-left);
+}
+#message-text {
+  white-space: pre-line;
 }
