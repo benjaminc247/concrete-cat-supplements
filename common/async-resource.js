@@ -1,89 +1,137 @@
+import * as cclUtils from '/common/utils.js'
+
 /**
- * Class representing an async loaded resource that can be awaited any number of times.
- * @template ResourceType
+ *Async loaded resource that can be awaited any number of times.
+ * @template ResourceT
  */
 export default class AsyncResource {
-  /**
-   * Name of resource for debugging and error messages.
-   * @type {string}
-   */
-  #_name;
+  /**  @type {string|null} */
+  #_context;
+
+  /** @type {Array<{error: any, context: string|null}>} */
+  #_errors;
 
   /**
-   * Error thrown from load callback.
-   * @type {{message: any}}
+   * @callback ErrorHandler
+   * @param {any} error
+   * @param {string|null} context
    */
-  #_error;
+  /** @type {Set<ErrorHandler>} */
+  #_errorHandlers;
 
   /**
    * Promise that resolves to return value of load function when complete.
    * If load function throws:
-   *   the exception is saved in the error property.
-   *   this promise resolves with an undefined value.
-   * This promise never rejects as rejections are only returned from promises one time.
-   * @type {Promise<ResourceType|undefined>}
+   *   the exception is pushed to the error list.
+   *   this promise resolves with a null value.
+   * @type {Promise<ResourceT|null>}
    */
   #_promise;
 
   /**
-   * Construct and load an async resource.
-   * @template ResourceType
-   * @param {string} name - name of the resource for debugging and error messages.
-   * @param {{():Promise<ResourceType>}} loadFn - load function returning the resource promise.
-   * @returns {AsyncResource<ResourceType>}
+   * User callback to set error context.
+   * @param {string} context
    */
-  static load(name, loadFn) {
+  #setContext(context) {
+    this.#_context = context;
+  }
+
+  /**
+   * User callback to push an error.
+   * @param {any} error
+   */
+  #pushError(error) {
+    this.#_errors.push({ error: error, context: this.#_context });
+    for (const handler of this.#_errorHandlers)
+      handler(error, this.#_context);
+  }
+
+  /**
+   * Add an error handler that will be called with all current and future errors.
+   * @param {ErrorHandler} handler
+   */
+  addErrorHandler(handler) {
+    for (const { error, context } of this.#_errors)
+      handler(error, context);
+    this.#_errorHandlers.add(handler);
+  }
+
+  /**
+   * Remove an error handler.
+   * @param {ErrorHandler} handler
+   */
+  removeErrorHandler(handler) {
+    this.#_errorHandlers.delete(handler);
+  }
+
+  /**
+   * User load function.
+   * @template ResourceT
+   * @callback LoadFn
+   * @param {(context: string) => void} [setContext]
+   * @param {(error: any) => void} [pushError]
+   * @returns {Promise<ResourceT>}
+   */
+  /**
+   * Construct and load an async resource.
+   * @template ResourceT
+   * @param {LoadFn<ResourceT>} loadFn - load function returning the resource promise
+   * @param {ErrorHandler} [errorHandler] - handler to be called on resource errors
+   * @returns {AsyncResource<ResourceT>}
+   */
+  static load(loadFn, errorHandler) {
     const resource = new AsyncResource();
-    resource.#_name = name;
-    resource.#_error = undefined;
-    resource.#_promise = new Promise((resolve) => {
-      (async () => {
-        try {
-          // try to resolve the load function
-          resolve(await loadFn());
-        }
-        catch (err) {
-          // save error for promise accessor, and ensure it looks like an error
-          // do not reject this promise, error property will be checked for failure
-          resource.#_error = (err && err.message) ? err : new Error(err);
-          resolve();
-        }
-      })();
-    });
+    resource.#_context = null;
+    resource.#_errors = new Array();
+    resource.#_errorHandlers = new Set();
+    if (errorHandler)
+      resource.#_errorHandlers.add(errorHandler);
+    resource.#_promise = (async () => {
+      try {
+        return await loadFn(
+          (context) => resource.#setContext(context),
+          (error) => resource.#pushError(error)
+        );
+      }
+      catch (err) {
+        resource.#pushError(err);
+        return null;
+      }
+    })();
     return resource;
   }
 
   /**
    * Get a new resource promise.
-   * Resolves with return value from load function when successful.
-   * Rejects with error thrown from load function.
+   * Resolves with return value from load function, or null in case of error or abort.
+   * Use 'throwErrors' flag to throw on abort or error rather than resolving with null.
    * @param {AbortSignal} [signal]
-   * @returns {Promise<ResourceType>}
+   * @param {boolean} [throwErrors]
+   * @returns {Promise<ResourceT|null>}
+   * @throws {AbortError} - if throwErrors is true
+   * @throws {Array<{error: any, context: string|null}>} - if throwErrors is true
    */
-  promise(signal) {
-    // return a new promise that awaits the internal promise and checks error property for failure
-    // abort signal aborts this promise not the static load
-    return new Promise((resolve, reject) => {
-      (async () => {
-        // check abort before call and listen for abort during await
-        const onAbort = () => {
-          signal.removeEventListener('abort', onAbort);
-          return reject(`${this.#_name} promise aborted: ${signal.reason}`);
+  async promise(signal, throwErrors) {
+    return new Promise(async (resolve, reject) => {
+      const onAbort = () => {
+        signal.removeEventListener('abort', onAbort);
+        throwErrors ? reject(signal.reason) : resolve(null);
+      }
+      if (signal) {
+        if (signal.aborted) {
+          throwErrors ? reject(signal.reason) : resolve(null);
+          return;
         }
-        if (signal) {
-          if (signal.aborted)
-            return reject(`${this.#_name} promise early abort: ${signal.reason}`);
-          signal.addEventListener('abort', onAbort);
-        }
-        // internal promise never rejects it sets error instead
-        // saving error allows this promise to reject every time
-        const result = await this.#_promise;
-        if (signal)
-          signal.removeEventListener('abort', onAbort);
-        if (this.#_error)
-          return reject(`${this.#_name} promise error: ${this.#_error}`);
-        return resolve(result);
-      })();
+        signal.addEventListener('abort', onAbort);
+      }
+      const res = await this.#_promise;
+      if (signal)
+        signal.removeEventListener('abort', onAbort);
+      if (this.#_errors.length) {
+        throwErrors ? reject(this.#_errors) : resolve(null);
+        return;
+      }
+      resolve(res);
     });
   }
 }
