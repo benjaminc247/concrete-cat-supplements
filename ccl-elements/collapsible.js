@@ -9,6 +9,10 @@ cclElementRegistry.registerCallback("collapsible", 1000, (parentElement) => {
         continue;
       collapsible.classList.add("ccl-initialized");
 
+      // verify collapsible is an html element
+      if (!(collapsible instanceof HTMLElement))
+        throw new Error('Collapsible must be an html element.');
+
       // create toggle button with heading text
       const toggle = document.createElement("button");
       toggle.classList.add("toggle");
@@ -52,9 +56,9 @@ cclElementRegistry.registerCallback("collapsible", 1000, (parentElement) => {
       if (collapsible.classList.contains("init-expanded"))
         toggle.classList.add('active');
 
-      // update height on hierarchy changes
-      const observer = new MutationObserver(updateHeight);
-      observer.observe(collapse, { subtree: true, childList: true });
+      // update height on content size changes
+      const observer = new ResizeObserver(updateHeight);
+      observer.observe(content);
     }
     catch (err) {
       console.log("Error initializing collapsible: " + err);
